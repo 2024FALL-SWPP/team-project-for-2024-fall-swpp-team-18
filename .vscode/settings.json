@@ -53,6 +53,7 @@
         "logs/": true,
         "ProjectSettings/": true,
         "UserSettings/": true,
+        "ProjectSettings/": true,
         "temp/": true,
         "Temp/": true
     },
