@@ -17,7 +17,7 @@ public class ViewpointController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        tmp = transform.parent.rotation;
+        tmp = Quaternion.Euler(new Vector3(20, 0, 0)) * transform.parent.rotation;
 
         if (Input.GetKeyDown(KeyCode.LeftAlt)) {
             mouseX = 0f;
@@ -26,7 +26,7 @@ public class ViewpointController : MonoBehaviour
             mouseX += Input.GetAxis("Mouse X") * mouseSpeed;
             mouseX = Mathf.Clamp(mouseX, -150, 150);
 
-            transform.localEulerAngles = new Vector3(0, mouseX, 0);
+            transform.localEulerAngles = new Vector3(20, mouseX, 0);
         } else {
             transform.rotation = Quaternion.RotateTowards(transform.rotation, tmp, rotateSpeed * Time.deltaTime);
         }
