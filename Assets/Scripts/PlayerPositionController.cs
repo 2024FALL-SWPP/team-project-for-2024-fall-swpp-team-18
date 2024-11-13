@@ -14,7 +14,7 @@ public class PlayerPositionController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(transform.forward * Speed * Time.deltaTime);
+        transform.Translate(-transform.forward * Speed * Time.deltaTime);
         //transform.Rotate(new Vector3(0, 1f, 0) * 10 * Time.deltaTime);
         if (Input.GetKey(KeyCode.Q)) {
             transform.Translate (-transform.right * Speed * Time.deltaTime);
