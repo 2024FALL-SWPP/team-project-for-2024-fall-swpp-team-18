@@ -4,23 +4,24 @@ using UnityEngine;
 
 public class PlayerPositionController : MonoBehaviour
 {
-    private float Speed = 20.0f; 
+    private float Speed = 10.0f; 
+    public Vector3 show;
     // Start is called before the first frame update
     void Start()
     {
-        
+         
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(-transform.forward * Speed * Time.deltaTime);
-        //transform.Rotate(new Vector3(0, 1f, 0) * 10 * Time.deltaTime);
+        show = transform.forward;  
+        transform.Translate(Vector3.forward * Speed * Time.deltaTime);
         if (Input.GetKey(KeyCode.Q)) {
-            transform.Translate (-transform.right * Speed * Time.deltaTime);
+            transform.Translate (-Vector3.right * Speed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.E)) {
-            transform.Translate (transform.right * Speed * Time.deltaTime);
+            transform.Translate (Vector3.right * Speed * Time.deltaTime);
         }
     }
 }
