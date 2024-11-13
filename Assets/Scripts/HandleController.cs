@@ -17,7 +17,7 @@ public class HandleController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        tmp = Quaternion.Euler(new Vector3(-90, 0, 0)) * transform.parent.rotation;
+        tmp = Quaternion.Euler(new Vector3(90, 0, 0)) * transform.parent.rotation;
         mouseX = Mathf.Clamp(mouseX, -30, 30);
 
         if (Input.GetKey(KeyCode.Q)) {
