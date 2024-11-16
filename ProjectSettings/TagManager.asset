@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Avalanche
+  - WallLeft
+  - WallRight
+  - Corner1
+  - Corner2
   layers:
   - Default
   - TransparentFX
