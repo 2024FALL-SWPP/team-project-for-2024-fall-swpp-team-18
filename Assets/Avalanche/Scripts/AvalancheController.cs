@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class AvalancheController : MonoBehaviour
 {
-    [SerializeField] public float speed = 4f;
-    [SerializeField] public int level = 1;
+    [SerializeField]
+    public float speed = 4f;
+
+    [SerializeField]
+    public int level = 1;
     private float diminishingTime = 10f;
     private float diminishingRate = 0.05f;
     public ParticleSystem fog;
@@ -17,39 +20,43 @@ public class AvalancheController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() { }
+
+    public void StartAvalanche()
     {
-
-    }
-
-    public void StartAvalanche() {
         speed += (float)level * 2f;
         StartCoroutine(AvalancheSlide());
     }
 
-    private IEnumerator AvalancheSlide() {
+    private IEnumerator AvalancheSlide()
+    {
         float time = 0;
-        while (true) {
+        while (true)
+        {
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
             time += Time.deltaTime;
-            //if (time > 4f) { 
+            //if (time > 4f) {
             //    StopAvalanche();
             //}
             yield return null;
         }
     }
 
-    public void StopAvalanche() {
+    public void StopAvalanche()
+    {
         StartCoroutine(StopAvalancheCoroutine());
     }
 
-    private IEnumerator StopAvalancheCoroutine() {
+    private IEnumerator StopAvalancheCoroutine()
+    {
         float time = 0;
         ParticleSystem.EmissionModule emissionModule = fog.emission;
         float currentRate = emissionModule.rateOverTime.constant;
-        while (time < diminishingTime) {
+        while (time < diminishingTime)
+        {
             time += Time.deltaTime;
-            if (currentRate > 0) {
+            if (currentRate > 0)
+            {
                 emissionModule.rateOverTime = currentRate - diminishingRate * Time.deltaTime;
             }
             gameObject.transform.position -= new Vector3(0, diminishingRate * Time.deltaTime, 0);
