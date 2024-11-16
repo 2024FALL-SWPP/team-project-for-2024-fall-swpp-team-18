@@ -12,9 +12,10 @@ public class ObstacleDestroyController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Fireball")) // Fireball 태그를 가진 오브젝트와 충돌 시
+        if (collision.gameObject.CompareTag("Fireball"))
         {
-            Destroy(gameObject); // 현재 장애물 오브젝트를 제거합니다.
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
         }
     }
 }
