@@ -425,7 +425,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9cfe65638d2f4a14b9c470ed8a2c5b81, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.58
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9cfe65638d2f4a14b9c470ed8a2c5b81, type: 3}
       propertyPath: m_LocalPosition.y
@@ -715,11 +715,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c158edd5e43a6e44e9b994f6685d17f7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 37.49
+      value: 37.88
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c158edd5e43a6e44e9b994f6685d17f7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 18.57
+      value: 19.93
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c158edd5e43a6e44e9b994f6685d17f7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -905,6 +905,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireballPrefab: {fileID: 6535557133876866142, guid: e0ddeac0103cdb1468ac0e4f726302d8, type: 3}
   spawnPoint: {fileID: 1218039817}
+  offset: {x: 0, y: 5, z: -5}
   spawnKey: 32
 --- !u!4 &1218039817 stripped
 Transform:
