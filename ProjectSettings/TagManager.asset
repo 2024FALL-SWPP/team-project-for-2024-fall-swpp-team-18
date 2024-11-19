@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Avalanche
   - Fireball
+  - WallLeft
+  - WallRight
+  - Corner1
+  - Corner2
   layers:
   - Default
   - TransparentFX
