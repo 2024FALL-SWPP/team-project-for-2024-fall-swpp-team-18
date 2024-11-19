@@ -12,6 +12,6 @@ public class FireballController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.back * speed * Time.deltaTime);
     }
 }

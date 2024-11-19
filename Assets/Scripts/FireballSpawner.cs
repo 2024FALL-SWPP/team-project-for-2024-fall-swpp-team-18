@@ -6,6 +6,7 @@ public class FireballSpawner : MonoBehaviour
 {
     public GameObject fireballPrefab;
     public Transform spawnPoint;
+    public Vector3 offset = new Vector3(0, 5, -5);
     public KeyCode spawnKey = KeyCode.Space;
 
     // Start is called before the first frame update
@@ -24,7 +25,8 @@ public class FireballSpawner : MonoBehaviour
     {
         if (fireballPrefab != null && spawnPoint != null)
         {
-            Instantiate(fireballPrefab, spawnPoint.position, spawnPoint.rotation);
+            Quaternion newRotation = spawnPoint.rotation * Quaternion.Euler(0, 180f, 0);
+            Instantiate(fireballPrefab, spawnPoint.position + offset, newRotation);
         }
         else
         {
