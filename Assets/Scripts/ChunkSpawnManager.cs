@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class ObstacleFactory
 {
@@ -17,9 +18,6 @@ public class ObstacleFactory
     }
 }
 
-
-using System.Collections;
-using UnityEngine;
 
 public class ChunkSpawnManager : MonoBehaviour
 {
