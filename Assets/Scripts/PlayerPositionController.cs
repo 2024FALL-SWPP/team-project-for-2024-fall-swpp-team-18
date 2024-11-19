@@ -8,7 +8,9 @@ public class PlayerPositionController : MonoBehaviour
 
     private bool BumpWallLeft = false;
     private bool BumpWallRight = false;
+    private bool Stop = false;
     private Vector3 CurForward; 
+    public bool GameOver = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,13 +20,20 @@ public class PlayerPositionController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+        if (!Stop) {
+            transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+        }
 
         if (Input.GetKey(KeyCode.Q) && !BumpWallLeft) {
             transform.Translate (-Vector3.right * Speed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.E) && !BumpWallRight) {
             transform.Translate (Vector3.right * Speed * Time.deltaTime);
+        }
+
+        GameObject Snowball = GameObject.FindWithTag("Snowball");
+        if (Vector3.Distance(transform.position, Snowball.transform.position) <= 10.0f) {
+            GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(10.0f);
         }
     }
 
@@ -41,6 +50,16 @@ public class PlayerPositionController : MonoBehaviour
         if (other.gameObject.CompareTag("Corner2")) {
             transform.forward = Vector3.back;
         }
+        if (other.gameObject.CompareTag("Avalanche")) {
+            GameOver = true;
+        }
+        if (other.gameObject.CompareTag("Obstacle")) {
+            Stop = true;
+            GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(1f);
+        }
+        if (other.gameObject.CompareTag("Snowball")) {
+            GameOver =true;
+        }
     }    
     private void OnTriggerExit(Collider other) {
         if (other.gameObject.CompareTag("WallLeft")) {
@@ -48,6 +67,9 @@ public class PlayerPositionController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("WallRight")) {
             BumpWallRight = false;
+        }
+        if (other.gameObject.CompareTag("Obstacle")) {
+            Stop = false;
         }
     }
 }

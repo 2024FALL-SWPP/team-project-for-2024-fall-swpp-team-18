@@ -10,6 +10,8 @@ TagManager:
   - WallRight
   - Corner1
   - Corner2
+  - Obstacle
+  - Snowball
   layers:
   - Default
   - TransparentFX
