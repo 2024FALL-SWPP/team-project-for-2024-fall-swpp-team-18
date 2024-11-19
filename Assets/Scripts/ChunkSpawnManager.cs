@@ -1,21 +1,45 @@
+using UnityEngine;
+
+public class ObstacleFactory
+{
+    private GameObject[] chunkPrefabs;
+
+    public ObstacleFactory(GameObject[] chunkPrefabs)
+    {
+        this.chunkPrefabs = chunkPrefabs;
+    }
+
+    public GameObject CreateRandomObstacle()
+    {
+        // 무작위로 장애물 선택
+        int randomIndex = Random.Range(0, chunkPrefabs.Length);
+        return chunkPrefabs[randomIndex];
+    }
+}
+
+
 using System.Collections;
 using UnityEngine;
 
 public class ChunkSpawnManager : MonoBehaviour
 {
-    public GameObject[] chunkPrefabs; // 생성할 장애물 프리팹 배열
-    public Transform[] spawnPoints; // 여러 스폰 지점 배열
-    public float spawnDistance = 10.0f; // 플레이어와의 거리 기준
-    public float checkInterval = 0.5f; // 거리 체크 간격
+    public GameObject[] chunkPrefabs; 
+    public Transform[] spawnPoints; 
+    public float spawnDistance = 10.0f; 
+    public float checkInterval = 0.5f; 
 
-    private GameObject player; // 플레이어 오브젝트
+    private GameObject player; 
+    private ObstacleFactory obstacleFactory; 
 
     private void Start()
     {
-        // "Player" 태그를 가진 오브젝트 찾기
+     
+        obstacleFactory = new ObstacleFactory(chunkPrefabs);
+
+        
         player = GameObject.FindGameObjectWithTag("Player");
 
-        // 플레이어가 존재하면 스폰 시작
+      
         if (player != null)
         {
             StartCoroutine(SpawnObstacles());
@@ -32,24 +56,23 @@ public class ChunkSpawnManager : MonoBehaviour
         {
             foreach (Transform spawnPoint in spawnPoints)
             {
-                // 플레이어와 각 스폰 지점의 거리 계산
+               
                 float distance = Vector3.Distance(player.transform.position, spawnPoint.position);
 
-                // 거리가 spawnDistance 이하인 경우 장애물 생성
+             
                 if (distance <= spawnDistance)
                 {
-                    // 무작위 장애물 선택
-                    GameObject randomObstacle = chunkPrefabs[Random.Range(0, chunkPrefabs.Length)];
+                   
+                    GameObject randomObstacle = obstacleFactory.CreateRandomObstacle();
 
-                    // 장애물 생성
+                 
                     Instantiate(randomObstacle, spawnPoint.position, spawnPoint.rotation);
 
-                    // 중복 생성 방지 (한 번 생성 후 대기)
+             
                     yield return new WaitForSeconds(1.0f);
                 }
             }
 
-            // 거리 체크 간격 대기
             yield return new WaitForSeconds(checkInterval);
         }
     }
