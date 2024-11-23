@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private float speed = 300.0f; 
+    private bool onJump = false;
     //public Quaternion tiltAngle;
     // Start is called before the first frame update
     void Start()
@@ -15,16 +16,31 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //Quaternion upAngle = Quaternion.Euler(transform.parent.up);
-        //Quaternion leftAngle = Quaternion.Euler(transform.parent.right);
-        //tiltAngle = Quaternion.Lerp(transform.parent.rotation, Quaternion.Euler(new Vector3(0,0,45)), 0.3f);    
-        Quaternion tmp = transform.parent.rotation;
-        if (Input.GetKey(KeyCode.Q)) {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(transform.parent.forward * 15)*tmp, speed * Time.deltaTime);
-        } else if (Input.GetKey(KeyCode.E)) {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(transform.parent.forward * -15)*tmp, speed * Time.deltaTime);
-        } else {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, tmp, 100 * Time.deltaTime);
+        
+        if (!onJump) {
+            Quaternion tmp = transform.parent.rotation;
+            if (Input.GetKey(KeyCode.Q)) {
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(transform.parent.forward * 15)*tmp, speed * Time.deltaTime);
+            } else if (Input.GetKey(KeyCode.E)) {
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(transform.parent.forward * -15)*tmp, speed * Time.deltaTime);
+            } else {
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, tmp, 100 * Time.deltaTime);
+            }
         }
+    }
+
+    IEnumerator Jump() {
+        onJump = true;
+        float t = 0.0f;
+        while (t < 1.0f) {
+            t += Time.deltaTime;
+            transform.Rotate(Vector3.right * 300 * (t-0.5f) * Time.deltaTime);
+            yield return null;
+        }
+        onJump = false;
+    }
+
+    public void JumpControl() {
+        StartCoroutine(Jump());
     }
 }

@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class PlayerPositionController : MonoBehaviour
 {
+    //private Rigidbody PlayerRb;
     private float Speed = 10.0f; 
-
     private bool BumpWallLeft = false;
     private bool BumpWallRight = false;
     private bool Stop = false;
-    private Vector3 CurForward; 
-    public bool GameOver = false;
+    private Vector3 CurForward;
+    public Quaternion BeforeJump;
+
     // Start is called before the first frame update
     void Start()
     {
-         
+        //PlayerRb = gameObject.GetComponent<Rigidbody>();
+        BeforeJump = transform.rotation;
     }
 
     // Update is called once per frame
@@ -46,19 +48,25 @@ public class PlayerPositionController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Corner1")) {
             transform.forward = Vector3.right;
+            BeforeJump = transform.rotation;
         }
         if (other.gameObject.CompareTag("Corner2")) {
             transform.forward = Vector3.back;
+            BeforeJump = transform.rotation;
         }
         if (other.gameObject.CompareTag("Avalanche")) {
-            GameOver = true;
+            GameManager.instance.GameOver = true;
         }
         if (other.gameObject.CompareTag("Obstacle")) {
             Stop = true;
             GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(1f);
         }
         if (other.gameObject.CompareTag("Snowball")) {
-            GameOver =true;
+            GameManager.instance.GameOver =true;
+        }
+        if (other.gameObject.CompareTag("JumpBoard")) { 
+            StartCoroutine(Jump());
+            GameObject.Find("Player").GetComponent<PlayerController>().JumpControl();
         }
     }    
     private void OnTriggerExit(Collider other) {
@@ -71,5 +79,20 @@ public class PlayerPositionController : MonoBehaviour
         if (other.gameObject.CompareTag("Obstacle")) {
             Stop = false;
         }
+    }
+
+    IEnumerator Jump() {
+        float t = 0.0f;
+        while (t < 0.5f) {
+            t += Time.deltaTime;
+            transform.Translate(Vector3.up * Speed * 2 * t * Time.deltaTime);
+            yield return null;
+        }
+        while (t < 1.0f) {
+            t += Time.deltaTime;
+            transform.Translate(Vector3.up * Speed * 2 * (1-t) * Time.deltaTime);
+            yield return null;
+        }
+    
     }
 }
