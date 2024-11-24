@@ -29,6 +29,13 @@ public class ObjectSpawnManager : MonoBehaviour
             isSpawnPointActive[i] = true; // 초기 상태는 모두 활성화
         }
     }
+    private void Awake()
+        {
+            // 현재 시간을 기반으로 랜덤 시드 초기화
+            Random.InitState(System.DateTime.Now.Millisecond);
+        }
+
+
 
     private void Update()
     {
@@ -51,7 +58,7 @@ public class ObjectSpawnManager : MonoBehaviour
     }
 
     private void TriggerRandomSpawnManager(Transform spawnPoint, int spawnIndex)
-    {   
+    {   Awake();
         isSpawnPointActive[spawnIndex] = false;
         int randomChoice = Random.Range(0, 2); // 0 또는 1 무작위 선택
 

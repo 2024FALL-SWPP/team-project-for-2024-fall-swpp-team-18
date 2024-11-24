@@ -4125,12 +4125,12 @@ MonoBehaviour:
   - {fileID: 4918117831273428130, guid: a4c3d3ecac0eddf488295253821b7e8c, type: 3}
   - {fileID: 3209340861657067056, guid: 97320cbe293ba4249be671f99164803a, type: 3}
   spawnOffsets:
-  - {x: -3, y: 2, z: 8}
-  - {x: 3, y: 1, z: 1}
-  - {x: 0, y: -1, z: -8}
-  - {x: -3, y: 1, z: 1}
-  - {x: 3, y: 2, z: 8}
-  - {x: 0, y: -1, z: -8}
+  - {x: -3, y: 2, z: 3}
+  - {x: 3, y: 1, z: -4}
+  - {x: 0, y: -1, z: -13}
+  - {x: -3, y: 1, z: -4}
+  - {x: 3, y: 2, z: 3}
+  - {x: 0, y: -1, z: -13}
   playerTransform: {fileID: 1528082982}
   maxCarsToSpawn: 3
 --- !u!4 &756779262

@@ -9,7 +9,12 @@ public class CarSpawnManager : MonoBehaviour
     public Transform playerTransform; // 플레이어 Transform
     private List<GameObject> selectedCars = new List<GameObject>(); // 무작위로 선택된 자동차 저장
     public int maxCarsToSpawn = 3; // 최대 생성할 자동차 수
-
+   
+    private void Awake()
+    {
+        // 현재 시간을 기반으로 랜덤 시드 초기화
+        Random.InitState(System.DateTime.Now.Millisecond);
+    }
     private void Start()
     {
         // 자동차 3종류 무작위 선택
@@ -17,7 +22,7 @@ public class CarSpawnManager : MonoBehaviour
     }
 
     private void SelectRandomCars()
-    {
+    {   
         // 4개의 자동차 중 3종류를 무작위로 선택
         List<GameObject> availableCars = new List<GameObject>(carPrefabs);
 
@@ -31,12 +36,14 @@ public class CarSpawnManager : MonoBehaviour
 
     // 외부에서 호출 가능한 메서드 (신호 기반으로 호출)
     public void TriggerSpawn(Transform spawnPoint)
-    {
+    {   
+        SelectRandomCars();
         StartCoroutine(SpawnCars(spawnPoint));
     }
 
     private IEnumerator SpawnCars(Transform spawnPoint)
-    {
+    {   Vector3 basePosition = (Random.Range(0, 2) == 0) ? new Vector3(0, 0, 0) : new Vector3(2, 0, 0);
+
         for (int i = 0; i < maxCarsToSpawn; i++)
         {
             if (i >= spawnOffsets.Length) break;
@@ -45,7 +52,7 @@ public class CarSpawnManager : MonoBehaviour
             Vector3 worldOffset = playerTransform.TransformPoint(spawnOffsets[i]) - playerTransform.position;
 
             // 최종 스폰 위치 계산
-            Vector3 spawnPosition = spawnPoint.position + worldOffset;
+            Vector3 spawnPosition = spawnPoint.position + worldOffset + basePosition;
 
             // 자동차 방향 설정 (플레이어의 정면 방향)
             Quaternion carRotation = Quaternion.LookRotation(playerTransform.forward);
