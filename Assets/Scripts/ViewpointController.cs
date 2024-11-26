@@ -42,4 +42,14 @@ public class ViewpointController : MonoBehaviour
         }
 
     }
+
+    IEnumerator Shake(float t) {
+        shake = true;
+        yield return new WaitForSeconds(t);
+        shake= false;
+    }
+
+    public void Shake_t(float t) {
+        StartCoroutine(Shake(t));
+    }
 }

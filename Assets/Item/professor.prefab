@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 3382157934341357550}
   - component: {fileID: 5178829998727763688}
   m_Layer: 0
-  m_Name: professor
+  m_Name: Professor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
