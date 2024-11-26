@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private float speed = 300.0f; 
+    public float speed = 300.0f; 
     //public Quaternion tiltAngle;
     // Start is called before the first frame update
     void Start()
