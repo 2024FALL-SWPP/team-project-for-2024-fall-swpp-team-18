@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 221579615506539332}
   m_Layer: 0
-  m_Name: MachinItem
+  m_Name: ItemMachin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,15 +58,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7432517681660770941, guid: dcae13c36cbcc924b80142cce78646f6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7432517681660770941, guid: dcae13c36cbcc924b80142cce78646f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.27
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7432517681660770941, guid: dcae13c36cbcc924b80142cce78646f6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.05
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7432517681660770941, guid: dcae13c36cbcc924b80142cce78646f6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -138,15 +138,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3498981007320081924, guid: fd46b56bd9c7afb46bb4ea28bf49ddc5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3498981007320081924, guid: fd46b56bd9c7afb46bb4ea28bf49ddc5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3498981007320081924, guid: fd46b56bd9c7afb46bb4ea28bf49ddc5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3498981007320081924, guid: fd46b56bd9c7afb46bb4ea28bf49ddc5, type: 3}
       propertyPath: m_LocalRotation.w
