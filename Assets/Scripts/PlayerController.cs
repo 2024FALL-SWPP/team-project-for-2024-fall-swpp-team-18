@@ -17,15 +17,13 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         
-        if (!onJump) {
-            Quaternion tmp = transform.parent.rotation;
-            if (Input.GetKey(KeyCode.Q)) {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(transform.parent.forward * 15)*tmp, speed * Time.deltaTime);
-            } else if (Input.GetKey(KeyCode.E)) {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(transform.parent.forward * -15)*tmp, speed * Time.deltaTime);
-            } else {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, tmp, 100 * Time.deltaTime);
-            }
+        Quaternion tmp = transform.parent.rotation;
+        if (Input.GetKey(KeyCode.Q) && !onJump) {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(transform.parent.forward * 15)*tmp, speed * Time.deltaTime);
+        } else if (Input.GetKey(KeyCode.E) && !onJump) {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(transform.parent.forward * -15)*tmp, speed * Time.deltaTime);
+        } else {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, tmp, 100 * Time.deltaTime);
         }
     }
 

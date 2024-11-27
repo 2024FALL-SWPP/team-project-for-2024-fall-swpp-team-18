@@ -10,13 +10,12 @@ public class PlayerPositionController : MonoBehaviour
     private bool BumpWallRight = false;
     private bool Stop = false;
     private Vector3 CurForward;
-    public Quaternion BeforeJump;
+    public Vector3 Before; 
 
     // Start is called before the first frame update
     void Start()
     {
         //PlayerRb = gameObject.GetComponent<Rigidbody>();
-        BeforeJump = transform.rotation;
     }
 
     // Update is called once per frame
@@ -46,14 +45,6 @@ public class PlayerPositionController : MonoBehaviour
         if (other.gameObject.CompareTag("WallRight")) {
             BumpWallRight = true;
         }
-        if (other.gameObject.CompareTag("Corner1")) {
-            transform.forward = Vector3.right;
-            BeforeJump = transform.rotation;
-        }
-        if (other.gameObject.CompareTag("Corner2")) {
-            transform.forward = Vector3.back;
-            BeforeJump = transform.rotation;
-        }
         if (other.gameObject.CompareTag("Avalanche")) {
             GameManager.instance.GameOver = true;
         }
@@ -67,6 +58,12 @@ public class PlayerPositionController : MonoBehaviour
         if (other.gameObject.CompareTag("JumpBoard")) { 
             StartCoroutine(Jump());
             GameObject.Find("Player").GetComponent<PlayerController>().JumpControl();
+        }
+        if (other.gameObject.CompareTag("Corner1")) {
+            StartCoroutine(TurnCorner1());
+        }
+        if (other.gameObject.CompareTag("Corner2")) {
+            StartCoroutine(TurnCorner2());
         }
     }    
     private void OnTriggerExit(Collider other) {
@@ -94,5 +91,23 @@ public class PlayerPositionController : MonoBehaviour
             yield return null;
         }
     
+    }
+
+    IEnumerator TurnCorner1() {
+        float t = 0.0f;
+        while(t < 2.0f) {
+            t += Time.deltaTime;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 90, 0), 250 * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    IEnumerator TurnCorner2() {
+        float t = 0.0f;
+        while(t < 10.0f) {
+            t += Time.deltaTime;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(3.274f, 180, 0), 250 * Time.deltaTime);
+            yield return null;
+        }
     }
 }
