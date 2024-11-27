@@ -12,6 +12,7 @@ TagManager:
   - Corner2
   - Obstacle
   - Snowball
+  - JumpBoard
   layers:
   - Default
   - TransparentFX
