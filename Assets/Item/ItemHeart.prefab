@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8953914941410084646}
   - component: {fileID: 455340572415888586}
+  - component: {fileID: 1926786643}
   m_Layer: 0
   m_Name: ItemHeart
   m_TagString: StudentItem
@@ -26,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 8953914941410084647}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 48.21, y: 14.9, z: -10.11}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5929169631409267834}
   - {fileID: 5533888766718845065}
@@ -42,11 +43,25 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8953914941410084647}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 8, y: 15, z: 3}
   m_Center: {x: 0, y: 8, z: 0}
+--- !u!114 &1926786643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8953914941410084647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 131d5ec1ae804b241aebe90cf786981d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreManager: {fileID: 0}
+  scoreManagerScript: {fileID: 0}
 --- !u!1001 &8953914941708328346
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84,7 +99,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3317488739440703968, guid: 2fa3a692b9832b241b2683b7d0826c47, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3317488739440703968, guid: 2fa3a692b9832b241b2683b7d0826c47, type: 3}
       propertyPath: m_LocalRotation.w

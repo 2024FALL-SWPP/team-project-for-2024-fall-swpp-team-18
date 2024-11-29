@@ -6,6 +6,7 @@ public class CanvasController : MonoBehaviour
 {
     public GameObject imagePrefab; // Image 프리팹 연결
     public Canvas canvas; // Canvas 연결
+    public Vector2 imageSize = new Vector2(300, 300); // 이미지 크기 설정 (기본값: 100x100)
 
     // Start is called before the first frame update
     void Start() { }
@@ -31,6 +32,8 @@ public class CanvasController : MonoBehaviour
             // 위치 설정
             RectTransform imageRect = newImage.GetComponent<RectTransform>();
             imageRect.anchoredPosition = randomPosition;
+
+            imageRect.sizeDelta = imageSize;
 
             Destroy(newImage, 3f);
 

@@ -21,6 +21,7 @@ public class StudentItem : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("in virtual func");
             scoreManagerScript.IncreaseStudent();
         }
     }

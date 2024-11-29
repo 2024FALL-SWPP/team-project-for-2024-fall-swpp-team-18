@@ -12,6 +12,7 @@ public class HourGlass : StudentItem
 
     public override void OnTriggerEnter(Collider other)
     {
+        Debug.Log("in func");
         base.OnTriggerEnter(other);
         Destroy(gameObject);
     }
