@@ -7,6 +7,7 @@ public class ObjectSpawnManager : MonoBehaviour
     public float triggerDistance = 25f; // 플레이어와의 거리 기준
     public CarSpawnManager carSpawnManager; // CarSpawnManager 참조
     public PeopleSpawnManager peopleSpawnManager; // PeopleSpawnManager 참조
+    public TreeSpawnManager treeSpawnManager; // TreeSpawnManager 참조
 
 
     private GameObject player; // Player 오브젝트
@@ -60,8 +61,8 @@ public class ObjectSpawnManager : MonoBehaviour
     private void TriggerRandomSpawnManager(Transform spawnPoint, int spawnIndex)
     {   Awake();
         isSpawnPointActive[spawnIndex] = false;
-        int randomChoice = Random.Range(0, 2); // 0 또는 1 무작위 선택
-
+        int randomChoice = Random.Range(0, 3); // 무작위 선택
+        
         if (randomChoice == 0 && carSpawnManager != null)
         {
             // CarSpawnManager 실행
@@ -71,6 +72,11 @@ public class ObjectSpawnManager : MonoBehaviour
         {
             // PeopleSpawnManager 실행
             peopleSpawnManager.TriggerSpawn(spawnPoint);
+        }
+        else if (randomChoice == 2 && peopleSpawnManager != null)
+        {
+            // PeopleSpawnManager 실행
+            treeSpawnManager.TriggerSpawn(spawnPoint);
         }
 
         // 로그 출력 (디버깅용)

@@ -132,5 +132,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minSpeed: -3
-  maxSpeed: 5
+  maxSpeed: 3
   lifetime: 10

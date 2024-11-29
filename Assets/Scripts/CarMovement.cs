@@ -3,7 +3,7 @@ using UnityEngine;
 public class CarMovement : MonoBehaviour
 {
     public float minSpeed = -3f; // 최소 이동 속도
-    public float maxSpeed = 5f; // 최대 이동 속도
+    public float maxSpeed = 3f; // 최대 이동 속도
     public float lifetime = 10f; // 자동차가 자동으로 삭제되기까지의 시간
 
     private float speed; // 자동차의 이동 속도
