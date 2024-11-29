@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 1939468959456013322}
   - component: {fileID: 4399620976444528832}
   - component: {fileID: 1606573102}
+  - component: {fileID: 9065475338311801976}
+  - component: {fileID: 2126177184090257967}
   m_Layer: 0
   m_Name: ItemF
-  m_TagString: Untagged
+  m_TagString: ScoreItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,3 +101,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatSpeed: 2
   floatHeight: 0.5
+--- !u!65 &9065475338311801976
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2742247454739724565}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.07, y: 0.08, z: 0.02}
+  m_Center: {x: -0.025930807, y: 0.034427013, z: -0.0049052276}
+--- !u!114 &2126177184090257967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2742247454739724565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fac922ae109745418911ee0884b4aa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreValue: -100
+  scoreManager: {fileID: 0}
