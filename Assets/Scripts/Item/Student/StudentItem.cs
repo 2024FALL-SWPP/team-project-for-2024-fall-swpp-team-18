@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class StudentItem : MonoBehaviour
 {
-    public GameObject scoreManager;
-    public ScoreManager scoreManagerScript;
+    protected GameObject scoreManager;
+    protected ScoreManager scoreManagerScript;
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
+        scoreManager = GameObject.Find("ScoreManager");
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
     }
 
@@ -21,7 +22,6 @@ public class StudentItem : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("in virtual func");
             scoreManagerScript.IncreaseStudent();
         }
     }

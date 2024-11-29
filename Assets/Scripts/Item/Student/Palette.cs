@@ -5,7 +5,15 @@ using UnityEngine.UI;
 
 public class Palette : StudentItem
 {
-    public CanvasController canvasController; // CanvasController 연결
+    private GameObject canvas;
+    private CanvasController canvasController; // CanvasController 연결
+
+    void Start()
+    {
+        base.Start();
+        canvas = GameObject.Find("Canvas");
+        canvasController = canvas.GetComponent<CanvasController>();
+    }
 
     public override void OnTriggerEnter(Collider other)
     {
