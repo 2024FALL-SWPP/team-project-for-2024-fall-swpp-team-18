@@ -107,60 +107,13 @@ public class PlayerPositionController : MonoBehaviour
         yield return StartCoroutine(SpinPlayer(spinSpeed, spinDuration));
         
         // 속도 복구
-        float targetSpeed = 10f;
-        Speed = targetSpeed;
+        
+        Speed = 10f;
 
         BumpSnowflake = false; // 상태 복구
         activeRecoveryCoroutine = null; // 활성화된 Snowflake 코루틴 해제
         Debug.Log("Player fully recovered from snowflake.");
     }
-
-    private IEnumerator HandleHurricaneEffect(Vector3 hurricaneCenter, GameObject hurricaneObject)
-    {
-    Debug.Log("Hurricane effect started.");
-
-    // 현재 회전 상태 저장
-    
-
-    // 허리케인 중심으로 이동
-    Vector3 initialPosition = transform.position;
-    transform.position = hurricaneCenter;
-    Speed = 0f; // 이동 중지
-
-    // 제자리 회전
-    float spinSpeed = 540f; // 빠른 회전 속도
-    float spinDuration = 3f; // 허리케인 지속 시간
-    float escapeReduction = 0.1f; // Q, E 입력 시 지속 시간 감소량
-    Quaternion initialRotation = transform.rotation;
-    while (spinDuration > 0)
-    {
-        // 매 프레임 회전
-        transform.Rotate(0f, spinSpeed * Time.deltaTime, 0f);
-
-        // Q, E 입력 처리
-        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E))
-        {
-            spinDuration -= escapeReduction;
-            Debug.Log($"Escape time reduced! Remaining time: {spinDuration}");
-        }
-
-        spinDuration -= Time.deltaTime; // 남은 시간 감소
-        yield return null;
-    }
-    transform.position = initialPosition;
-    // 허리케인 탈출 후 초기 회전 상태 복원
-    transform.rotation = initialRotation;
-    Debug.Log("Player escaped the hurricane.");
-    Speed = 10f; // 속도 복구
-    BumpHurricane = false; // 상태 복구
-
-    // 허리케인 오브젝트 삭제
-    Destroy(hurricaneObject);
-    Debug.Log("Hurricane destroyed.");
-    }
-
-
-
 
     private IEnumerator SpinPlayer(float spinSpeed, float spinDuration)
     {
@@ -182,4 +135,62 @@ public class PlayerPositionController : MonoBehaviour
         transform.rotation = initialRotation;
         Debug.Log("Player finished spinning.");
     }
+
+    private IEnumerator HandleHurricaneEffect(Vector3 hurricaneCenter, GameObject hurricaneObject)
+    {
+    Debug.Log("Hurricane effect started.");
+
+
+    // 플레이어를 허리케인 중심으로 이동
+    transform.position = hurricaneCenter;
+    
+
+    // 제자리 회전 (Q, E 입력으로 지속 시간 감소)
+    float spinSpeed = 540f; // 빠른 회전 속도
+    float spinDuration = 3f; // 허리케인 지속 시간
+    float escapeReduction = 0.2f; // Q, E 입력 시 지속 시간 감소량
+    yield return StartCoroutine(SpinPlayerByKeyboard(spinSpeed, spinDuration, escapeReduction));
+
+    Speed = 10f;
+    Debug.Log("Player escaped the hurricane.");
+
+    BumpHurricane = false; // 상태 복구
+    activeHurricaneCoroutine = null;
+    // 허리케인 오브젝트 삭제
+    Destroy(hurricaneObject);
+    Debug.Log("Hurricane destroyed.");
+    }
+
+
+
+    
+
+    private IEnumerator SpinPlayerByKeyboard(float spinSpeed, float spinDuration, float escapeReduction)
+    {
+    Debug.Log("SpinPlayerByKeyboard started.");
+
+    float elapsedTime = 0f;
+    Quaternion initialRotation = transform.rotation;
+
+    while (elapsedTime < spinDuration)
+    {
+        // 플레이어는 항상 제자리 회전
+        float angle = spinSpeed * Time.deltaTime;
+        transform.Rotate(0f, angle, 0f);
+
+        // Q, E 입력 처리
+        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E))
+        {
+            spinDuration -= escapeReduction;
+            Debug.Log($"Escape time reduced! Remaining spin duration: {spinDuration}");
+        }
+
+        elapsedTime += Time.deltaTime;
+        
+        yield return null; // 다음 프레임까지 대기
+    }
+    transform.rotation = initialRotation;
+    Debug.Log("SpinPlayerByKeyboard finished.");
+    }
+
 }

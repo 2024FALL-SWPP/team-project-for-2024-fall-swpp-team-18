@@ -40,25 +40,26 @@ public class HurricaneController : MonoBehaviour
     }
 
     private void MoveTowardsPlayer()
+{
+    if (playerTransform == null)
     {
-        if (playerTransform == null)
-        {
-            Debug.LogWarning("Player Transform is not assigned.");
-            return;
-        }
-
-        // 플레이어 방향 계산
-        Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
-
-        // 경사면을 고려한 위치 보정
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, 1f))
-        {
-            // 경사면 높이에 따라 Y축 위치 보정
-            transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
-        }
-
-        // 플레이어를 향해 이동
-        rb.MovePosition(transform.position + directionToPlayer * moveSpeed * Time.deltaTime);
+        Debug.LogWarning("Player Transform is not assigned.");
+        return;
     }
+
+    // 플레이어 방향 계산
+    Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+
+    // 경사면을 따라 이동 (중력 포함)
+    Vector3 targetVelocity = directionToPlayer * moveSpeed;
+    rb.velocity = new Vector3(targetVelocity.x, rb.velocity.y, targetVelocity.z);
+
+    // 경사면을 따라 정확한 Y 위치를 보정 (필요 시 추가)
+    RaycastHit hit;
+    if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, 2f))
+    {
+        transform.position = new Vector3(transform.position.x, hit.point.y+ 1f, transform.position.z);
+    }
+}
+
 }
