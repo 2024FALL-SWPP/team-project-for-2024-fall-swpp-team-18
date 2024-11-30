@@ -9,9 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 955764156495326695}
-  - component: {fileID: 1592504758}
-  - component: {fileID: 1592504759}
-  - component: {fileID: 1592504761}
   m_Layer: 0
   m_Name: NewPlayer
   m_TagString: Player
@@ -35,44 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1592504758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 955764156495326694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5de1ef9bcb14ddd4f891ed8cb7b13311, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Before: {x: 0, y: 0, z: 0}
---- !u!114 &1592504759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 955764156495326694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ed1f5c244ad13e46965c598f975ecf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1592504761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 955764156495326694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8139cf005689a6742ab8828d0e4acdec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shake: 0
 --- !u!1 &955764156778967734
 GameObject:
   m_ObjectHideFlags: 0
@@ -85,9 +44,10 @@ GameObject:
   - component: {fileID: 955764156778967733}
   - component: {fileID: 955764156778967732}
   - component: {fileID: 955764156778967731}
+  - component: {fileID: 1018614906}
   m_Layer: 0
   m_Name: PlayerPosition
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,6 +110,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Before: {x: 0, y: 0, z: 0}
+--- !u!114 &1018614906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955764156778967734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bacd07dcdcf93c9419aeefda2ae8c8db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireballPrefab: {fileID: 6535557133876866142, guid: e0ddeac0103cdb1468ac0e4f726302d8, type: 3}
+  spawnPoint: {fileID: 955764156778967730}
+  offset: {x: 0, y: 0.5, z: 0}
+  spawnKey: 32
+  scoreManager: {fileID: 0}
+  scoreManagerScript: {fileID: 0}
 --- !u!1 &955764157390295790
 GameObject:
   m_ObjectHideFlags: 0
