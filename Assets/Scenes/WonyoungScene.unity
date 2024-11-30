@@ -691,34 +691,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2383013838887036025, guid: f3ca53069524ea646a90e21698a698d1, type: 3}
   m_PrefabInstance: {fileID: 1017635547}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1018614901 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 955764156778967734, guid: 3674583b537b7274ea3c060dbd5c3d39, type: 3}
-  m_PrefabInstance: {fileID: 1319458669}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1018614902 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 955764156778967730, guid: 3674583b537b7274ea3c060dbd5c3d39, type: 3}
-  m_PrefabInstance: {fileID: 1319458669}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1018614906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018614901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bacd07dcdcf93c9419aeefda2ae8c8db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireballPrefab: {fileID: 6535557133876866142, guid: e0ddeac0103cdb1468ac0e4f726302d8, type: 3}
-  spawnPoint: {fileID: 1018614902}
-  offset: {x: 0, y: 0.5, z: 0}
-  spawnKey: 32
-  scoreManager: {fileID: 2136157339}
-  scoreManagerScript: {fileID: 2136157340}
 --- !u!1 &1093444602
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,6 +872,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1018614906, guid: 3674583b537b7274ea3c060dbd5c3d39, type: 3}
+      propertyPath: scoreManager
+      value: 
+      objectReference: {fileID: 2136157339}
+    - target: {fileID: 1018614906, guid: 3674583b537b7274ea3c060dbd5c3d39, type: 3}
+      propertyPath: scoreManagerScript
+      value: 
+      objectReference: {fileID: 2136157340}
     - target: {fileID: 955764156495326694, guid: 3674583b537b7274ea3c060dbd5c3d39, type: 3}
       propertyPath: m_Name
       value: NewPlayer
@@ -948,14 +928,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 955764156778967734, guid: 3674583b537b7274ea3c060dbd5c3d39, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1592504758, guid: 3674583b537b7274ea3c060dbd5c3d39, type: 3}
-    - {fileID: 1592504759, guid: 3674583b537b7274ea3c060dbd5c3d39, type: 3}
-    - {fileID: 1592504761, guid: 3674583b537b7274ea3c060dbd5c3d39, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3674583b537b7274ea3c060dbd5c3d39, type: 3}
 --- !u!1 &1354360944
 GameObject:
