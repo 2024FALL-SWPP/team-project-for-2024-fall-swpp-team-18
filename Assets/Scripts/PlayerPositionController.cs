@@ -145,4 +145,9 @@ public class PlayerPositionController : MonoBehaviour
             yield return null;
         }
     }
+
+    public void ChangeSpeed(float delta)
+    {
+        Speed += delta;
+    }
 }
