@@ -3,21 +3,33 @@ using UnityEngine;
 
 public class PlayerPositionController : MonoBehaviour
 {
-    public float Speed = 10.0f;
 
+    //private Rigidbody PlayerRb;
+    private float Speed = 10.0f; 
     private bool BumpWallLeft = false;
     private bool BumpWallRight = false;
     private bool BumpSnowflake = false; 
     private bool BumpHurricane = false; 
+    private bool Stop = false;
+    private Vector3 CurForward;
+    public Vector3 Before; 
     private Coroutine activeRecoveryCoroutine = null; // 현재 활성화된 Snowflake 코루틴
     private Coroutine activeHurricaneCoroutine = null; // 현재 활성화된 Hurricane 코루틴
+    // Start is called before the first frame update
+    void Start()
+    {
+        //PlayerRb = gameObject.GetComponent<Rigidbody>();
+    }
+
 
     void Update()
     {
+
         // 눈송이 또는 허리케인 효과가 없을 때만 이동
-        if (!BumpSnowflake && !BumpHurricane)
+        if (!BumpSnowflake && !BumpHurricane && !Stop)
         {
             transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+
 
             if (Input.GetKey(KeyCode.Q) && !BumpWallLeft)
             {
@@ -27,6 +39,11 @@ public class PlayerPositionController : MonoBehaviour
             {
                 transform.Translate(Vector3.right * Speed * Time.deltaTime);
             }
+        }
+
+        GameObject Snowball = GameObject.FindWithTag("Snowball");
+        if (Vector3.Distance(transform.position, Snowball.transform.position) <= 10.0f) {
+            GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(10.0f);
         }
     }
 
@@ -40,13 +57,25 @@ public class PlayerPositionController : MonoBehaviour
         {
             BumpWallRight = true;
         }
-        if (other.gameObject.CompareTag("Corner1"))
-        {
-            transform.forward = Vector3.right;
+        if (other.gameObject.CompareTag("Avalanche")) {
+            GameManager.instance.GameOver = true;
         }
-        if (other.gameObject.CompareTag("Corner2"))
-        {
-            transform.forward = Vector3.back;
+        if (other.gameObject.CompareTag("Obstacle")) {
+            Stop = true;
+            GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(1f);
+        }
+        if (other.gameObject.CompareTag("Snowball")) {
+            GameManager.instance.GameOver =true;
+        }
+        if (other.gameObject.CompareTag("JumpBoard")) { 
+            StartCoroutine(Jump());
+            GameObject.Find("Player").GetComponent<PlayerController>().JumpControl();
+        }
+        if (other.gameObject.CompareTag("Corner1")) {
+            StartCoroutine(TurnCorner1());
+        }
+        if (other.gameObject.CompareTag("Corner2")) {
+            StartCoroutine(TurnCorner2());
         }
 
         if (other.gameObject.CompareTag("Snowflake"))
@@ -94,6 +123,42 @@ public class PlayerPositionController : MonoBehaviour
         if (other.gameObject.CompareTag("WallRight"))
         {
             BumpWallRight = false;
+        }
+        if (other.gameObject.CompareTag("Obstacle")) {
+            Stop = false;
+        }
+    }
+
+    IEnumerator Jump() {
+        float t = 0.0f;
+        while (t < 0.5f) {
+            t += Time.deltaTime;
+            transform.Translate(Vector3.up * Speed * 2 * t * Time.deltaTime);
+            yield return null;
+        }
+        while (t < 1.0f) {
+            t += Time.deltaTime;
+            transform.Translate(Vector3.up * Speed * 2 * (1-t) * Time.deltaTime);
+            yield return null;
+        }
+    
+    }
+
+    IEnumerator TurnCorner1() {
+        float t = 0.0f;
+        while(t < 2.0f) {
+            t += Time.deltaTime;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 90, 0), 250 * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    IEnumerator TurnCorner2() {
+        float t = 0.0f;
+        while(t < 10.0f) {
+            t += Time.deltaTime;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(3.274f, 180, 0), 250 * Time.deltaTime);
+            yield return null;
         }
     }
 

@@ -12,6 +12,10 @@ TagManager:
   - Corner2
   - Snowflake
   - Hurricane
+  - Obstacle
+  - Snowball
+  - JumpBoard
+
   layers:
   - Default
   - TransparentFX
