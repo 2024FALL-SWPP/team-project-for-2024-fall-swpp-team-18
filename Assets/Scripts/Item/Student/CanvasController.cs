@@ -36,8 +36,6 @@ public class CanvasController : MonoBehaviour
             imageRect.sizeDelta = imageSize;
 
             Destroy(newImage, 3f);
-
-            Debug.Log($"Image {i + 1} created at: {randomPosition}");
         }
     }
 }

@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerPositionController : MonoBehaviour
 {
     //private Rigidbody PlayerRb;
-    private float Speed = 10.0f;
+    [SerializeField]
+    public float Speed = 10.0f;
+    private float ItemDuration = 5f;
     private bool BumpWallLeft = false;
     private bool BumpWallRight = false;
     private bool Stop = false;
@@ -146,8 +148,18 @@ public class PlayerPositionController : MonoBehaviour
         }
     }
 
-    public void ChangeSpeed(float delta)
+    public void CallCoroutine(float delta, GameObject item)
     {
+        StartCoroutine(ChangeSpeed(delta, item));
+    }
+
+    public IEnumerator ChangeSpeed(float delta, GameObject item)
+    {
+        Debug.Log(Speed);
         Speed += delta;
+        yield return new WaitForSecondsRealtime(ItemDuration);
+        Speed -= delta;
+        Debug.Log(Speed);
+        Destroy(item);
     }
 }

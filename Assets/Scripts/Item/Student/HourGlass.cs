@@ -12,7 +12,7 @@ public class HourGlass : StudentItem
     public override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        playerPositionController.ChangeSpeed(-2f);
+        playerPositionController.CallCoroutine(-2f, gameObject);
         Destroy(gameObject);
     }
 }

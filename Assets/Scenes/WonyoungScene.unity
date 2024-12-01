@@ -261,7 +261,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 221579615506539331, guid: 71e2e8ee8f3e13445a17c25c33d558c7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 221579615506539332, guid: 71e2e8ee8f3e13445a17c25c33d558c7, type: 3}
       propertyPath: m_RootOrder
@@ -1360,13 +1360,17 @@ PrefabInstance:
       propertyPath: scoreManager
       value: 
       objectReference: {fileID: 2136157339}
+    - target: {fileID: 7499119489089449752, guid: cd0ddacfd94b5d843b53fd24ce9cc9f3, type: 3}
+      propertyPath: m_Size.y
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8545137949897575412, guid: cd0ddacfd94b5d843b53fd24ce9cc9f3, type: 3}
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8545137949897575412, guid: cd0ddacfd94b5d843b53fd24ce9cc9f3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -182.16
+      value: -182.19
       objectReference: {fileID: 0}
     - target: {fileID: 8545137949897575412, guid: cd0ddacfd94b5d843b53fd24ce9cc9f3, type: 3}
       propertyPath: m_LocalPosition.y
