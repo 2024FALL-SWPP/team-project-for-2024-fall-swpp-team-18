@@ -9,6 +9,8 @@ public class ObjectSpawnManager : MonoBehaviour
     public PeopleSpawnManager peopleSpawnManager; // PeopleSpawnManager 참조
     public TreeSpawnManager treeSpawnManager; // TreeSpawnManager 참조
 
+    public JumpSpawnManager jumpSpawnManager; // TreeSpawnManager 참조
+
 
     private GameObject player; // Player 오브젝트
     private bool[] isSpawnPointActive; // 각 스폰 포인트 활성화 상태 추적
@@ -61,26 +63,37 @@ public class ObjectSpawnManager : MonoBehaviour
     private void TriggerRandomSpawnManager(Transform spawnPoint, int spawnIndex)
     {   Awake();
         isSpawnPointActive[spawnIndex] = false;
-        int randomChoice = Random.Range(0, 3); // 무작위 선택
+        int randomChoice = Random.Range(0, 4); // 무작위 선택
+        randomChoice = 3;
         
         if (randomChoice == 0 && carSpawnManager != null)
         {
             // CarSpawnManager 실행
             carSpawnManager.TriggerSpawn(spawnPoint);
+            Debug.Log($"Spawn triggered at {spawnPoint.name} using {"CarSpawnManager"}");
         }
         else if (randomChoice == 1 && peopleSpawnManager != null)
         {
             // PeopleSpawnManager 실행
             peopleSpawnManager.TriggerSpawn(spawnPoint);
+            Debug.Log($"Spawn triggered at {spawnPoint.name} using {"PeopleSpawnManager"}");
         }
-        else if (randomChoice == 2 && peopleSpawnManager != null)
+        else if (randomChoice == 2 && treeSpawnManager != null)
         {
             // PeopleSpawnManager 실행
             treeSpawnManager.TriggerSpawn(spawnPoint);
+            Debug.Log($"Spawn triggered at {spawnPoint.name} using {"TreeSpawnManager"}");
+        }
+        else if (randomChoice == 3 && jumpSpawnManager != null)
+        {
+            // PeopleSpawnManager 실행
+            jumpSpawnManager.TriggerSpawn(spawnPoint);
+            Debug.Log($"Spawn triggered at {spawnPoint.name} using {"jumpSpawnManager"}");
         }
 
+
         // 로그 출력 (디버깅용)
-        Debug.Log($"Spawn triggered at {spawnPoint.name} using {(randomChoice == 0 ? "CarSpawnManager" : "PeopleSpawnManager")}");
+        
 
         // 스폰 포인트 비활성화 시작
   
