@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+
 public class UIManager : MonoBehaviour
 {
     public GameManager gameManager;
@@ -12,7 +13,7 @@ public class UIManager : MonoBehaviour
 
     public TextMeshProUGUI scoreText; // 연결된 텍스트
     private int score = 0;            // 현재 점수
-    // Start is called before the first frame update
+
     void Start()
     {
         pauseButton.gameObject.SetActive(true);
@@ -22,7 +23,6 @@ public class UIManager : MonoBehaviour
     public void AddScore(int amount)
     {
         score += amount;
-        
     }
 
     public int GetScore()
@@ -30,24 +30,30 @@ public class UIManager : MonoBehaviour
         scoreText.text = "Score: " + score; // 점수 업데이트
         return score;
     }
-    public void TogglePause(){
-    isPaused = !isPaused;
-    if (isPaused)
-    {   
-        Time.timeScale = 0;
-        Debug.Log("Game Paused");
-    }
-    else
+
+    public void TogglePause()
     {
-        Time.timeScale = 1; 
-        Debug.Log("Game Resumed");
-    }
-    
+        isPaused = !isPaused;
+        if (isPaused)
+        {   
+            Time.timeScale = 0;
+            Debug.Log("Game Paused");
+        }
+        else
+        {
+            Time.timeScale = 1; 
+            Debug.Log("Game Resumed");
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         GetScore();
+
+        // Esc 키 입력으로 일시정지/재개
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
     }
 }
