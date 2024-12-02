@@ -42,8 +42,11 @@ public class PlayerPositionController : MonoBehaviour
         }
 
         GameObject Snowball = GameObject.FindWithTag("Snowball");
-        if (Vector3.Distance(transform.position, Snowball.transform.position) <= 10.0f) {
-            GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(10.0f);
+        if (Snowball != null) // null 확인
+        {
+            if (Vector3.Distance(transform.position, Snowball.transform.position) <= 10.0f) {
+                GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(10.0f);
+            }
         }
     }
 
