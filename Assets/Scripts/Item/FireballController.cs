@@ -14,4 +14,13 @@ public class FireballController : MonoBehaviour
     {
         transform.Translate(Vector3.back * speed * Time.deltaTime);
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Obstacle"))
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+        }
+    }
 }
