@@ -15,7 +15,9 @@ TagManager:
   - Obstacle
   - Snowball
   - JumpBoard
-
+  - ScoreItem
+  - StudentItem
+ 
   layers:
   - Default
   - TransparentFX
