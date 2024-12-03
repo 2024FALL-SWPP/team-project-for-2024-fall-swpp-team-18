@@ -94,9 +94,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4532576786631820608}
   - component: {fileID: 1919892959}
+  - component: {fileID: 4665976242679167960}
+  - component: {fileID: 4576407900010429820}
   m_Layer: 0
   m_Name: ItemA
-  m_TagString: Untagged
+  m_TagString: ScoreItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,6 +134,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatSpeed: 2
   floatHeight: 0.5
+--- !u!65 &4665976242679167960
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3867785305720315898}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 12, z: 7}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &4576407900010429820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3867785305720315898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fac922ae109745418911ee0884b4aa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreValue: 100
+  scoreManager: {fileID: 0}
 --- !u!1 &5593700685984080718
 GameObject:
   m_ObjectHideFlags: 0

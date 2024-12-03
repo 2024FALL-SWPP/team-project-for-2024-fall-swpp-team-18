@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 public class FireballSpawner : MonoBehaviour
 {
     public GameObject fireballPrefab;
     public Transform spawnPoint;
-    public Vector3 offset = new Vector3(0, 5, -5);
+    public UnityEngine.Vector3 offset = new UnityEngine.Vector3(0, 5, -5);
     public KeyCode spawnKey = KeyCode.Space;
+    public GameObject scoreManager;
+    public ScoreManager scoreManagerScript;
 
     // Start is called before the first frame update
     void Start() { }
@@ -23,10 +26,17 @@ public class FireballSpawner : MonoBehaviour
 
     void SpawnFireball()
     {
-        if (fireballPrefab != null && spawnPoint != null)
+        if (scoreManagerScript.fireball > 0 && fireballPrefab != null && spawnPoint != null)
         {
-            Quaternion newRotation = spawnPoint.rotation * Quaternion.Euler(0, 180f, 0);
-            Instantiate(fireballPrefab, spawnPoint.position + offset, newRotation);
+            UnityEngine.Quaternion newRotation =
+                spawnPoint.rotation * UnityEngine.Quaternion.Euler(1.5f, 180f, 0);
+            GameObject fireball = Instantiate(
+                fireballPrefab,
+                spawnPoint.position + offset,
+                newRotation
+            );
+            scoreManagerScript.fireball--;
+            Destroy(fireball, 5f);
         }
         else
         {
