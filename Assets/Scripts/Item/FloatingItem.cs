@@ -6,7 +6,7 @@ public class FloatingItem : MonoBehaviour
     public float floatSpeed = 2f;
 
     // 떠오르는 높이 범위
-    public float floatHeight = 0.2f;
+    public float floatHeight = 0.1f;
     private Vector3 initialPosition;
 
     void Start()
