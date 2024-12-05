@@ -1,71 +1,129 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ItemSpawnManager : MonoBehaviour
 {
-    public Transform[] spawnPoints; // 스폰 포인트 배열
-    public float triggerDistance = 25f; // 플레이어와의 거리 기준
-    public GameObject player; // Player 오브젝트
+    public Transform[] spawnPoints1;
+    public Transform[] spawnPoints2;
+    public Transform[] spawnPoints3;
+    public float triggerDistance = 25f;
+    public GameObject player;
     public GameObject[] itemPrefabs;
-    private bool[] isSpawnPointActive; // 각 스폰 포인트 활성화 상태 추적
+    public bool isScore = true;
+    public Transform[][] spawnPoints = new Transform[3][];
+    private bool[][] isSpawnPointActive = new bool[3][];
 
     void Start()
     {
-        isSpawnPointActive = new bool[spawnPoints.Length];
-        for (int i = 0; i < isSpawnPointActive.Length; i++)
+        spawnPoints[0] = spawnPoints1;
+        spawnPoints[1] = spawnPoints2;
+        spawnPoints[2] = spawnPoints3;
+        for (int j = 0; j < spawnPoints.Length; j++)
         {
-            isSpawnPointActive[i] = true;
+            isSpawnPointActive[j] = new bool[spawnPoints[j].Length];
+            for (int i = 0; i < isSpawnPointActive[j].Length; i++)
+            {
+                isSpawnPointActive[j][i] = true;
+            }
         }
     }
 
     private void Update()
     {
-        for (int i = 0; i < spawnPoints.Length; i++)
+        for (int j = 0; j < spawnPoints.Length; j++)
         {
-            if (!isSpawnPointActive[i])
-                continue;
-
-            Transform spawnPoint = spawnPoints[i];
-            float distance = Vector3.Distance(player.transform.position, spawnPoint.position);
-
-            if (distance <= triggerDistance)
+            for (int i = 0; i < spawnPoints[j].Length; i++)
             {
-                TriggerRandomSpawnManager(spawnPoint, i);
+                if (!isSpawnPointActive[j][i])
+                    continue;
+
+                Transform spawnPoint = spawnPoints[j][i];
+
+                List<Vector3> spawnPositions = new List<Vector3>();
+                Vector3 spawnPosition = spawnPoint.position;
+                Quaternion spawnRotation = spawnPoint.rotation;
+                float distance = Vector3.Distance(player.transform.position, spawnPoint.position);
+
+                if (isScore)
+                    spawnPositions = FixSpawnPoint(spawnPosition, j);
+                else
+                    spawnPositions.Add(spawnPoint.position);
+                if (distance <= triggerDistance)
+                {
+                    isSpawnPointActive[j][i] = false;
+                    for (int k = 0; k < spawnPositions.Count; k++)
+                    {
+                        TriggerRandomSpawnManager(spawnPositions[k], spawnRotation, k);
+                    }
+                }
             }
         }
     }
 
-    private void TriggerRandomSpawnManager(Transform spawnPoint, int spawnIndex)
+    private List<Vector3> FixSpawnPoint(Vector3 spawnPosition, int stage)
     {
         Random.InitState(System.DateTime.Now.Millisecond);
-        isSpawnPointActive[spawnIndex] = false;
+        int randomChoice = 0;
+        int iter = Random.Range(1, 4);
+        List<Vector3> fixedSpawnPositions = new List<Vector3>();
+        Vector3 fixedSpawnPosition;
+        int prev1 = -1;
+        int prev2 = -1;
+        for (int i = 0; i < iter; i++)
+        {
+            while (randomChoice == prev1 || randomChoice == prev2)
+                randomChoice = Random.Range(0, 3);
+
+            if (stage == 0)
+            {
+                fixedSpawnPosition = spawnPosition - new Vector3(2 * randomChoice + 1, 0, 0);
+            }
+            else if (stage == 1)
+            {
+                fixedSpawnPosition = spawnPosition - new Vector3(0, 0, 2 * randomChoice + 1);
+            }
+            else
+            {
+                fixedSpawnPosition = spawnPosition - new Vector3(2 * randomChoice, 0, 0);
+            }
+            fixedSpawnPositions.Add(fixedSpawnPosition);
+            prev2 = prev1;
+            prev1 = randomChoice;
+        }
+        return fixedSpawnPositions;
+    }
+
+    private void TriggerRandomSpawnManager(Vector3 spawnPosition, Quaternion spawnRotation, int k)
+    {
+        Random.InitState(System.DateTime.Now.Millisecond * (k + 1));
         int randomChoice = Random.Range(0, 10);
         if (randomChoice < 3)
         {
-            Instantiate(itemPrefabs[0], spawnPoint.position, spawnPoint.rotation);
-            Debug.Log($"Spawn A+");
+            Destroy(Instantiate(itemPrefabs[0], spawnPosition, spawnRotation), 15f);
         }
         else if (randomChoice < 6)
         {
-            Instantiate(itemPrefabs[1], spawnPoint.position, spawnPoint.rotation);
-            Debug.Log($"Spawn B+");
+            Destroy(Instantiate(itemPrefabs[1], spawnPosition, spawnRotation), 15f);
         }
-        else if (randomChoice < 7)
+        else if (randomChoice < 8)
         {
-            Instantiate(itemPrefabs[2], spawnPoint.position, spawnPoint.rotation);
-            Debug.Log($"Spawn B-");
+            Destroy(Instantiate(itemPrefabs[2], spawnPosition, spawnRotation), 15f);
         }
         else if (randomChoice == 8)
         {
-            Instantiate(itemPrefabs[3], spawnPoint.position, spawnPoint.rotation);
-            Debug.Log($"Spawn C+");
+            Destroy(Instantiate(itemPrefabs[3], spawnPosition, spawnRotation), 15f);
         }
         else
         {
-            Quaternion targetRotation = spawnPoint.rotation * Quaternion.Euler(0, -90, 0);
-            Instantiate(itemPrefabs[4], spawnPoint.position, targetRotation);
-            Debug.Log($"Spawn F");
+            if (isScore)
+            {
+                spawnRotation *= Quaternion.Euler(0, -90, 0);
+                spawnPosition += new Vector3(0.2f, -0.5f, 0);
+            }
+            Destroy(Instantiate(itemPrefabs[4], spawnPosition, spawnRotation), 15f);
         }
     }
 }

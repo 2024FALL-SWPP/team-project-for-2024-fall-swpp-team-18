@@ -292,11 +292,9 @@ public class PlayerPositionController : MonoBehaviour
 
     public IEnumerator ChangeSpeed(float delta, GameObject item)
     {
-        Debug.Log(Speed);
         Speed += delta;
         yield return new WaitForSecondsRealtime(ItemDuration);
         Speed -= delta;
-        Debug.Log(Speed);
         Destroy(item);
     }
 }
