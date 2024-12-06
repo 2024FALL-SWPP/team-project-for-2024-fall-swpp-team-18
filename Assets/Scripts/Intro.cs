@@ -26,7 +26,14 @@ public class Intro : MonoBehaviour
                 GameObject.Find("Main Camera").GetComponent<IntroCamera>().Run_t(5.0f);
                 stair = true;
             }
-            transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+            if (T < 1.0f) {
+                transform.Translate(Vector3.forward * Speed * T * Time.deltaTime);
+            } else if (T < 4.0f) {
+                transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+            } else {
+                transform.Translate(Vector3.forward * Speed * (5-T) * Time.deltaTime);
+            }
+            
         } else if (T < 6.0f) {
             if (!stop) {
                 GameObject.Find("Main Camera").GetComponent<IntroCamera>().Shake_t(10.0f);
@@ -34,15 +41,15 @@ public class Intro : MonoBehaviour
                 stop = true;
             }
         } else if (T < 6.3f) {
-            transform.Rotate(Vector3.up *  -300 * Time.deltaTime);
+            transform.Rotate(Vector3.up * -300 * Time.deltaTime);
         } else if (T < 8.0f) {
 
         } else if (T < 8.5f) {
             transform.Rotate(Vector3.up *  300 * Time.deltaTime);
         } else if (T < 9.0f) {
 
-        } else if (T < 9.5f) {
-            transform.Rotate(Vector3.up *  -150 * Time.deltaTime);
+        } else if (T < 9.25f) {
+            transform.Rotate(Vector3.up *  -300 * Time.deltaTime);
         } else if (T >= 10.0f && T< 13.0f) {
             if (!run) {
                 GameObject.Find("Main Camera").GetComponent<IntroCamera>().Run_t(3.0f);
