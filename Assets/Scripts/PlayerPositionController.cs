@@ -261,4 +261,8 @@ public class PlayerPositionController : MonoBehaviour
     Debug.Log("SpinPlayerByKeyboard finished.");
     }
 
+    public bool getBumpHurricane(){
+        return BumpHurricane;
+    }
+
 }
