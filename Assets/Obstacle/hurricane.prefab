@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1123686354644866711
+--- !u!1 &4135780575062743851
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 347888114749918253}
-  - component: {fileID: 3709886307761177480}
-  - component: {fileID: 1484180963387782978}
+  - component: {fileID: 3616089414295552401}
+  - component: {fileID: 396657326191021620}
+  - component: {fileID: 2478601529527696126}
+  - component: {fileID: 3962354361308684510}
+  - component: {fileID: -4875623572911014146}
+  - component: {fileID: 6942801462060990605}
+  - component: {fileID: -6161064983211984386}
   m_Layer: 0
   m_Name: hurricane
-  m_TagString: Untagged
+  m_TagString: Hurricane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &347888114749918253
+--- !u!4 &3616089414295552401
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1123686354644866711}
+  m_GameObject: {fileID: 4135780575062743851}
   m_LocalRotation: {x: -0.70614433, y: -0.03687996, z: -0.03687996, w: 0.7061444}
-  m_LocalPosition: {x: -153.5969, y: 0, z: -317.49213}
-  m_LocalScale: {x: 33, y: 33, z: 50}
+  m_LocalPosition: {x: -1479.52, y: 224.31, z: 749.55}
+  m_LocalScale: {x: 35, y: 35, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3709886307761177480
+--- !u!33 &396657326191021620
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1123686354644866711}
+  m_GameObject: {fileID: 4135780575062743851}
   m_Mesh: {fileID: 8314571269056883277, guid: d14c92d4391b5be4589930082b1978f8, type: 3}
---- !u!23 &1484180963387782978
+--- !u!23 &2478601529527696126
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1123686354644866711}
+  m_GameObject: {fileID: 4135780575062743851}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -83,3 +87,63 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3962354361308684510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4135780575062743851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02c46f8c3f8dfa348aad17b35fa6afe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  moveSpeed: 5
+  rotationSpeed: 200
+--- !u!54 &-4875623572911014146
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4135780575062743851}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 32
+  m_CollisionDetection: 0
+--- !u!64 &6942801462060990605
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4135780575062743851}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8314571269056883277, guid: d14c92d4391b5be4589930082b1978f8, type: 3}
+--- !u!114 &-6161064983211984386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4135780575062743851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02c46f8c3f8dfa348aad17b35fa6afe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  moveSpeed: 5
+  rotationSpeed: 300

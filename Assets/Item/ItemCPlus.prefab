@@ -178,9 +178,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8545137949897575412}
   - component: {fileID: 1359032722}
+  - component: {fileID: 7499119489089449752}
+  - component: {fileID: 3031313462053139102}
   m_Layer: 0
   m_Name: ItemCPlus
-  m_TagString: Untagged
+  m_TagString: ScoreItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -194,8 +196,8 @@ Transform:
   m_GameObject: {fileID: 9069613154277429582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 48.9617, y: 0, z: 4.9866977}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4596369853500992550}
   - {fileID: 6988214480193443187}
@@ -216,3 +218,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatSpeed: 2
   floatHeight: 0.5
+--- !u!65 &7499119489089449752
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9069613154277429582}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 12, z: 7}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &3031313462053139102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9069613154277429582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fac922ae109745418911ee0884b4aa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreValue: -10
+  scoreManager: {fileID: 0}

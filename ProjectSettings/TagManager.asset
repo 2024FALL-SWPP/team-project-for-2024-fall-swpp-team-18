@@ -10,9 +10,14 @@ TagManager:
   - WallRight
   - Corner1
   - Corner2
+  - Snowflake
+  - Hurricane
   - Obstacle
   - Snowball
   - JumpBoard
+  - ScoreItem
+  - StudentItem
+ 
   layers:
   - Default
   - TransparentFX
