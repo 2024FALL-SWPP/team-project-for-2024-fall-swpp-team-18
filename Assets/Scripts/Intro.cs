@@ -40,12 +40,12 @@ public class Intro : MonoBehaviour
                 Avalanche.SetActive(true);
                 stop = true;
             }
-        } else if (T < 6.3f) {
-            transform.Rotate(Vector3.up * -300 * Time.deltaTime);
+        } else if (T < 6.2f) {
+            transform.Rotate(Vector3.up * -450 * Time.deltaTime);
         } else if (T < 8.0f) {
 
-        } else if (T < 8.5f) {
-            transform.Rotate(Vector3.up *  300 * Time.deltaTime);
+        } else if (T < 8.3f) {
+            transform.Rotate(Vector3.up *  500 * Time.deltaTime);
         } else if (T < 9.0f) {
 
         } else if (T < 9.25f) {

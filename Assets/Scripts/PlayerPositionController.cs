@@ -32,7 +32,7 @@ public class PlayerPositionController : MonoBehaviour
         if (!BumpSnowflake && !BumpHurricane && !Stop)
         {
             transform.Translate(Vector3.forward * Speed * Time.deltaTime);
-
+        }
         if (Input.GetKey(KeyCode.Q) && !BumpWallLeft)
         {
             transform.Translate(-Vector3.right * Speed * Time.deltaTime);
@@ -228,27 +228,27 @@ public class PlayerPositionController : MonoBehaviour
 
     private IEnumerator HandleHurricaneEffect(Vector3 hurricaneCenter, GameObject hurricaneObject)
     {
-    Debug.Log("Hurricane effect started.");
+        Debug.Log("Hurricane effect started.");
 
 
-    // 플레이어를 허리케인 중심으로 이동
-    transform.position = hurricaneCenter;
-    
+        // 플레이어를 허리케인 중심으로 이동
+        transform.position = hurricaneCenter;
+        
 
-    // 제자리 회전 (Q, E 입력으로 지속 시간 감소)
-    float spinSpeed = 540f; // 빠른 회전 속도
-    float spinDuration = 3f; // 허리케인 지속 시간
-    float escapeReduction = 0.2f; // Q, E 입력 시 지속 시간 감소량
-    yield return StartCoroutine(SpinPlayerByKeyboard(spinSpeed, spinDuration, escapeReduction));
+        // 제자리 회전 (Q, E 입력으로 지속 시간 감소)
+        float spinSpeed = 540f; // 빠른 회전 속도
+        float spinDuration = 3f; // 허리케인 지속 시간
+        float escapeReduction = 0.2f; // Q, E 입력 시 지속 시간 감소량
+        yield return StartCoroutine(SpinPlayerByKeyboard(spinSpeed, spinDuration, escapeReduction));
 
-    Speed = 10f;
-    Debug.Log("Player escaped the hurricane.");
+        Speed = 10f;
+        Debug.Log("Player escaped the hurricane.");
 
-    BumpHurricane = false; // 상태 복구
-    activeHurricaneCoroutine = null;
-    // 허리케인 오브젝트 삭제
-    Destroy(hurricaneObject);
-    Debug.Log("Hurricane destroyed.");
+        BumpHurricane = false; // 상태 복구
+        activeHurricaneCoroutine = null;
+        // 허리케인 오브젝트 삭제
+        Destroy(hurricaneObject);
+        Debug.Log("Hurricane destroyed.");
     }
 
 
@@ -257,33 +257,32 @@ public class PlayerPositionController : MonoBehaviour
 
     private IEnumerator SpinPlayerByKeyboard(float spinSpeed, float spinDuration, float escapeReduction)
     {
-    Debug.Log("SpinPlayerByKeyboard started.");
+        Debug.Log("SpinPlayerByKeyboard started.");
 
-    float elapsedTime = 0f;
-    Quaternion initialRotation = transform.rotation;
+        float elapsedTime = 0f;
+        Quaternion initialRotation = transform.rotation;
 
-    while (elapsedTime < spinDuration)
-    {
-        // 플레이어는 항상 제자리 회전
-        float angle = spinSpeed * Time.deltaTime;
-        transform.Rotate(0f, angle, 0f);
-
-        // Q, E 입력 처리
-        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E))
+        while (elapsedTime < spinDuration)
         {
-            spinDuration -= escapeReduction;
-            Debug.Log($"Escape time reduced! Remaining spin duration: {spinDuration}");
+            // 플레이어는 항상 제자리 회전
+            float angle = spinSpeed * Time.deltaTime;
+            transform.Rotate(0f, angle, 0f);
+
+            // Q, E 입력 처리
+            if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E))
+            {
+                spinDuration -= escapeReduction;
+                Debug.Log($"Escape time reduced! Remaining spin duration: {spinDuration}");
+            }
+
+            elapsedTime += Time.deltaTime;
+            
+            yield return null; // 다음 프레임까지 대기
         }
-
-        elapsedTime += Time.deltaTime;
-        
-        yield return null; // 다음 프레임까지 대기
-    }
-    transform.rotation = initialRotation;
-    Debug.Log("SpinPlayerByKeyboard finished.");
+        transform.rotation = initialRotation;
+        Debug.Log("SpinPlayerByKeyboard finished.");
     }
 
-}
 
     public void CallCoroutine(float delta, GameObject item)
     {
