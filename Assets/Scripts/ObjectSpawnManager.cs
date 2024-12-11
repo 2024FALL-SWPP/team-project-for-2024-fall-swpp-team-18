@@ -11,20 +11,11 @@ public class ObjectSpawnManager : MonoBehaviour
 
     public JumpSpawnManager jumpSpawnManager; // TreeSpawnManager 참조
 
-
-    private GameObject player; // Player 오브젝트
+    public GameObject player; // Player 오브젝트
     private bool[] isSpawnPointActive; // 각 스폰 포인트 활성화 상태 추적
 
     private void Start()
     {
-        // Player 태그를 가진 오브젝트 찾기
-        player = GameObject.FindGameObjectWithTag("Player");
-
-        if (player == null)
-        {
-            Debug.LogError("Player 태그를 가진 오브젝트를 찾을 수 없습니다!");
-        }
-
         // 스폰 포인트 활성화 상태 초기화
         isSpawnPointActive = new bool[spawnPoints.Length];
         for (int i = 0; i < isSpawnPointActive.Length; i++)
@@ -32,22 +23,23 @@ public class ObjectSpawnManager : MonoBehaviour
             isSpawnPointActive[i] = true; // 초기 상태는 모두 활성화
         }
     }
+
     private void Awake()
-        {
-            // 현재 시간을 기반으로 랜덤 시드 초기화
-            Random.InitState(System.DateTime.Now.Millisecond);
-        }
-
-
+    {
+        // 현재 시간을 기반으로 랜덤 시드 초기화
+        Random.InitState(System.DateTime.Now.Millisecond);
+    }
 
     private void Update()
     {
-        if (player == null) return;
+        if (player == null)
+            return;
 
         // 각 스폰 포인트를 검사
         for (int i = 0; i < spawnPoints.Length; i++)
         {
-            if (!isSpawnPointActive[i]) continue; // 비활성화된 스폰 포인트는 무시
+            if (!isSpawnPointActive[i])
+                continue; // 비활성화된 스폰 포인트는 무시
 
             Transform spawnPoint = spawnPoints[i];
             float distance = Vector3.Distance(player.transform.position, spawnPoint.position);
@@ -61,11 +53,11 @@ public class ObjectSpawnManager : MonoBehaviour
     }
 
     private void TriggerRandomSpawnManager(Transform spawnPoint, int spawnIndex)
-    {   Awake();
+    {
+        Awake();
         isSpawnPointActive[spawnIndex] = false;
         int randomChoice = Random.Range(0, 4); // 무작위 선택
-        randomChoice = 3;
-        
+
         if (randomChoice == 0 && carSpawnManager != null)
         {
             // CarSpawnManager 실행
@@ -91,11 +83,9 @@ public class ObjectSpawnManager : MonoBehaviour
             Debug.Log($"Spawn triggered at {spawnPoint.name} using {"jumpSpawnManager"}");
         }
 
-
         // 로그 출력 (디버깅용)
-        
+
 
         // 스폰 포인트 비활성화 시작
-  
     }
 }
