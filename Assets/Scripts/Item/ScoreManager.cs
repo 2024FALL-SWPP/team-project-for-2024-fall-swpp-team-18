@@ -27,8 +27,8 @@ public class ScoreManager : MonoBehaviour
     {
         if (heart == 0)
         {
-            Debug.Log("gameover");
-            GameManager.Instance.GameOver = true;
+            //Debug.Log("gameover");
+            //GameManager.Instance.GameOver = true;
         }
     }
 
