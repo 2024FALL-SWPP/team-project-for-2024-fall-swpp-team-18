@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 4665976242679167960}
   - component: {fileID: 4576407900010429820}
   m_Layer: 0
-  m_Name: ItemA
+  m_Name: _ItemA
   m_TagString: ScoreItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

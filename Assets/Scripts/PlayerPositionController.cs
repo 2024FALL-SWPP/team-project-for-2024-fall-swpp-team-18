@@ -244,14 +244,14 @@ public class PlayerPositionController : MonoBehaviour
         // 제자리 회전 (Q, E 입력으로 지속 시간 감소)
         float spinSpeed = 540f; // 빠른 회전 속도
         float spinDuration = 3f; // 허리케인 지속 시간
-        float escapeReduction = 0.2f; // Q, E 입력 시 지속 시간 감소량
+        float escapeReduction = 0.4f; // Q, E 입력 시 지속 시간 감소량
         yield return StartCoroutine(SpinPlayerByKeyboard(spinSpeed, spinDuration, escapeReduction));
 
         Speed = 10f;
         Debug.Log("Player escaped the hurricane.");
-
         BumpHurricane = false; // 상태 복구
         activeHurricaneCoroutine = null;
+
         // 허리케인 오브젝트 삭제
         Destroy(hurricaneObject);
         Debug.Log("Hurricane destroyed.");

@@ -40,7 +40,7 @@ public class ViewpointController : MonoBehaviour
             mouseX += Input.GetAxis("Mouse X") * mouseSpeed;
             mouseX = Mathf.Clamp(mouseX, -150, 150);
 
-            transform.localEulerAngles = new Vector3(20, mouseX, 0);
+            transform.localEulerAngles = new Vector3(15, mouseX, 0);
         }
         else
         {

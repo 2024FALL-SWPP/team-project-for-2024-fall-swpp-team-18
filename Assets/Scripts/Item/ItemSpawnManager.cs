@@ -15,9 +15,11 @@ public class ItemSpawnManager : MonoBehaviour
     public bool isScore = true;
     public Transform[][] spawnPoints = new Transform[3][];
     private bool[][] isSpawnPointActive = new bool[3][];
+    private int prefabNum;
 
     void Start()
     {
+        prefabNum = itemPrefabs.Length;
         spawnPoints[0] = spawnPoints1;
         spawnPoints[1] = spawnPoints2;
         spawnPoints[2] = spawnPoints3;
@@ -57,6 +59,7 @@ public class ItemSpawnManager : MonoBehaviour
                     for (int k = 0; k < spawnPositions.Count; k++)
                     {
                         TriggerRandomSpawnManager(spawnPositions[k], spawnRotation, k);
+                        Debug.Log($"Spawn triggered at {spawnPoint.name}");
                     }
                 }
             }
@@ -67,7 +70,7 @@ public class ItemSpawnManager : MonoBehaviour
     {
         Random.InitState(System.DateTime.Now.Millisecond);
         int randomChoice = 0;
-        int iter = Random.Range(1, 4);
+        int iter = Random.Range(2, 4);
         List<Vector3> fixedSpawnPositions = new List<Vector3>();
         Vector3 fixedSpawnPosition;
         int prev1 = -1;
@@ -102,28 +105,28 @@ public class ItemSpawnManager : MonoBehaviour
         int randomChoice = Random.Range(0, 10);
         if (randomChoice < 3)
         {
-            Destroy(Instantiate(itemPrefabs[0], spawnPosition, spawnRotation), 15f);
+            Destroy(Instantiate(itemPrefabs[0 % prefabNum], spawnPosition, spawnRotation), 15f);
         }
         else if (randomChoice < 6)
         {
-            Destroy(Instantiate(itemPrefabs[1], spawnPosition, spawnRotation), 15f);
+            Destroy(Instantiate(itemPrefabs[1 % prefabNum], spawnPosition, spawnRotation), 15f);
         }
         else if (randomChoice < 8)
         {
-            Destroy(Instantiate(itemPrefabs[2], spawnPosition, spawnRotation), 15f);
+            Destroy(Instantiate(itemPrefabs[2 % prefabNum], spawnPosition, spawnRotation), 15f);
         }
         else if (randomChoice == 8)
         {
-            Destroy(Instantiate(itemPrefabs[3], spawnPosition, spawnRotation), 15f);
+            Destroy(Instantiate(itemPrefabs[3 % prefabNum], spawnPosition, spawnRotation), 15f);
         }
         else
         {
             if (isScore)
             {
                 spawnRotation *= Quaternion.Euler(0, -90, 0);
-                spawnPosition += new Vector3(0.2f, -0.5f, 0);
+                spawnPosition += new Vector3(0.4f, -0.5f, 0);
             }
-            Destroy(Instantiate(itemPrefabs[4], spawnPosition, spawnRotation), 15f);
+            Destroy(Instantiate(itemPrefabs[4 % prefabNum], spawnPosition, spawnRotation), 15f);
         }
     }
 }

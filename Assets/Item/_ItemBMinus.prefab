@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1844337580726988979}
   - component: {fileID: 5333326405186622133}
   m_Layer: 0
-  m_Name: ItemBMinus
+  m_Name: _ItemBMinus
   m_TagString: ScoreItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

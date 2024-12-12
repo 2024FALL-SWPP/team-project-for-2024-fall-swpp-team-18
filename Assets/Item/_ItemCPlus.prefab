@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 7499119489089449752}
   - component: {fileID: 3031313462053139102}
   m_Layer: 0
-  m_Name: ItemCPlus
+  m_Name: _ItemCPlus
   m_TagString: ScoreItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
