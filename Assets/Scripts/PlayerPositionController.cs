@@ -5,7 +5,7 @@ public class PlayerPositionController : MonoBehaviour
 {
     //private Rigidbody PlayerRb;
     [SerializeField]
-    public float Speed = 10.0f;
+    public float Speed = 0.0f;
     private float ItemDuration = 5f;
     private bool BumpWallLeft = false;
     private bool BumpWallRight = false;
@@ -13,7 +13,6 @@ public class PlayerPositionController : MonoBehaviour
     private bool BumpHurricane = false;
     private bool Stop = false;
     private Vector3 CurForward;
-    public Vector3 Before;
     private Coroutine activeRecoveryCoroutine = null; // 현재 활성화된 Snowflake 코루틴
     private Coroutine activeHurricaneCoroutine = null; // 현재 활성화된 Hurricane 코루틴
     private GameObject scoreManager;
@@ -22,6 +21,7 @@ public class PlayerPositionController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //PlayerRb = GetComponent<Rigidbody>();
         scoreManager = GameObject.Find("ScoreManager");
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
     }
@@ -35,6 +35,7 @@ public class PlayerPositionController : MonoBehaviour
 
             if (Input.GetKey(KeyCode.Q) && !BumpWallLeft)
             {
+                //PlayerRb.AddForce(Vector3.right * 50.0f, ForceMode.Force);
                 transform.Translate(-Vector3.right * Speed * Time.deltaTime);
             }
             if (Input.GetKey(KeyCode.E) && !BumpWallRight)
@@ -51,14 +52,13 @@ public class PlayerPositionController : MonoBehaviour
             transform.Translate(Vector3.right * Speed * Time.deltaTime);
         }
 
-            GameObject Snowball = GameObject.FindWithTag("Snowball");
-            if (
-                Snowball != null
-                && Vector3.Distance(transform.position, Snowball.transform.position) <= 10.0f
-            )
-            {
-                GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(10.0f);
-            }
+        GameObject Snowball = GameObject.FindWithTag("Snowball");
+        if (
+            Snowball != null
+            && Vector3.Distance(transform.position, Snowball.transform.position) <= 10.0f
+        )
+        {
+            GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(10.0f);
         }
     }
 
@@ -67,7 +67,7 @@ public class PlayerPositionController : MonoBehaviour
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             //Stop = true;
-            GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(1f);
+            GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(0.5f);
             scoreManagerScript.heart--;
         }
     }
@@ -255,11 +255,6 @@ public class PlayerPositionController : MonoBehaviour
         transform.position = hurricaneCenter;
         
 
-        // 제자리 회전 (Q, E 입력으로 지속 시간 감소)
-        float spinSpeed = 540f; // 빠른 회전 속도
-        float spinDuration = 3f; // 허리케인 지속 시간
-        float escapeReduction = 0.2f; // Q, E 입력 시 지속 시간 감소량
-        yield return StartCoroutine(SpinPlayerByKeyboard(spinSpeed, spinDuration, escapeReduction));
         // 제자리 회전 (Q, E 입력으로 지속 시간 감소)
         float spinSpeed = 540f; // 빠른 회전 속도
         float spinDuration = 3f; // 허리케인 지속 시간

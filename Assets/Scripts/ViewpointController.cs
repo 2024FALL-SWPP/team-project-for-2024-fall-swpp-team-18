@@ -21,10 +21,10 @@ public class ViewpointController : MonoBehaviour
         // 초기 위치
         init = Quaternion.Euler(transform.parent.right*20) * transform.parent.rotation;
 
-        if (Input.GetKeyDown(KeyCode.LeftAlt)) {
+        if (Input.GetKeyDown(KeyCode.LeftShift)) {
             mouseX = 0f;
         }
-        if (Input.GetKey(KeyCode.LeftAlt)) {
+        if (Input.GetKey(KeyCode.LeftShift)) {
             mouseX += Input.GetAxis("Mouse X") * mouseSpeed;
             mouseX = Mathf.Clamp(mouseX, -150, 150);
 

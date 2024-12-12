@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     void HandleGameOver()
     {
         // 게임 종료 동작 실행
-        Debug.Log("Game Over! Returning to Main Menu...");
-        SceneManager.LoadScene("MainMenu"); // 예: 메인 메뉴 씬으로 이동
+        //Debug.Log("Game Over! Returning to Main Menu...");
+        //SceneManager.LoadScene("MainMenu"); // 예: 메인 메뉴 씬으로 이동
     }
 }
