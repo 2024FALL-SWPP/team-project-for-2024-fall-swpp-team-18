@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: dbce8548a0bf3824380d482fa52bcaf1
+  - enabled: 1
+    path: Assets/Scenes/Jinsik.unity
+    guid: efc106d040f8d8b45900fda8a3aed50d
   m_configObjects: {}
