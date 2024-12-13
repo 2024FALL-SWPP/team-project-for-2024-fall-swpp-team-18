@@ -6,6 +6,7 @@ public class PlayerPositionController : MonoBehaviour
     //private Rigidbody PlayerRb;
     [SerializeField]
     public float Speed = 10.0f;
+    public GameObject Avalanche2;
     private float ItemDuration = 5f;
     private bool BumpWallLeft = false;
     private bool BumpWallRight = false;
@@ -75,6 +76,7 @@ public class PlayerPositionController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Avalanche"))
         {
+            Debug.Log("fail");
             GameManager.instance.GameOver = true;
         }
         if (other.gameObject.CompareTag("Snowball"))
@@ -92,6 +94,7 @@ public class PlayerPositionController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Corner2"))
         {
+            Avalanche2.SetActive(true);
             StartCoroutine(TurnCorner2());
         }
 

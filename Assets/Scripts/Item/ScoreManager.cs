@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Schema;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField]
-    public int score = 0;
+    public float score = 0;
+
+    [SerializeField]
+    public int scoreNum = 0;
+
+    [SerializeField]
+    public int total = 0;
 
     [SerializeField]
     public int student = 0;
@@ -19,12 +26,20 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     public int fireball = 0;
 
+    [SerializeField]
+    public float playTime;
+
     // Start is called before the first frame update
-    void Start() { }
+    void Start()
+    {
+        playTime = 0f;
+    }
 
     // Update is called once per frame
     void Update()
     {
+        playTime += Time.deltaTime;
+        total = (int)(score * 100) + student * 100 + scoreNum * 100;
         if (heart == 0)
         {
             //Debug.Log("gameover");
@@ -34,7 +49,9 @@ public class ScoreManager : MonoBehaviour
 
     public void IncreaseScore(int itemScore)
     {
-        score += itemScore;
+        score = (score * scoreNum + itemScore) / (scoreNum + 1);
+        score = Mathf.Round(score * 100) / 100f;
+        scoreNum++;
     }
 
     public void IncreaseStudent()

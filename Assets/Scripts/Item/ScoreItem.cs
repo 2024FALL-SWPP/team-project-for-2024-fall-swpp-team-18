@@ -6,6 +6,7 @@ using UnityEngine;
 public class ScoreItem : MonoBehaviour
 {
     public int scoreValue;
+
     private GameObject scoreManager;
     private ScoreManager scoreManagerScript;
 
