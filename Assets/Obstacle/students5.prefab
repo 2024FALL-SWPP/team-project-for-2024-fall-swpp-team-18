@@ -768,7 +768,7 @@ GameObject:
   - component: {fileID: -2854960903549870348}
   m_Layer: 0
   m_Name: students5
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -843,7 +843,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 7, z: 2}
+  m_Size: {x: 7, y: 7, z: 2}
   m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!114 &-2854960903549870348
 MonoBehaviour:

@@ -14,7 +14,7 @@ public class ScoreManager : MonoBehaviour
     public int professor = 0;
 
     [SerializeField]
-    public int heart = 0;
+    public int heart = 3;
 
     [SerializeField]
     public int fireball = 0;
@@ -23,7 +23,14 @@ public class ScoreManager : MonoBehaviour
     void Start() { }
 
     // Update is called once per frame
-    void Update() { }
+    void Update()
+    {
+        if (heart == 0)
+        {
+            //Debug.Log("gameover");
+            //GameManager.Instance.GameOver = true;
+        }
+    }
 
     public void IncreaseScore(int itemScore)
     {

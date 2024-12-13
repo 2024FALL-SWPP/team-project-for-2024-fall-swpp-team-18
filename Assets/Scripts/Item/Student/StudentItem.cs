@@ -9,7 +9,7 @@ public class StudentItem : MonoBehaviour
     protected ScoreManager scoreManagerScript;
 
     // Start is called before the first frame update
-    protected void Start()
+    protected virtual void Start()
     {
         scoreManager = GameObject.Find("ScoreManager");
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
