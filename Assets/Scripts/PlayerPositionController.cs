@@ -62,6 +62,12 @@ public class PlayerPositionController : MonoBehaviour
             GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(1f);
             scoreManagerScript.heart--;
         }
+        if (collision.gameObject.CompareTag("Professor"))
+        {
+            Debug.Log("collision of player and professor");
+            scoreManagerScript.IncreaseProfessor();
+            Destroy(collision.gameObject);
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -77,7 +83,11 @@ public class PlayerPositionController : MonoBehaviour
         if (other.gameObject.CompareTag("Avalanche"))
         {
             Debug.Log("fail");
-            GameManager.instance.GameOver = true;
+            GameManager.Instance.HandleGameOver();
+        }
+        if (other.gameObject.CompareTag("MainGate"))
+        {
+            GameManager.Instance.HandleGameClear();
         }
         if (other.gameObject.CompareTag("Snowball"))
         {
@@ -97,7 +107,6 @@ public class PlayerPositionController : MonoBehaviour
             Avalanche2.SetActive(true);
             StartCoroutine(TurnCorner2());
         }
-
         if (other.gameObject.CompareTag("Snowflake"))
         {
             Debug.Log("Collision with snowflake detected.");

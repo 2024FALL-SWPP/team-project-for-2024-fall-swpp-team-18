@@ -9,12 +9,12 @@ public class ProfessorMove : MonoBehaviour
 
     private float time;
 
-    [SerializeField]
-    public GameObject scoreManager;
-
-    [SerializeField]
-    public ScoreManager scoreManagerScript;
-
+    /*     [SerializeField]
+        public GameObject scoreManager;
+    
+        [SerializeField]
+        public ScoreManager scoreManagerScript;
+     */
     void Start()
     {
         Random.InitState(System.DateTime.Now.Millisecond);
@@ -43,13 +43,14 @@ public class ProfessorMove : MonoBehaviour
         transform.position = newPosition;
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+    /*     void OnCollisionEnter(Collision collision)
         {
-            Debug.Log("collision of player and professor");
-            scoreManagerScript.IncreaseProfessor();
-            Destroy(gameObject);
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                Debug.Log("collision of player and professor");
+                scoreManagerScript.IncreaseProfessor();
+                Destroy(gameObject);
+            }
         }
-    }
+     */
 }

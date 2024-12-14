@@ -42,8 +42,8 @@ public class ScoreManager : MonoBehaviour
         total = (int)(score * 100) + student * 100 + scoreNum * 100;
         if (heart == 0)
         {
-            //Debug.Log("gameover");
-            //GameManager.Instance.GameOver = true;
+            Debug.Log("gameover");
+            GameManager.Instance.HandleGameOver();
         }
     }
 
@@ -72,5 +72,10 @@ public class ScoreManager : MonoBehaviour
     public void IncreaseFireball()
     {
         fireball++;
+    }
+
+    public void CalculateTotal()
+    {
+        score = (score + (200 - playTime) * 500) * (professor + 1);
     }
 }
