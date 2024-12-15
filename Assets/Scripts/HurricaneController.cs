@@ -7,6 +7,7 @@ public class HurricaneController : MonoBehaviour
 
     private Rigidbody rb; // Rigidbody 컴포넌트
     private Transform playerTransform; // 플레이어의 Transform
+    private GameObject player;
 
     void Start()
     {
@@ -18,16 +19,16 @@ public class HurricaneController : MonoBehaviour
         }
 
         // Scene에서 Player 태그를 가진 객체 찾기
-        GameObject player = GameObject.FindWithTag("Player");
-        if (player != null)
+        player = GameObject.Find("NewPlayer");
+        playerTransform = player.transform.Find("PlayerPosition").transform;
+        if (playerTransform == null || player == null)
         {
-            playerTransform = player.transform;
+            Debug.Log("fail to find player");
         }
         else
         {
-            Debug.LogError("Player with tag 'Player' not found in the scene!");
+            Debug.Log(playerTransform.position.x);
         }
-
     }
 
     void FixedUpdate()
@@ -40,26 +41,29 @@ public class HurricaneController : MonoBehaviour
     }
 
     private void MoveTowardsPlayer()
-{
-    if (playerTransform == null)
     {
-        Debug.LogWarning("Player Transform is not assigned.");
-        return;
+        if (playerTransform == null)
+        {
+            Debug.LogWarning("Player Transform is not assigned.");
+            return;
+        }
+
+        // 플레이어 방향 계산
+        Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+
+        // 경사면을 따라 이동 (중력 포함)
+        Vector3 targetVelocity = directionToPlayer * moveSpeed;
+        rb.velocity = new Vector3(targetVelocity.x, rb.velocity.y, targetVelocity.z);
+
+        // 경사면을 따라 정확한 Y 위치를 보정 (필요 시 추가)
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, 2f))
+        {
+            transform.position = new Vector3(
+                transform.position.x,
+                hit.point.y + 1f,
+                transform.position.z
+            );
+        }
     }
-
-    // 플레이어 방향 계산
-    Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
-
-    // 경사면을 따라 이동 (중력 포함)
-    Vector3 targetVelocity = directionToPlayer * moveSpeed;
-    rb.velocity = new Vector3(targetVelocity.x, rb.velocity.y, targetVelocity.z);
-
-    // 경사면을 따라 정확한 Y 위치를 보정 (필요 시 추가)
-    RaycastHit hit;
-    if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, 2f))
-    {
-        transform.position = new Vector3(transform.position.x, hit.point.y+ 1f, transform.position.z);
-    }
-}
-
 }

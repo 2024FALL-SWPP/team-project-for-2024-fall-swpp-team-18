@@ -21,7 +21,7 @@ public class IntroCamera : MonoBehaviour
         float T = 0.0f;
         while(T < t) {
             T += Time.deltaTime;
-            transform.localPosition = origin + 0.02f * T * (Vector3)(Random.insideUnitCircle);
+            transform.localPosition = origin + 0.02f * (T%1.0f) * (Vector3)(Random.insideUnitCircle);
             yield return null;
         }
         transform.localPosition = origin;
@@ -43,5 +43,19 @@ public class IntroCamera : MonoBehaviour
 
     public void Run_t(float t) {
         StartCoroutine(Run(t));
+    }
+
+    IEnumerator Walk(float t) {
+        float T = 0.0f;
+        while(T < t) {
+            T += Time.deltaTime;
+            transform.Translate(Vector3.up * (T%0.7f - 0.35f) * 0.02f);
+            yield return null;
+        }
+        transform.localPosition = origin;
+    }
+
+    public void Walk_t(float t) {
+        StartCoroutine(Walk(t));
     }
 }

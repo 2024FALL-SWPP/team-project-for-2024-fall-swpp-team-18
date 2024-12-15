@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ViewpointController : MonoBehaviour
 {
-    private float rotateSpeed = 400f; 
+    private float rotateSpeed = 400f;
     private float mouseSpeed = 8f; // 회전속도(mouse 이동시)
     private float mouseX = 0f; // 수평 회전값
     private Quaternion init;
@@ -19,7 +19,7 @@ public class ViewpointController : MonoBehaviour
     void Update()
     {
         // 초기 위치
-        init = Quaternion.Euler(transform.parent.right*20) * transform.parent.rotation;
+        init = Quaternion.Euler(transform.parent.right * 15) * transform.parent.rotation;
 
         if (Input.GetKeyDown(KeyCode.LeftShift)) {
             mouseX = 0f;
@@ -28,11 +28,16 @@ public class ViewpointController : MonoBehaviour
             mouseX += Input.GetAxis("Mouse X") * mouseSpeed;
             mouseX = Mathf.Clamp(mouseX, -150, 150);
 
-            transform.localEulerAngles = new Vector3(20, mouseX, 0);
-        } else {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, init, rotateSpeed * Time.deltaTime);
+            transform.localEulerAngles = new Vector3(15, mouseX, 0);
         }
-
+        else
+        {
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation,
+                init,
+                rotateSpeed * Time.deltaTime
+            );
+        }
     }
 
     IEnumerator Shake(float t) {
@@ -45,7 +50,8 @@ public class ViewpointController : MonoBehaviour
         transform.localPosition = origin;
     }
 
-    public void Shake_t(float t) {
+    public void Shake_t(float t)
+    {
         StartCoroutine(Shake(t));
     }
 }
