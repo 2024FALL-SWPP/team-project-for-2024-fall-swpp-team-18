@@ -277,26 +277,23 @@ public class PlayerPositionController : MonoBehaviour
                 Debug.Log($"Escape time reduced! Remaining spin duration: {spinDuration}");
             }
 
-        elapsedTime += Time.deltaTime;
-        
-        yield return null; // 다음 프레임까지 대기
-    }
-    transform.rotation = initialRotation;
-    Debug.Log("SpinPlayerByKeyboard finished.");
+            elapsedTime += Time.deltaTime;
+
+            yield return null; // 다음 프레임까지 대기
+        }
+        transform.rotation = initialRotation;
+        Debug.Log("SpinPlayerByKeyboard finished.");
     }
 
 
-    public bool getBumpHurricane(){
+    public bool getBumpHurricane()
+    {
         return BumpHurricane;
     }
 
     public void CallCoroutine(float delta, GameObject item)
     {
         StartCoroutine(ChangeSpeed(delta, item));
-    }
-
-    public bool getBumpHurricane(){
-        return BumpHurricane;
     }
 
     public IEnumerator ChangeSpeed(float delta, GameObject item)
