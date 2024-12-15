@@ -28,6 +28,10 @@ public class TreeFall : MonoBehaviour
             }
         }
 
+       
+
+        
+
         PushTree();
 
         // 일정 시간 후 나무 삭제
@@ -37,9 +41,10 @@ public class TreeFall : MonoBehaviour
     public void PushTree()
     {
         if (rb != null && player != null)
-        {
+        {   
+
             // Player의 Transform 기준으로 로컬 방향을 월드 방향으로 변환
-            Vector3 worldForceDirection = -player.transform.TransformDirection(localForceDirection);
+            Vector3 worldForceDirection = player.transform.TransformDirection(localForceDirection);
             // 지정된 방향으로 힘 가하기
             rb.AddForce(worldForceDirection * force);
         }
