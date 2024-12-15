@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class SnowballSpawnManager : MonoBehaviour
 {
+<<<<<<< HEAD:Assets/Scripts/SnowballSpawnManager.cs
     public GameObject player; // Player 객체
     private Transform playerTransform; // 플레이어 Transform
 
@@ -11,6 +12,14 @@ public class SnowballSpawnManager : MonoBehaviour
     private float snowballSpeed = 20.0f; 
     private float snowballLifetime = 10.0f; 
     private float spawnInterval = 5.0f; 
+=======
+    public GameObject snowballPrefab; // 스폰할 눈덩이 프리팹
+    public Transform playerTransform; // 플레이어 Transform
+    public Vector3[] spawnPositions; // 눈덩이 생성 위치 배열
+    private float snowballSpeed = 20.0f; // 눈덩이의 이동 속도
+    private float snowballLifetime = 10.0f; // 눈덩이 생존 시간
+    private float spawnInterval = 5.0f; // 눈덩이 생성 주기
+>>>>>>> a276dcbc51462d1bb5240c142161439d666a7fc1:Assets/Scripts/ObstacleSpawnerScript/SnowballSpawnManager.cs
 
     private void Start()
     {

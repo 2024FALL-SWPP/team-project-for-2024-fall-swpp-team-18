@@ -6,6 +6,9 @@ public class PlayerPositionController : MonoBehaviour
     //private Rigidbody PlayerRb;
     [SerializeField]
     public float Speed = 10.0f;
+
+    [SerializeField]
+    public GameObject Avalanche2;
     private float ItemDuration = 5f;
     private bool BumpWallLeft = false;
     private bool BumpWallRight = false;
@@ -66,6 +69,12 @@ public class PlayerPositionController : MonoBehaviour
             GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(1f);
             scoreManagerScript.heart--;
         }
+        if (collision.gameObject.CompareTag("Professor"))
+        {
+            Debug.Log("collision of player and professor");
+            scoreManagerScript.IncreaseProfessor();
+            Destroy(collision.gameObject);
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -80,11 +89,15 @@ public class PlayerPositionController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Avalanche"))
         {
-            GameManager.instance.GameOver = true;
+            scoreManagerScript.collideAvalanche();
+        }
+        if (other.gameObject.CompareTag("MainGate"))
+        {
+            scoreManagerScript.arriveMainGate();
         }
         if (other.gameObject.CompareTag("Snowball"))
         {
-            GameManager.instance.GameOver = true;
+            scoreManagerScript.collideSnowball();
         }
         if (other.gameObject.CompareTag("JumpBoard"))
         {
@@ -98,11 +111,12 @@ public class PlayerPositionController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Corner2"))
         {
+            Avalanche2.SetActive(true);
             StartCoroutine(TurnCorner2());
             stage = 3;
         }
-
         if (other.gameObject.CompareTag("Snowflake") && !BumpHurricane)
+
         {
             Debug.Log("Collision with snowflake detected.");
 
@@ -295,6 +309,11 @@ public class PlayerPositionController : MonoBehaviour
     public void CallCoroutine(float delta, GameObject item)
     {
         StartCoroutine(ChangeSpeed(delta, item));
+    }
+
+    public bool getBumpHurricane()
+    {
+        return BumpHurricane;
     }
 
     public IEnumerator ChangeSpeed(float delta, GameObject item)
