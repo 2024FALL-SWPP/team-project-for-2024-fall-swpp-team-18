@@ -6,6 +6,9 @@ public class PlayerPositionController : MonoBehaviour
     //private Rigidbody PlayerRb;
     [SerializeField]
     public float Speed = 10.0f;
+
+    [SerializeField]
+    public GameObject Avalanche2;
     private float ItemDuration = 5f;
     private bool BumpWallLeft = false;
     private bool BumpWallRight = false;
@@ -61,6 +64,12 @@ public class PlayerPositionController : MonoBehaviour
             GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(1f);
             scoreManagerScript.heart--;
         }
+        if (collision.gameObject.CompareTag("Professor"))
+        {
+            Debug.Log("collision of player and professor");
+            scoreManagerScript.IncreaseProfessor();
+            Destroy(collision.gameObject);
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -75,11 +84,15 @@ public class PlayerPositionController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Avalanche"))
         {
-            GameManager.instance.GameOver = true;
+            scoreManagerScript.collideAvalanche();
+        }
+        if (other.gameObject.CompareTag("MainGate"))
+        {
+            scoreManagerScript.arriveMainGate();
         }
         if (other.gameObject.CompareTag("Snowball"))
         {
-            GameManager.instance.GameOver = true;
+            scoreManagerScript.collideSnowball();
         }
         if (other.gameObject.CompareTag("JumpBoard"))
         {
@@ -92,9 +105,9 @@ public class PlayerPositionController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Corner2"))
         {
+            Avalanche2.SetActive(true);
             StartCoroutine(TurnCorner2());
         }
-
         if (other.gameObject.CompareTag("Snowflake"))
         {
             Debug.Log("Collision with snowflake detected.");
@@ -277,17 +290,12 @@ public class PlayerPositionController : MonoBehaviour
                 Debug.Log($"Escape time reduced! Remaining spin duration: {spinDuration}");
             }
 
-        elapsedTime += Time.deltaTime;
-        
-        yield return null; // 다음 프레임까지 대기
-    }
-    transform.rotation = initialRotation;
-    Debug.Log("SpinPlayerByKeyboard finished.");
-    }
+            elapsedTime += Time.deltaTime;
 
-
-    public bool getBumpHurricane(){
-        return BumpHurricane;
+            yield return null; // 다음 프레임까지 대기
+        }
+        transform.rotation = initialRotation;
+        Debug.Log("SpinPlayerByKeyboard finished.");
     }
 
     public void CallCoroutine(float delta, GameObject item)
@@ -295,7 +303,8 @@ public class PlayerPositionController : MonoBehaviour
         StartCoroutine(ChangeSpeed(delta, item));
     }
 
-    public bool getBumpHurricane(){
+    public bool getBumpHurricane()
+    {
         return BumpHurricane;
     }
 
@@ -307,5 +316,3 @@ public class PlayerPositionController : MonoBehaviour
         Destroy(item);
     }
 }
-
-

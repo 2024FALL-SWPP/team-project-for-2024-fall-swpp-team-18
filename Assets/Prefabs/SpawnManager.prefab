@@ -1302,7 +1302,6 @@ GameObject:
   - component: {fileID: 3009697763083689844}
   - component: {fileID: 3009697763083689845}
   - component: {fileID: 3009697763083689847}
-  - component: {fileID: 3009697762107690296}
   - component: {fileID: 3009697762107690299}
   m_Layer: 0
   m_Name: ItemSpawnManager
@@ -1409,40 +1408,6 @@ MonoBehaviour:
   - {fileID: 221579615506539331, guid: 71e2e8ee8f3e13445a17c25c33d558c7, type: 3}
   - {fileID: 2383013838887036024, guid: f3ca53069524ea646a90e21698a698d1, type: 3}
   - {fileID: 7877608124086941761, guid: 43206ba7fde4a1644906d7d49f827f99, type: 3}
-  isScore: 0
---- !u!114 &3009697762107690296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3009697763083689850}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e479d5e84694d0c44b46a41747713f40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPoints1:
-  - {fileID: 3009697761883072827}
-  - {fileID: 3009697761475861173}
-  - {fileID: 3009697762381142436}
-  spawnPoints2:
-  - {fileID: 3009697762479960100}
-  - {fileID: 3009697761459988276}
-  - {fileID: 3009697763379538479}
-  spawnPoints3:
-  - {fileID: 3009697762699342469}
-  - {fileID: 3009697761691067044}
-  - {fileID: 3009697762620094521}
-  - {fileID: 3009697763542287985}
-  - {fileID: 3009697762576937659}
-  - {fileID: 3009697763348210937}
-  - {fileID: 3009697762164688728}
-  triggerDistance: 25
-  player: {fileID: 0}
-  itemPrefabs:
-  - {fileID: 3863873134944068238, guid: f8cfc1bb94daa304da5a4146fa56701c, type: 3}
-  - {fileID: 5452614578148273548, guid: ef035b4234a617c47953efb71a01aa1c, type: 3}
   isScore: 0
 --- !u!114 &3009697762107690299
 MonoBehaviour:
@@ -1898,7 +1863,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2516835163671437941, guid: 1e653ff0c3dbba44a9cf2a869904a026, type: 3}
       propertyPath: m_Name
-      value: ObjectSpawnManager (1)
+      value: ObjectSpawnManager
       objectReference: {fileID: 0}
     - target: {fileID: 2516835163671437942, guid: 1e653ff0c3dbba44a9cf2a869904a026, type: 3}
       propertyPath: player
