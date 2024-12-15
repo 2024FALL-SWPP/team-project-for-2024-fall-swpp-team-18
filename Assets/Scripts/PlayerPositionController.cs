@@ -6,6 +6,8 @@ public class PlayerPositionController : MonoBehaviour
     //private Rigidbody PlayerRb;
     [SerializeField]
     public float Speed = 10.0f;
+
+    [SerializeField]
     public GameObject Avalanche2;
     private float ItemDuration = 5f;
     private bool BumpWallLeft = false;
@@ -82,16 +84,15 @@ public class PlayerPositionController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Avalanche"))
         {
-            Debug.Log("fail");
-            GameManager.Instance.HandleGameOver();
+            scoreManagerScript.collideAvalanche();
         }
         if (other.gameObject.CompareTag("MainGate"))
         {
-            GameManager.Instance.HandleGameClear();
+            scoreManagerScript.arriveMainGate();
         }
         if (other.gameObject.CompareTag("Snowball"))
         {
-            GameManager.instance.GameOver = true;
+            scoreManagerScript.collideSnowball();
         }
         if (other.gameObject.CompareTag("JumpBoard"))
         {
@@ -289,17 +290,12 @@ public class PlayerPositionController : MonoBehaviour
                 Debug.Log($"Escape time reduced! Remaining spin duration: {spinDuration}");
             }
 
-        elapsedTime += Time.deltaTime;
-        
-        yield return null; // 다음 프레임까지 대기
-    }
-    transform.rotation = initialRotation;
-    Debug.Log("SpinPlayerByKeyboard finished.");
-    }
+            elapsedTime += Time.deltaTime;
 
-
-    public bool getBumpHurricane(){
-        return BumpHurricane;
+            yield return null; // 다음 프레임까지 대기
+        }
+        transform.rotation = initialRotation;
+        Debug.Log("SpinPlayerByKeyboard finished.");
     }
 
     public void CallCoroutine(float delta, GameObject item)
@@ -307,7 +303,8 @@ public class PlayerPositionController : MonoBehaviour
         StartCoroutine(ChangeSpeed(delta, item));
     }
 
-    public bool getBumpHurricane(){
+    public bool getBumpHurricane()
+    {
         return BumpHurricane;
     }
 
@@ -319,5 +316,3 @@ public class PlayerPositionController : MonoBehaviour
         Destroy(item);
     }
 }
-
-

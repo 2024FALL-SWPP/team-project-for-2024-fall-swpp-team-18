@@ -6,10 +6,10 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField]
-    public float score = 0;
+    public float grade = 0;
 
     [SerializeField]
-    public int scoreNum = 0;
+    public int gradeNum = 0;
 
     [SerializeField]
     public int total = 0;
@@ -38,20 +38,29 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playTime += Time.deltaTime;
-        total = (int)(score * 100) + student * 100 + scoreNum * 100;
-        if (heart == 0)
+        if (!GameManager.instance.isGameOver)
         {
-            Debug.Log("gameover");
-            GameManager.Instance.HandleGameOver();
+            playTime += Time.deltaTime;
+            if (heart == 0)
+            {
+                GameManager.Instance.HandleGameOver(
+                    GameManager.OverBy.Obstacle,
+                    grade,
+                    student,
+                    playTime,
+                    total,
+                    professor,
+                    gradeNum
+                );
+            }
         }
     }
 
-    public void IncreaseScore(int itemScore)
+    public void IncreaseGrade(float itemGrade)
     {
-        score = (score * scoreNum + itemScore) / (scoreNum + 1);
-        score = Mathf.Round(score * 100) / 100f;
-        scoreNum++;
+        grade = (grade * gradeNum + itemGrade) / (gradeNum + 1);
+        grade = Mathf.Round(grade * 100) / 100f;
+        gradeNum++;
     }
 
     public void IncreaseStudent()
@@ -74,8 +83,48 @@ public class ScoreManager : MonoBehaviour
         fireball++;
     }
 
-    public void CalculateTotal()
+    public int CalculateTotal()
     {
-        score = (score + (200 - playTime) * 500) * (professor + 1);
+        return ((int)(grade * 100 * gradeNum) + student * 100 + (int)((200 - playTime) * 500))
+            * (professor + 1);
+    }
+
+    public void collideSnowball()
+    {
+        if (heart == 1)
+        {
+            GameManager.instance.HandleGameOver(
+                GameManager.OverBy.Snowball,
+                grade,
+                student,
+                playTime,
+                total,
+                professor,
+                gradeNum
+            );
+        }
+        else
+        {
+            heart--;
+        }
+    }
+
+    public void collideAvalanche()
+    {
+        GameManager.instance.HandleGameOver(
+            GameManager.OverBy.Avalanche,
+            grade,
+            student,
+            playTime,
+            total,
+            professor,
+            gradeNum
+        );
+    }
+
+    public void arriveMainGate()
+    {
+        total = CalculateTotal();
+        GameManager.Instance.HandleGameClear(grade, student, playTime, total, professor, gradeNum);
     }
 }

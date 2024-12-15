@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ScoreItem : MonoBehaviour
 {
-    public int scoreValue;
+    public float scoreValue;
 
     private GameObject scoreManager;
     private ScoreManager scoreManagerScript;
@@ -24,7 +24,7 @@ public class ScoreItem : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            scoreManagerScript.IncreaseScore(scoreValue);
+            scoreManagerScript.IncreaseGrade(scoreValue);
             Destroy(gameObject);
         }
     }
