@@ -59,6 +59,7 @@ public class PlayerPositionController : MonoBehaviour
         {
             //Stop = true;
             GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(1f);
+            SFXController.PlayExplosion();
             scoreManagerScript.heart--;
         }
     }
@@ -299,8 +300,12 @@ public class PlayerPositionController : MonoBehaviour
     public IEnumerator ChangeSpeed(float delta, GameObject item)
     {
         Speed += delta;
+
+        BackgroundMusicController.Instance.SetPlaySpeed(1 + (delta / 10));
+
         yield return new WaitForSecondsRealtime(ItemDuration);
         Speed -= delta;
+        BackgroundMusicController.Instance.PlayNormal();
         Destroy(item);
     }
 }

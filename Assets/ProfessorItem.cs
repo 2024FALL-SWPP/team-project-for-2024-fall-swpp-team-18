@@ -23,6 +23,8 @@ public class ProfessorItem : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             scoreManagerScript.IncreaseProfessor();
+            SFXController.PlayBlip();
+            Debug.Log("ProfessorItem");
             Destroy(gameObject);
         }
     }
