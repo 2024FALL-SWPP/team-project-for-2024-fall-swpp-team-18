@@ -9,8 +9,6 @@ public class ViewpointController : MonoBehaviour
     private float mouseX = 0f; // 수평 회전값
     private Quaternion init;
     private Vector3 origin;
-    public bool shake = false;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -23,20 +21,10 @@ public class ViewpointController : MonoBehaviour
         // 초기 위치
         init = Quaternion.Euler(transform.parent.right * 15) * transform.parent.rotation;
 
-        // 진동 기능 구현
-        transform.localPosition = origin;
-        if (shake)
-        {
-            origin = transform.localPosition;
-            transform.localPosition = origin + (Vector3)Random.insideUnitCircle;
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
-        {
+        if (Input.GetKeyDown(KeyCode.LeftShift)) {
             mouseX = 0f;
         }
-        if (Input.GetKey(KeyCode.LeftAlt))
-        {
+        if (Input.GetKey(KeyCode.LeftShift)) {
             mouseX += Input.GetAxis("Mouse X") * mouseSpeed;
             mouseX = Mathf.Clamp(mouseX, -150, 150);
 
@@ -52,11 +40,14 @@ public class ViewpointController : MonoBehaviour
         }
     }
 
-    IEnumerator Shake(float t)
-    {
-        shake = true;
-        yield return new WaitForSeconds(t);
-        shake = false;
+    IEnumerator Shake(float t) {
+        float T = 0.0f;
+        while(T < t) {
+            T += Time.deltaTime;
+            transform.localPosition = origin + (Vector3)Random.insideUnitCircle;
+            yield return null;
+        }
+        transform.localPosition = origin;
     }
 
     public void Shake_t(float t)

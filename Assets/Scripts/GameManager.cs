@@ -9,12 +9,12 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     public bool isGameOver = false;
     public bool isGameClear = false;
-    public float grade;
-    public int student;
-    public float time;
-    public int total;
-    public int professor;
-    public int gradeNum;
+    public float grade = 0.0f;
+    public int student = 0;
+    public float time = 0.0f;
+    public int total = 0;
+    public int professor = 0;
+    public int gradeNum = 0;
 
     public class OverBy
     {
@@ -70,11 +70,19 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         Debug.Log("Game Over! Returning to Main Menu...");
 
-        if (overtype == OverBy.Avalanche) { }
-        else if (overtype == OverBy.Snowball) { }
-        else if (overtype == OverBy.Obstacle) { }
-        else { }
-        SceneManager.LoadScene("Main"); // 예: 메인 메뉴 씬으로 이동
+        if (overtype == OverBy.Avalanche) { 
+            SceneManager.LoadScene("AvalancheOutro");
+        }
+        else if (overtype == OverBy.Snowball) { 
+            SceneManager.LoadScene("SnowballOutro");
+        }
+        else if (overtype == OverBy.Obstacle) { 
+            SceneManager.LoadScene("AvalancheOutro");
+        }
+        else { 
+            SceneManager.LoadScene("Outro1");
+        }
+        // SceneManager.LoadScene("Main"); // 예: 메인 메뉴 씬으로 이동
     }
 
     public void HandleGameClear(

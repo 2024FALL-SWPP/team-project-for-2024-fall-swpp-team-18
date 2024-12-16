@@ -1,14 +1,15 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerPositionController : MonoBehaviour
 {
-    //private Rigidbody PlayerRb;
     [SerializeField]
     public float Speed = 10.0f;
 
     [SerializeField]
     public GameObject Avalanche2;
+    public Image Img;
     private float ItemDuration = 5f;
     private bool BumpWallLeft = false;
     private bool BumpWallRight = false;
@@ -17,7 +18,6 @@ public class PlayerPositionController : MonoBehaviour
     private bool Stop = false;
     private int stage = 1;    
     private Vector3 CurForward;
-    public Vector3 Before;
     private Coroutine activeRecoveryCoroutine = null; // 현재 활성화된 Snowflake 코루틴
     private Coroutine activeHurricaneCoroutine = null; // 현재 활성화된 Hurricane 코루틴
     private GameObject scoreManager;
@@ -27,8 +27,10 @@ public class PlayerPositionController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //PlayerRb = GetComponent<Rigidbody>();
         scoreManager = GameObject.Find("ScoreManager");
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
+        Img.CrossFadeAlpha(0.0f, 1.0f, false);
     }
     public int getStage(){
         return stage;
@@ -43,21 +45,30 @@ public class PlayerPositionController : MonoBehaviour
 
             if (Input.GetKey(KeyCode.Q) && !BumpWallLeft)
             {
+                //PlayerRb.AddForce(Vector3.right * 50.0f, ForceMode.Force);
                 transform.Translate(-Vector3.right * Speed * Time.deltaTime);
             }
             if (Input.GetKey(KeyCode.E) && !BumpWallRight)
             {
                 transform.Translate(Vector3.right * Speed * Time.deltaTime);
             }
+        }
+        if (Input.GetKey(KeyCode.Q) && !BumpWallLeft)
+        {
+            transform.Translate(-Vector3.right * Speed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.E) && !BumpWallRight)
+        {
+            transform.Translate(Vector3.right * Speed * Time.deltaTime);
+        }
 
-            GameObject Snowball = GameObject.FindWithTag("Snowball");
-            if (
-                Snowball != null
-                && Vector3.Distance(transform.position, Snowball.transform.position) <= 10.0f
-            )
-            {
-                GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(10.0f);
-            }
+        GameObject Snowball = GameObject.FindWithTag("Snowball");
+        if (
+            Snowball != null
+            && Vector3.Distance(transform.position, Snowball.transform.position) <= 10.0f
+        )
+        {
+            GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(10.0f);
         }
     }
 
@@ -259,9 +270,14 @@ public class PlayerPositionController : MonoBehaviour
     IEnumerator HandleHurricaneEffect(Vector3 hurricaneCenter, GameObject hurricaneObject)
     {
         Debug.Log("Hurricane effect started.");
+        Debug.Log("Hurricane effect started.");
+
 
         // 플레이어를 허리케인 중심으로 이동
         transform.position = hurricaneCenter;
+        // 플레이어를 허리케인 중심으로 이동
+        transform.position = hurricaneCenter;
+        
 
         // 제자리 회전 (Q, E 입력으로 지속 시간 감소)
         float spinSpeed = 540f; // 빠른 회전 속도
@@ -271,6 +287,7 @@ public class PlayerPositionController : MonoBehaviour
 
         Speed = 10f;
         Debug.Log("Player escaped the hurricane.");
+
         BumpHurricane = false; // 상태 복구
         activeHurricaneCoroutine = null;
 

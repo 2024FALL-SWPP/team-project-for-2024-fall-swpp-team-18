@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class HandleController : MonoBehaviour
 {
-    private float rotateSpeed = 200f; 
-    private float speed = 8f; // 회전속도(mouse 이동시)
+    private float rotateSpeed = 100f; 
+    private float speed = 4f; // 회전속도
     private float mouseX = 0f; // 수평 회전값
     private Quaternion tmp;
     // Start is called before the first frame update
