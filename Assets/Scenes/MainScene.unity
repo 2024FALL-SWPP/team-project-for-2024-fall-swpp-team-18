@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 86043059}
   - component: {fileID: 86043062}
   - component: {fileID: 86043061}
-  - component: {fileID: 86043060}
+  - component: {fileID: 86043063}
   m_Layer: 5
   m_Name: GaugePlayer
   m_TagString: Untagged
@@ -305,24 +305,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.04168701, y: -0.2216339}
   m_SizeDelta: {x: 1500, y: 500}
   m_Pivot: {x: 0, y: 0.5}
---- !u!114 &86043060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 86043058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37d1e2531f5ae57439a12f15dd11c0b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTransform12: {fileID: 2061098763}
-  playerTransform3: {fileID: 2061098763}
-  startPoint: {fileID: 1531912493}
-  destination: {fileID: 1390808714}
-  gaugePlayer: {fileID: 86043058}
-  player: {fileID: 84246176}
 --- !u!114 &86043061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,6 +343,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 86043058}
   m_CullTransparentMesh: 1
+--- !u!114 &86043063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86043058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d1e2531f5ae57439a12f15dd11c0b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 2061098763}
+  startPoint: {fileID: 1531912493}
+  destination: {fileID: 1390808714}
+  gaugePlayer: {fileID: 86043058}
+  player: {fileID: 84246176}
 --- !u!1 &135882214
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,11 +485,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 143961942}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37d1e2531f5ae57439a12f15dd11c0b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 89f9f06747720a2499411429c358275a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform12: {fileID: 482877181}
-  playerTransform3: {fileID: 285949228}
+  playerTransform1: {fileID: 837326300}
+  playerTransform3: {fileID: 687692184}
   startPoint: {fileID: 1531912493}
   destination: {fileID: 1390808714}
   gaugePlayer: {fileID: 143961942}
@@ -1112,14 +1111,9 @@ PrefabInstance:
     - target: {fileID: 955764156778967731, guid: 3674583b537b7274ea3c060dbd5c3d39, type: 3}
       propertyPath: Avalanche2
       value: 
-      objectReference: {fileID: 106144990752666892, guid: 56074e57ee56e404b9f247150cd58a4e, type: 3}
+      objectReference: {fileID: 1272695213}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3674583b537b7274ea3c060dbd5c3d39, type: 3}
---- !u!4 &285949228 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9188706794114841229, guid: 56074e57ee56e404b9f247150cd58a4e, type: 3}
-  m_PrefabInstance: {fileID: 913783995}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &315468946 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4532576786631820608, guid: fb95deb8501295045bb05f82ebc01be7, type: 3}
@@ -1379,11 +1373,6 @@ Transform:
   m_Father: {fileID: 758701289}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &482877181 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9188706793688419964, guid: 56074e57ee56e404b9f247150cd58a4e, type: 3}
-  m_PrefabInstance: {fileID: 913783995}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &529682780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1843,6 +1832,11 @@ RectTransform:
   m_AnchoredPosition: {x: -1800, y: -500}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!4 &687692184 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9188706793551893516, guid: 56074e57ee56e404b9f247150cd58a4e, type: 3}
+  m_PrefabInstance: {fileID: 913783995}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &689442053 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7877608124086941762, guid: 43206ba7fde4a1644906d7d49f827f99, type: 3}
@@ -2157,37 +2151,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 785594047}
   m_CullTransparentMesh: 1
---- !u!1 &860037809
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 860037810}
-  m_Layer: 0
-  m_Name: SnowballSpawnPoint1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &860037810
+--- !u!4 &837326300 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 9188706793999278333, guid: 56074e57ee56e404b9f247150cd58a4e, type: 3}
+  m_PrefabInstance: {fileID: 913783995}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 860037809}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 91.76, y: -0.1, z: -378.38}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 948701954}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &878192084
 GameObject:
   m_ObjectHideFlags: 0
@@ -2702,9 +2670,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 860037810}
   - {fileID: 1873365883}
-  - {fileID: 1616955312}
   m_Father: {fileID: 758701289}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2723,9 +2689,9 @@ MonoBehaviour:
   player: {fileID: 84246176}
   snowballPrefab: {fileID: 1181036157804623955, guid: 8aa0191e3092b1244816806ea902b721, type: 3}
   spawnPoints:
-  - {fileID: 860037810}
+  - {fileID: 837326300}
   - {fileID: 1873365883}
-  - {fileID: 1616955312}
+  - {fileID: 687692184}
 --- !u!1001 &951504443
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3549,6 +3515,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e5450abc60afc24f8dfa6a5d1fe6643, type: 3}
+--- !u!1 &1272695213 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9188706794114841228, guid: 56074e57ee56e404b9f247150cd58a4e, type: 3}
+  m_PrefabInstance: {fileID: 913783995}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1371598919
 GameObject:
   m_ObjectHideFlags: 0
@@ -4258,37 +4229,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615703704}
   m_CullTransparentMesh: 1
---- !u!1 &1616955311
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1616955312}
-  m_Layer: 0
-  m_Name: SnowballSpawnPoint3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1616955312
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1616955311}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 484.9, y: -92.13, z: -776.82}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 948701954}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1653893979 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 221579615506539332, guid: 71e2e8ee8f3e13445a17c25c33d558c7, type: 3}
@@ -4758,7 +4698,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 948701954}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1970419217
 PrefabInstance:
