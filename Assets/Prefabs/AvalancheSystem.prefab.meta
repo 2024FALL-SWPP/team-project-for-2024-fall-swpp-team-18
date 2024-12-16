@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Sound.meta
+guid: 5ef3625e8db412241a7cc8a7d7c8e38f
+folderAsset: yes
+DefaultImporter:
+========
 guid: 56074e57ee56e404b9f247150cd58a4e
 PrefabImporter:
+>>>>>>>> development:Assets/Prefabs/AvalancheSystem.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

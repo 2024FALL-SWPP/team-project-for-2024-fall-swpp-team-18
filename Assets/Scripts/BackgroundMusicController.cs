@@ -6,7 +6,12 @@ public class BackgroundMusicController : MonoBehaviour
 
     // Inspector에서 설정 가능한 AudioClip
     [Header("Audio Clip")]
-    public AudioClip audioClip;
+    public AudioClip bgmAudioClip;
+
+    public AudioClip gameOverAudioClip;
+
+    [Range(0f, 1.0f)]
+    public float volume = 1.0f;
 
     // AudioSource는 내부에서만 접근
     private AudioSource audioSource;
@@ -37,9 +42,9 @@ public class BackgroundMusicController : MonoBehaviour
         }
 
         // AudioClip 설정
-        if (audioClip != null)
+        if (bgmAudioClip != null)
         {
-            audioSource.clip = audioClip;
+            audioSource.clip = bgmAudioClip;
         }
         else
         {
@@ -58,6 +63,7 @@ public class BackgroundMusicController : MonoBehaviour
         if (audioSource != null)
         {
             audioSource.pitch = playbackSpeed;
+            audioSource.volume = volume;
         }
     }
 
@@ -69,6 +75,7 @@ public class BackgroundMusicController : MonoBehaviour
         if (audioSource != null && !audioSource.isPlaying)
         {
             isPaused = false;
+            audioSource.volume = volume;
             audioSource.Play();
         }
     }
@@ -103,5 +110,44 @@ public class BackgroundMusicController : MonoBehaviour
     public bool IsPlaying()
     {
         return audioSource != null && audioSource.isPlaying;
+    }
+
+    /// <summary>
+    /// 빠르게 재생 (속도: 1.2배)
+    /// </summary>
+    public void SetPlaySpeed(float speed)
+    {
+        playbackSpeed = speed;
+        if (audioSource != null)
+        {
+            audioSource.pitch = playbackSpeed;
+        }
+    }
+
+    /// <summary>
+    /// 일반 속도로 재생 (속도: 1배)
+    /// </summary>
+    public void PlayNormal()
+    {
+        playbackSpeed = 1.0f;
+        if (audioSource != null)
+        {
+            audioSource.pitch = playbackSpeed;
+        }
+    }
+
+    public void PlayGameOverMusic()
+    {
+        if (audioSource != null && gameOverAudioClip != null)
+        {
+            audioSource.Stop(); // 현재 재생 중인 음악 정지
+            audioSource.clip = gameOverAudioClip;
+            audioSource.loop = false; // 게임 오버 음악은 반복되지 않도록 설정
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("GameOver AudioClip이 설정되지 않았거나 AudioSource가 초기화되지 않았습니다.");
+        }
     }
 }
