@@ -7,13 +7,17 @@ public class LifeUIManager : MonoBehaviour
     public Transform heartsContainer; // 하트를 배치할 Panel (UI Container)
     public int maxLives = 3; // 최대 생명 수
     private List<GameObject> hearts = new List<GameObject>();
-
+    private GameObject scoreManager;
     private int currentLives;
+
+    private ScoreManager scoreManagerScript;
 
     public Vector3[] heartPositions; // 하트의 UI 좌표를 지정할 배열
 
     void Start()
-    {
+    {   
+        scoreManager = GameObject.Find("ScoreManager");
+        scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
         // 초기 생명 설정
         currentLives = maxLives;
 
@@ -26,26 +30,15 @@ public class LifeUIManager : MonoBehaviour
 
         UpdateLivesUI();
     }
-
-    // 생명 감소
-    public void DecreaseLife()
-    {
-        if (currentLives > 0)
-        {
-            currentLives--;
+    void Update(){
+        if(currentLives != scoreManagerScript.heart){
+            currentLives = scoreManagerScript.heart;
             UpdateLivesUI();
         }
+        
     }
 
-    // 생명 증가
-    public void IncreaseLife()
-    {
-        if (currentLives < maxLives)
-        {
-            currentLives++;
-            UpdateLivesUI();
-        }
-    }
+    
 
     // UI 업데이트
     private void UpdateLivesUI()
