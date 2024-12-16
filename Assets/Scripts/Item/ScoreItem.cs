@@ -24,6 +24,7 @@ public class ScoreItem : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            SFXController.PlayBlip();
             scoreManagerScript.IncreaseGrade(scoreValue);
             Destroy(gameObject);
         }

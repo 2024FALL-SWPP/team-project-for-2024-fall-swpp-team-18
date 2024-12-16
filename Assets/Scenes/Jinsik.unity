@@ -976,13 +976,20 @@ MonoBehaviour:
   treePrefabs:
   - {fileID: 1861773171592671157, guid: 0103942438424b843a8ddb3c2c08c278, type: 3}
   - {fileID: 9023683330206932126, guid: 031a5a8729b3f164598ffe48bcc032d2, type: 3}
-  spawnOffsets:
+  spawnOffsets13:
   - {x: 8, y: 5, z: 5}
   - {x: -12, y: 5, z: 5}
   - {x: 8, y: 5, z: 13}
   - {x: -12, y: 5, z: 13}
   - {x: 8, y: 5, z: 21}
   - {x: -12, y: 5, z: 21}
+  spawnOffsets2:
+  - {x: 10, y: 5, z: 5}
+  - {x: -9, y: 5, z: 5}
+  - {x: 10, y: 5, z: 13}
+  - {x: -9, y: 5, z: 13}
+  - {x: 10, y: 5, z: 21}
+  - {x: -9, y: 5, z: 21}
   playerTransform: {fileID: 1528082982}
   maxtreesToSpawn: 3
 --- !u!1 &204814945
@@ -5653,7 +5660,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff6d903ee8930546a969b902de8249c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameOver: 0
+  isGameOver: 0
+  isGameClear: 0
+  grade: 0
+  student: 0
+  time: 0
+  total: 0
+  professor: 0
+  gradeNum: 0
 --- !u!4 &827917809
 Transform:
   m_ObjectHideFlags: 0
@@ -8164,6 +8178,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1267419498}
   m_Mesh: {fileID: 6782711572969893341, guid: af3c5ebde18d70f4b9f98346babfb020, type: 3}
+--- !u!1 &1284058133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1284058134}
+  m_Layer: 0
+  m_Name: SnowballSpawnPoint2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1284058134
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284058133}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 75.94, y: -101.49, z: -797.54}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1712070045}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1289228208
 GameObject:
   m_ObjectHideFlags: 0
@@ -9700,6 +9745,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5de1ef9bcb14ddd4f891ed8cb7b13311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Speed: 10
+  Avalanche2: {fileID: 0}
   Before: {x: 0, y: 0, z: 0}
 --- !u!65 &1528082980
 BoxCollider:
@@ -11453,7 +11500,10 @@ Transform:
   m_LocalPosition: {x: 1148, y: -203.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1837482470}
+  - {fileID: 1284058134}
+  - {fileID: 2048954744}
   m_Father: {fileID: 1787801113}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11469,10 +11519,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6651df19988ab9f47840e3766a74dfa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1528082978}
   snowballPrefab: {fileID: 1181036157804623955, guid: 8aa0191e3092b1244816806ea902b721, type: 3}
-  playerTransform: {fileID: 1528082982}
-  spawnPositions:
-  - {x: -182.5, y: 120, z: 417}
+  spawnPoints:
+  - {fileID: 1837482470}
+  - {fileID: 1284058134}
+  - {fileID: 2048954744}
 --- !u!1 &1716735101
 GameObject:
   m_ObjectHideFlags: 0
@@ -12098,6 +12150,7 @@ MonoBehaviour:
   peopleSpawnManager: {fileID: 1460096155}
   treeSpawnManager: {fileID: 200876010}
   jumpSpawnManager: {fileID: 1848718461}
+  player: {fileID: 0}
 --- !u!4 &1787801113
 Transform:
   m_ObjectHideFlags: 0
@@ -12586,6 +12639,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1821452853}
   m_CullTransparentMesh: 1
+--- !u!1 &1837482469
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1837482470}
+  m_Layer: 0
+  m_Name: SnowballSpawnPoint1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1837482470
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837482469}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 92.12, y: 0.81, z: -382.38}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1712070045}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1848718459
 GameObject:
   m_ObjectHideFlags: 0
@@ -12634,10 +12718,10 @@ MonoBehaviour:
   - {fileID: 8835030795515639584, guid: ea3fb89537b8f5a488a8030df660fede, type: 3}
   - {fileID: 2693453019956569452, guid: 1aba66bb1b9f7914ca3d27e246e2681c, type: 3}
   jumpObject: {fileID: 330740502543464223, guid: 307fee46362dd3b4a90ca16646485c0e, type: 3}
-  spawnjumpOffsets:
-  - {x: 2, y: 0, z: -2}
-  - {x: -6, y: 0, z: -2}
-  spawnOffsets:
+  spawnjumpOffsets13:
+  - {x: 2, y: 0.5, z: -2}
+  - {x: -6, y: 0.5, z: -2}
+  spawnOffsets13:
   - {x: 8, y: 7, z: 17}
   - {x: -12, y: 7, z: 17}
   - {x: 8, y: 7, z: 25}
@@ -12646,6 +12730,18 @@ MonoBehaviour:
   - {x: -12, y: 7, z: 33}
   - {x: 8, y: 7, z: 41}
   - {x: -12, y: 7, z: 41}
+  spawnjumpOffsets2:
+  - {x: 2, y: 0.5, z: -2}
+  - {x: -6, y: 0.5, z: -2}
+  spawnOffsets2:
+  - {x: 7, y: 9, z: 17}
+  - {x: -7, y: 9, z: 17}
+  - {x: 7, y: 9, z: 23}
+  - {x: -7, y: 9, z: 23}
+  - {x: 7, y: 9, z: 29}
+  - {x: -7, y: 9, z: 29}
+  - {x: 7, y: 9, z: 35}
+  - {x: -7, y: 9, z: 35}
   playerTransform: {fileID: 1528082982}
 --- !u!1 &1853606605
 GameObject:
@@ -13873,6 +13969,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2045770065}
   m_Mesh: {fileID: -4574189435763429387, guid: af3c5ebde18d70f4b9f98346babfb020, type: 3}
+--- !u!1 &2048954743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2048954744}
+  m_Layer: 0
+  m_Name: SnowballSpawnPoint3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2048954744
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048954743}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 484.1, y: -93.97, z: -783}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1712070045}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2060197658
 GameObject:
   m_ObjectHideFlags: 0
