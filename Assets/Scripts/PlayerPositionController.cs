@@ -62,6 +62,7 @@ public class PlayerPositionController : MonoBehaviour
         {
             //Stop = true;
             GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(1f);
+            SFXController.PlayExplosion();
             scoreManagerScript.heart--;
         }
         if (collision.gameObject.CompareTag("Professor"))
@@ -298,21 +299,26 @@ public class PlayerPositionController : MonoBehaviour
         Debug.Log("SpinPlayerByKeyboard finished.");
     }
 
-    public void CallCoroutine(float delta, GameObject item)
-    {
-        StartCoroutine(ChangeSpeed(delta, item));
-    }
 
     public bool getBumpHurricane()
     {
         return BumpHurricane;
     }
 
+    public void CallCoroutine(float delta, GameObject item)
+    {
+        StartCoroutine(ChangeSpeed(delta, item));
+    }
+
     public IEnumerator ChangeSpeed(float delta, GameObject item)
     {
         Speed += delta;
+
+        BackgroundMusicController.Instance.SetPlaySpeed(1 + (delta / 10));
+
         yield return new WaitForSecondsRealtime(ItemDuration);
         Speed -= delta;
+        BackgroundMusicController.Instance.PlayNormal();
         Destroy(item);
     }
 }
