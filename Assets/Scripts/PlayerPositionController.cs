@@ -15,18 +15,23 @@ public class PlayerPositionController : MonoBehaviour
     private bool BumpSnowflake = false;
     private bool BumpHurricane = false;
     private bool Stop = false;
+    private int stage = 1;    
     private Vector3 CurForward;
     public Vector3 Before;
     private Coroutine activeRecoveryCoroutine = null; // 현재 활성화된 Snowflake 코루틴
     private Coroutine activeHurricaneCoroutine = null; // 현재 활성화된 Hurricane 코루틴
     private GameObject scoreManager;
     private ScoreManager scoreManagerScript;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         scoreManager = GameObject.Find("ScoreManager");
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
+    }
+    public int getStage(){
+        return stage;
     }
 
     void Update()
@@ -103,13 +108,16 @@ public class PlayerPositionController : MonoBehaviour
         if (other.gameObject.CompareTag("Corner1"))
         {
             StartCoroutine(TurnCorner1());
+            stage = 2;
         }
         if (other.gameObject.CompareTag("Corner2"))
         {
             Avalanche2.SetActive(true);
             StartCoroutine(TurnCorner2());
+            stage = 3;
         }
-        if (other.gameObject.CompareTag("Snowflake"))
+        if (other.gameObject.CompareTag("Snowflake") && !BumpHurricane)
+
         {
             Debug.Log("Collision with snowflake detected.");
 
@@ -126,7 +134,7 @@ public class PlayerPositionController : MonoBehaviour
             activeRecoveryCoroutine = StartCoroutine(HandleSnowflakeEffect());
         }
 
-        if (other.gameObject.CompareTag("Hurricane"))
+        if (other.gameObject.CompareTag("Hurricane") && !BumpSnowflake)
         {
             Debug.Log("Collision with hurricane detected.");
 
