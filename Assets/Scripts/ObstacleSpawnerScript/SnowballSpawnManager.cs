@@ -10,7 +10,7 @@ public class SnowballSpawnManager : MonoBehaviour
     public GameObject snowballPrefab;  // 스폰할 눈덩이 프리팹
     public Transform[] spawnPoints;    // 눈덩이 생성 위치 오브젝트들
     private float snowballSpeed = 20.0f; 
-    private float snowballLifetime = 20.0f; 
+    private float snowballLifetime = 10.0f; 
     private float spawnInterval = 5.0f; 
 
 

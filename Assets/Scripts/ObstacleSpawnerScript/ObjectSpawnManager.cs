@@ -57,7 +57,7 @@ public class ObjectSpawnManager : MonoBehaviour
         PlayerPositionController playerController = player.GetComponent<PlayerPositionController>();
         Awake();
         isSpawnPointActive[spawnIndex] = false;
-        int randomChoice = 1; // 무작위 선택
+        int randomChoice = 2; // 무작위 선택
 
         if (randomChoice == 0 && carSpawnManager != null)
         {

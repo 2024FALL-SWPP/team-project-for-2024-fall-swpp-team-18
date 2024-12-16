@@ -20,8 +20,8 @@ public class HurricaneImageController : MonoBehaviour
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
         {
-        
-            playerController = playerObject.GetComponent<PlayerPositionController>();
+            Transform rootTransform = playerObject.transform.root; // 최상위 부모 찾기
+            playerController = rootTransform.GetComponent<PlayerPositionController>();
 
             if (playerController == null)
             {
@@ -43,7 +43,6 @@ public class HurricaneImageController : MonoBehaviour
         if (playerController != null)
         {
             bool bumpHurricane = playerController.getBumpHurricane();
-            
 
             if (bumpHurricane)
             {

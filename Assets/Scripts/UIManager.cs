@@ -7,8 +7,6 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public GameManager gameManager;
-    private GameObject scoreManager;
-    private ScoreManager scoreManagerScript;
 
     public Button pauseButton;
     bool isPaused = false;
@@ -18,16 +16,18 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        scoreManager = GameObject.Find("ScoreManager");
-        scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
         pauseButton.gameObject.SetActive(true);
         pauseButton.onClick.AddListener(TogglePause);
     }
 
+    public void AddScore(int amount)
+    {
+        score += amount;
+    }
 
     public int GetScore()
     {
-        scoreText.text = "Score: " + scoreManagerScript.CalculateTotal(); // 점수 업데이트
+        scoreText.text = "Score: " + score; // 점수 업데이트
         return score;
     }
 

@@ -4,29 +4,20 @@ using UnityEngine.UI;
 public class FireballUIController : MonoBehaviour
 {
     private Image targetImage; // 색상을 변경할 Image 컴포넌트
-    private GameObject scoreManager;
-    private ScoreManager scoreManagerScript;
     private bool isFireball = false; // 상태를 나타냄
-    
 
     void Start()
     {
-
-        scoreManager = GameObject.Find("ScoreManager");
-        scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
         // Image 컴포넌트를 가져옴
         targetImage = GetComponent<Image>();
         if (targetImage == null)
         {
             Debug.LogError("No Image component found on this GameObject!");
         }
-        UpdateisFireball(scoreManagerScript.fireball);
     }
 
     void Update()
-    {   
-        if((scoreManagerScript.fireball > 0 && isFireball == false ) || (scoreManagerScript.fireball == 0 && isFireball == true ))
-        UpdateisFireball(scoreManagerScript.fireball);
+    {
         if (targetImage == null) return;
 
         // isFireball 값에 따라 색상 결정
@@ -43,13 +34,8 @@ public class FireballUIController : MonoBehaviour
             Debug.LogError($"Invalid Hex Color: {hexColor}");
         }
     }
-    public void UpdateisFireball(int fireball){
-        if(fireball == 0){
-            isFireball = false;
-        }
-        else{
-            isFireball = true;
-        }
+    public void UpdateisFireball(bool isFb){
+        isFireball = isFb;
 
     }
 }
