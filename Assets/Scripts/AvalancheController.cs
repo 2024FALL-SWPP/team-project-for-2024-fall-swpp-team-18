@@ -22,6 +22,11 @@ public class AvalancheController : MonoBehaviour
     // Update is called once per frame
     void Update() { }
 
+    void OnEnable()
+    {
+        StartAvalanche();
+    }
+
     public void StartAvalanche()
     {
         speed += (float)level * 2f;

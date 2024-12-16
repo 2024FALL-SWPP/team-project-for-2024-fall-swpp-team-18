@@ -23,6 +23,7 @@ public class StudentItem : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             scoreManagerScript.IncreaseStudent();
+            SFXController.PlayBlip();
         }
     }
 }
