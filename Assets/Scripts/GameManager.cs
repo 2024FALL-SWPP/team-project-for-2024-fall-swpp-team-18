@@ -95,6 +95,6 @@ public class GameManager : MonoBehaviour
 
         isGameClear = true;
         Debug.Log("Game Clear! Returning to Main Menu...");
-        SceneManager.LoadScene("sample");
+        SceneManager.LoadScene("Score");
     }
 }

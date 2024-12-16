@@ -3,54 +3,22 @@ using UnityEngine.AI;
 
 public class ProfessorMove : MonoBehaviour
 {
-    public float speed = 5f; // 앞으로 이동하는 속도
-    public float amplitude = 2f; // 진동의 세기 (양 옆으로 얼마나 움직이는지)
-    public float frequency = 1f; // 진동의 속도
+    [SerializeField]
+    public GameObject scoreManager;
 
-    private float time;
+    [SerializeField]
+    public ScoreManager scoreManagerScript;
 
-    /*     [SerializeField]
-        public GameObject scoreManager;
-    
-        [SerializeField]
-        public ScoreManager scoreManagerScript;
-     */
     void Start()
     {
         Random.InitState(System.DateTime.Now.Millisecond);
-        transform.localPosition = new Vector3(Random.Range(-170, 220), 65f, -9.5f);
-    }
 
-    void Update()
-    {
-        // 시간 기반으로 앞으로 이동
-        time += Time.deltaTime;
-        float forwardMovement = speed * Time.deltaTime;
+        Vector3 randomPosition = new Vector3(Random.Range(-160, 210), 15f, Random.Range(-6, -3));
 
-        // 사인 함수를 사용한 좌우 진동 계산
-        float sideMovement = Mathf.Sin(time * frequency) * amplitude;
-
-        // 새로운 위치 계산 (예: Z축으로 앞으로 이동, X축으로 좌우 진동)
-        Vector3 newPosition = transform.position;
-        if (newPosition.x > 210)
-            speed = -5;
-        else if (newPosition.x < -180)
-            speed = 5;
-        newPosition.x += forwardMovement; // 앞으로 이동
-        newPosition.z = sideMovement - 4; // 좌우 진동
-
-        // 객체의 위치 업데이트
-        transform.position = newPosition;
-    }
-
-    /*     void OnCollisionEnter(Collision collision)
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
         {
-            if (collision.gameObject.CompareTag("Player"))
-            {
-                Debug.Log("collision of player and professor");
-                scoreManagerScript.IncreaseProfessor();
-                Destroy(gameObject);
-            }
+            rb.MovePosition(randomPosition); // Rigidbody를 이용해 위치 이동
         }
-     */
+    }
 }

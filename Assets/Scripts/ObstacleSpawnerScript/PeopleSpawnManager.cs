@@ -1,6 +1,6 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class PeopleSpawnManager : MonoBehaviour
 {
@@ -11,14 +11,11 @@ public class PeopleSpawnManager : MonoBehaviour
     private List<float> selectedOffsets = new List<float>(); // 무작위로 선택된 좌우 오프셋
     public Transform playerTransform; // 플레이어 Transform
 
-
     private void Awake()
     {
         // 현재 시간을 기반으로 랜덤 시드 초기화
         Random.InitState(System.DateTime.Now.Millisecond);
     }
-
-
 
     // 외부에서 호출 가능한 메서드 (신호 기반)
     public void TriggerSpawn(Transform spawnPoint)
@@ -27,11 +24,8 @@ public class PeopleSpawnManager : MonoBehaviour
         StartCoroutine(SpawnPeople(spawnPoint));
     }
 
-
-
     private void SelectRandomOffsets()
     {
-        
         // lateralOffsets 배열에서 3개의 무작위 오프셋 선택
         List<float> availableOffsets = new List<float>(lateralOffsets);
 
@@ -43,11 +37,13 @@ public class PeopleSpawnManager : MonoBehaviour
             availableOffsets.RemoveAt(randomIndex); // 중복 선택 방지
         }
     }
+
     private IEnumerator SpawnPeople(Transform spawnPoint)
     {
         for (int i = 0; i < maxPeopleToSpawn; i++)
         {
-            if (i >= selectedOffsets.Count) break;
+            if (i >= selectedOffsets.Count)
+                break;
             float startOffset = (Random.Range(0, 2) == 0) ? -8 : 6;
             Vector3 startPosition = spawnPoint.position + playerTransform.right * startOffset;
             // 좌우 오프셋 추가 (플레이어 기준)
@@ -66,14 +62,18 @@ public class PeopleSpawnManager : MonoBehaviour
         }
     }
 
-     private IEnumerator MoveToTarget(Transform person, Vector3 targetPosition)
+    private IEnumerator MoveToTarget(Transform person, Vector3 targetPosition)
     {
         float speed = 4f; // 이동 속도
 
         while (Vector3.Distance(person.position, targetPosition) > 0.1f)
         {
             // 목표 위치로 이동
-            person.position = Vector3.MoveTowards(person.position, targetPosition, speed * Time.deltaTime);
+            person.position = Vector3.MoveTowards(
+                person.position,
+                targetPosition,
+                speed * Time.deltaTime
+            );
             yield return null; // 다음 프레임까지 대기
         }
 

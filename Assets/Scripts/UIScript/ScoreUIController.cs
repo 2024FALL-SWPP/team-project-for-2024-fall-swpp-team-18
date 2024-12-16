@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro; // TextMeshPro 사용 시 필요
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.SceneManagement; // 씬 관리를 위한 네임스페이스
 
 public class ScoreUIController : MonoBehaviour
@@ -18,6 +19,11 @@ public class ScoreUIController : MonoBehaviour
 
     void Start()
     {
+        if (gradeText == null)
+            Debug.Log("NULL");
+        if (studentText == null)
+            Debug.Log("NULL");
+
         StartCoroutine(ShowTextsSequentially());
     }
 
@@ -70,6 +76,8 @@ public class ScoreUIController : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             float currentValue = Mathf.Lerp(startValue, endValue, elapsedTime / animationDuration);
+            if (targetText == null)
+                continue;
             if (!isInt)
                 targetText.text = prefix + (Mathf.Round(currentValue * 10) / 10).ToString();
             else
@@ -77,10 +85,12 @@ public class ScoreUIController : MonoBehaviour
             yield return null;
         }
 
-        // 최종 값 설정
-        if (!isInt)
-            targetText.text = prefix + (Mathf.Round(endValue * 10) / 10).ToString();
-        else
-            targetText.text = prefix + Mathf.RoundToInt(endValue).ToString();
+        if (targetText != null)
+        {
+            if (!isInt)
+                targetText.text = prefix + (Mathf.Round(endValue * 10) / 10).ToString();
+            else
+                targetText.text = prefix + Mathf.RoundToInt(endValue).ToString();
+        }
     }
 }
