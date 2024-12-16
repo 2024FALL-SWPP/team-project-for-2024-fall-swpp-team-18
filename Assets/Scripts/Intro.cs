@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Intro : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class Intro : MonoBehaviour
     private Vector3 InitPos;
     private Quaternion InitRot;
     // Start is called before the first frame update
-    private bool fadein = false, stair = false, camera1 = false, camera2 = false, camera3 = false, shake = false, run = false;
+    private bool stair = false, camera1 = false, camera3 = false, shake = false, run = false;
     void Start()
     {
         InitPos = Camera2.transform.position;
@@ -23,6 +24,8 @@ public class Intro : MonoBehaviour
         Camera2.SetActive(false);
         Camera3.SetActive(false);
         Avalanche.SetActive(false);
+
+        Img.CrossFadeAlpha(0.0f, 2.0f, false);
     }
 
     // Update is called once per frame
@@ -31,10 +34,6 @@ public class Intro : MonoBehaviour
         T += Time.deltaTime;
         
         if (T < 1.0f) {
-            if (!fadein) {
-                Img.CrossFadeAlpha(0.0f, 2.0f, false);
-                fadein = true;
-            }
             animator.SetBool("isWalking", true);
         } else if (T < 6.0f) {
             if (!stair) {
@@ -98,6 +97,8 @@ public class Intro : MonoBehaviour
                 camera3 = true;
             }
             transform.Translate(Vector3.forward * Speed * 2 * Time.deltaTime);
+        } else if (T > 17.5f) {
+            SceneManager.LoadScene("MainScene");
         }
     }
 }

@@ -7,6 +7,9 @@ public class Outro1 : MonoBehaviour
 {
     private Animator animator;
     public GameObject Cam;
+    public RawImage scoreBoard;
+    public Vector2 boardSize = new Vector2(1024, 1024);
+    private RectTransform boardRt;
     public Image Img;
     private float T = 0.0f;
     private bool fadein = false, jump = false;
@@ -14,6 +17,8 @@ public class Outro1 : MonoBehaviour
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
+        boardRt = scoreBoard.GetComponent<RectTransform>();
+        boardRt.sizeDelta = new Vector2(0, 0);
     }
 
     // Update is called once per frame
@@ -33,7 +38,24 @@ public class Outro1 : MonoBehaviour
         } else if (T < 10.0f && !jump) {
             animator.SetBool("Jump", true);
             jump = true;
+            Invoke("InvokeShowBoard", 2.0f);
         }
         
+    }
+    private void InvokeShowBoard() 
+    {
+        StartCoroutine(ShowBoard(boardSize));
+    }
+
+    IEnumerator ShowBoard(Vector2 boardSize)
+    {
+        float elapsedTime = 0.0f;
+
+        while (elapsedTime < 1.0f) {
+            elapsedTime += Time.deltaTime;
+            boardRt.sizeDelta = Vector2.Lerp(new Vector2(0, 0), boardSize, elapsedTime);
+            yield return null;
+        }
+        GameObject.Find("ScoreBoard").GetComponent<ScoreUIController>().InvokeShowTextsSequentially();
     }
 }

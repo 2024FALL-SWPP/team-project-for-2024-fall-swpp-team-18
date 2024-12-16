@@ -1,15 +1,15 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerPositionController : MonoBehaviour
 {
-    //private Rigidbody PlayerRb;
     [SerializeField]
     public float Speed = 10.0f;
 
     [SerializeField]
     public GameObject Avalanche2;
+    public Image Img;
     private float ItemDuration = 5f;
     private bool BumpWallLeft = false;
     private bool BumpWallRight = false;
@@ -28,6 +28,7 @@ public class PlayerPositionController : MonoBehaviour
         //PlayerRb = GetComponent<Rigidbody>();
         scoreManager = GameObject.Find("ScoreManager");
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
+        Img.CrossFadeAlpha(0.0f, 1.0f, false);
     }
 
     void Update()
@@ -94,21 +95,15 @@ public class PlayerPositionController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Avalanche"))
         {
-            GameManager.instance.GameOver = true;
-            SceneManager.LoadScene("AvalancheOutro");
             scoreManagerScript.collideAvalanche();
         }
         if (other.gameObject.CompareTag("MainGate"))
         {
             scoreManagerScript.arriveMainGate();
-            
         }
         if (other.gameObject.CompareTag("Snowball"))
         {
-            GameManager.instance.GameOver = true;
             scoreManagerScript.collideSnowball();
-            SceneManager.LoadScene("SnowballOutro");
-            
         }
         if (other.gameObject.CompareTag("JumpBoard"))
         {

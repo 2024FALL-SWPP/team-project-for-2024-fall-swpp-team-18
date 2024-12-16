@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro; // TextMeshPro 사용 시 필요
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement; // 씬 관리를 위한 네임스페이스
 
 public class ScoreUIController : MonoBehaviour
@@ -18,11 +19,15 @@ public class ScoreUIController : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(ShowTextsSequentially());
+        
     }
 
+    public void InvokeShowTextsSequentially() {
+        StartCoroutine(ShowTextsSequentially());
+    }
     IEnumerator ShowTextsSequentially()
     {
+        yield return new WaitForSeconds(1f);
         // 2. Grade
         yield return StartCoroutine(
             AnimateValue(gradeText, "grade\n", 0, GameManager.instance.grade, false)
@@ -51,7 +56,7 @@ public class ScoreUIController : MonoBehaviour
         yield return StartCoroutine(
             AnimateValue(scoreText, "Score : ", 0, GameManager.instance.total, true)
         );
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(20f);
 
         SceneManager.LoadScene("Main");
     }
@@ -70,6 +75,8 @@ public class ScoreUIController : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             float currentValue = Mathf.Lerp(startValue, endValue, elapsedTime / animationDuration);
+            if (targetText == null)
+                continue;
             if (!isInt)
                 targetText.text = prefix + (Mathf.Round(currentValue * 10) / 10).ToString();
             else
@@ -77,10 +84,12 @@ public class ScoreUIController : MonoBehaviour
             yield return null;
         }
 
-        // 최종 값 설정
-        if (!isInt)
-            targetText.text = prefix + (Mathf.Round(endValue * 10) / 10).ToString();
-        else
-            targetText.text = prefix + Mathf.RoundToInt(endValue).ToString();
+        if (targetText != null)
+        {
+            if (!isInt)
+                targetText.text = prefix + (Mathf.Round(endValue * 10) / 10).ToString();
+            else
+                targetText.text = prefix + Mathf.RoundToInt(endValue).ToString();
+        }
     }
 }
