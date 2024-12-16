@@ -126,6 +126,7 @@ public class PlayerPositionController : MonoBehaviour
             Avalanche2.SetActive(true);
             StartCoroutine(TurnCorner2());
             stage = 3;
+            Debug.Log(stage);
         }
         if (other.gameObject.CompareTag("Snowflake") && !BumpHurricane)
 

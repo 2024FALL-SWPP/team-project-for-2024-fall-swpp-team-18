@@ -75,7 +75,8 @@ public class ScoreManager : MonoBehaviour
 
     public void IncreaseHeart()
     {
-        heart++;
+        heart = Mathf.Min(heart + 1, 3);
+
     }
 
     public void IncreaseFireball()
