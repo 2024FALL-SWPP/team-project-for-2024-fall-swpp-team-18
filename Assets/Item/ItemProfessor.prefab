@@ -175,12 +175,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3382157934341357550}
-  - component: {fileID: 5178829998727763688}
   - component: {fileID: 794969785451014868}
-  - component: {fileID: 544759540365505337}
+  - component: {fileID: 1764966827}
   m_Layer: 0
   m_Name: ItemProfessor
-  m_TagString: ScoreItem
+  m_TagString: Professor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207,19 +206,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5178829998727763688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2712299559897212244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b5f0baf1053d1f4481790126ff30549, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: {x: 0, y: 50, z: 0}
 --- !u!65 &794969785451014868
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -231,9 +217,9 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.3, z: 0.3}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &544759540365505337
+  m_Size: {x: 0.23, y: 0.25, z: 0.24}
+  m_Center: {x: -0.01, y: -0.03, z: -0.01}
+--- !u!114 &1764966827
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -242,9 +228,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2712299559897212244}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e320312bbf11054cb740e449ec2128d, type: 3}
+  m_Script: {fileID: 11500000, guid: b9d15ddbe83d3e345aac50faab49acb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
+  amplitude: 2
+  frequency: 1
 --- !u!1 &5643591231166424470
 GameObject:
   m_ObjectHideFlags: 0

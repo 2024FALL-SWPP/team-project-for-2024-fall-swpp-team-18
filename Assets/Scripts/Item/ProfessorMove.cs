@@ -9,6 +9,12 @@ public class ProfessorMove : MonoBehaviour
 
     private float time;
 
+    /*     [SerializeField]
+        public GameObject scoreManager;
+    
+        [SerializeField]
+        public ScoreManager scoreManagerScript;
+     */
     void Start()
     {
         Random.InitState(System.DateTime.Now.Millisecond);
@@ -36,4 +42,15 @@ public class ProfessorMove : MonoBehaviour
         // 객체의 위치 업데이트
         transform.position = newPosition;
     }
+
+    /*     void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                Debug.Log("collision of player and professor");
+                scoreManagerScript.IncreaseProfessor();
+                Destroy(gameObject);
+            }
+        }
+     */
 }

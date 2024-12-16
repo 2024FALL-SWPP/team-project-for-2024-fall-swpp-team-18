@@ -6,6 +6,9 @@ public class PlayerPositionController : MonoBehaviour
     //private Rigidbody PlayerRb;
     [SerializeField]
     public float Speed = 10.0f;
+
+    [SerializeField]
+    public GameObject Avalanche2;
     private float ItemDuration = 5f;
     private bool BumpWallLeft = false;
     private bool BumpWallRight = false;
@@ -62,6 +65,12 @@ public class PlayerPositionController : MonoBehaviour
             SFXController.PlayExplosion();
             scoreManagerScript.heart--;
         }
+        if (collision.gameObject.CompareTag("Professor"))
+        {
+            Debug.Log("collision of player and professor");
+            scoreManagerScript.IncreaseProfessor();
+            Destroy(collision.gameObject);
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -76,11 +85,15 @@ public class PlayerPositionController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Avalanche"))
         {
-            GameManager.instance.GameOver = true;
+            scoreManagerScript.collideAvalanche();
+        }
+        if (other.gameObject.CompareTag("MainGate"))
+        {
+            scoreManagerScript.arriveMainGate();
         }
         if (other.gameObject.CompareTag("Snowball"))
         {
-            GameManager.instance.GameOver = true;
+            scoreManagerScript.collideSnowball();
         }
         if (other.gameObject.CompareTag("JumpBoard"))
         {
@@ -93,9 +106,9 @@ public class PlayerPositionController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Corner2"))
         {
+            Avalanche2.SetActive(true);
             StartCoroutine(TurnCorner2());
         }
-
         if (other.gameObject.CompareTag("Snowflake"))
         {
             Debug.Log("Collision with snowflake detected.");
@@ -309,5 +322,3 @@ public class PlayerPositionController : MonoBehaviour
         Destroy(item);
     }
 }
-
-
