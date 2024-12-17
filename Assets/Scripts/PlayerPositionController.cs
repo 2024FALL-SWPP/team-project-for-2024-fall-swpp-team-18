@@ -65,7 +65,7 @@ public class PlayerPositionController : MonoBehaviour
             && Vector3.Distance(transform.position, Snowball.transform.position) <= 10.0f
         )
         {
-            //GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(10.0f);
+            GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(10.0f);
         }
     }
 
