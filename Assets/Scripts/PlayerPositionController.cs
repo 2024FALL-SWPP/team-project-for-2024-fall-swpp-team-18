@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class PlayerPositionController : MonoBehaviour
 {
     [SerializeField]
-    public float Speed = 10.0f;
+    public float Speed = 5.0f;
 
     [SerializeField]
     public GameObject Avalanche2;
@@ -30,14 +30,20 @@ public class PlayerPositionController : MonoBehaviour
         //PlayerRb = GetComponent<Rigidbody>();
         scoreManager = GameObject.Find("ScoreManager");
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
-        Img.CrossFadeAlpha(0.0f, 1.0f, false);
+        GameObject.Find("PauseManager").GetComponent<PauseManager>().Fadein();
+        Invoke("RemoveBlackScreen", 1.0f);
     }
+
     public int getStage(){
         return stage;
     }
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            GameObject.Find("PauseManager").GetComponent<PauseManager>().InvokePauseBoard();
+        }
         // 눈송이 또는 허리케인 효과가 없을 때만 이동
         if (!BumpSnowflake && !BumpHurricane && !Stop)
         {
@@ -45,22 +51,13 @@ public class PlayerPositionController : MonoBehaviour
 
             if (Input.GetKey(KeyCode.Q) && !BumpWallLeft)
             {
-                //PlayerRb.AddForce(Vector3.right * 50.0f, ForceMode.Force);
                 transform.Translate(-Vector3.right * Speed * Time.deltaTime);
             }
             if (Input.GetKey(KeyCode.E) && !BumpWallRight)
             {
                 transform.Translate(Vector3.right * Speed * Time.deltaTime);
             }
-        }
-        if (Input.GetKey(KeyCode.Q) && !BumpWallLeft)
-        {
-            transform.Translate(-Vector3.right * Speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.E) && !BumpWallRight)
-        {
-            transform.Translate(Vector3.right * Speed * Time.deltaTime);
-        }
+        }   
 
         GameObject Snowball = GameObject.FindWithTag("Snowball");
         if (
@@ -342,9 +339,14 @@ public class PlayerPositionController : MonoBehaviour
 
         BackgroundMusicController.Instance.SetPlaySpeed(1 + (delta / 10));
 
-        yield return new WaitForSecondsRealtime(ItemDuration);
+        yield return new WaitForSeconds(ItemDuration);
         Speed -= delta;
         BackgroundMusicController.Instance.PlayNormal();
         Destroy(item);
+    }
+
+    private void RemoveBlackScreen()
+    {
+        Img.gameObject.SetActive(false);
     }
 }
