@@ -35,18 +35,17 @@ public class NewSpawnerManager : MonoBehaviour
             peopleSpawnManager.TriggerSpawn(this.transform);
             Debug.Log($"Spawn triggered at {this.transform.name} using {"PeopleSpawnManager"}");
         }
-        /*         else if (randomChoice == 2 && treeSpawnManager != null)
-                {
-                    // PeopleSpawnManager 실행
-                    treeSpawnManager.TriggerSpawn(this.transform);
-                    Debug.Log($"Spawn triggered at {this.transform.name} using {"TreeSpawnManager"}");
-                }
-                else if (randomChoice == 3 && jumpSpawnManager != null)
-                {
-                    // PeopleSpawnManager 실행
-                    jumpSpawnManager.TriggerSpawn(this.transform);
-                    Debug.Log($"Spawn triggered at {this.transform.name} using {"jumpSpawnManager"}");
-                }
-         */
+        else if (randomChoice == 2 && treeSpawnManager != null)
+        {
+            // PeopleSpawnManager 실행
+            treeSpawnManager.TriggerSpawn13(this.transform);
+            Debug.Log($"Spawn triggered at {this.transform.name} using {"TreeSpawnManager"}");
+        }
+        else if (randomChoice == 3 && jumpSpawnManager != null)
+        {
+            // PeopleSpawnManager 실행
+            jumpSpawnManager.TriggerSpawn13(this.transform);
+            Debug.Log($"Spawn triggered at {this.transform.name} using {"jumpSpawnManager"}");
+        }
     }
 }

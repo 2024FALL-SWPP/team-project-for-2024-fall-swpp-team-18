@@ -64,10 +64,22 @@ public class PeopleSpawnManager : MonoBehaviour
 
     private IEnumerator MoveToTarget(Transform person, Vector3 targetPosition)
     {
+        // person이 null인지 먼저 확인
+        if (person == null)
+        {
+            yield break; // 바로 코루틴 종료
+        }
+
         float speed = 4f; // 이동 속도
 
-        while (Vector3.Distance(person.position, targetPosition) > 0.1f)
+        while (person != null && Vector3.Distance(person.position, targetPosition) > 0.1f)
         {
+            // person이 아직 존재하는지 매 프레임 확인
+            if (person == null)
+            {
+                yield break; // person이 사라졌다면 즉시 종료
+            }
+
             // 목표 위치로 이동
             person.position = Vector3.MoveTowards(
                 person.position,
@@ -76,7 +88,5 @@ public class PeopleSpawnManager : MonoBehaviour
             );
             yield return null; // 다음 프레임까지 대기
         }
-
-        Debug.Log($"{person.name} has reached the target at {targetPosition}");
     }
 }

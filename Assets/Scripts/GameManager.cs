@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     public bool isGameOver = false;
     public bool isGameClear = false;
+    public bool isPaused = false;
     public float grade = 0.0f;
     public int student = 0;
     public float time = 0.0f;
