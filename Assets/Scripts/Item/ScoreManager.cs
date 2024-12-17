@@ -134,6 +134,7 @@ public class ScoreManager : MonoBehaviour
 
     public void arriveMainGate()
     {
+        GameManager.instance.isGameClear = true;
         total = CalculateFinalTotal();
         GameManager.Instance.HandleGameClear(grade, student, playTime, total, professor, gradeNum);
     }
