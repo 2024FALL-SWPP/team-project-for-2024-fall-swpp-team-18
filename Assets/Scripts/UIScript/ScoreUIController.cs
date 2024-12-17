@@ -7,13 +7,18 @@ using UnityEngine.UI;
 
 public class ScoreUIController : MonoBehaviour
 {
-    public Text scoreText, gradeText, studentText, timeText, lectureText, professorText;
+    public Text scoreText,
+        gradeText,
+        studentText,
+        timeText,
+        lectureText,
+        professorText;
 
     public float animationDuration = 1.0f; // 점수 애니메이션 지속 시간
 
     void Start()
     {
-        StartCoroutine(ShowTextsSequentially());
+        //StartCoroutine(ShowTextsSequentially());
     }
 
     public void InvokeShowTextsSequentially()
@@ -69,7 +74,7 @@ public class ScoreUIController : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
 
-            fade = Mathf.Lerp(0, 1, elapsedTime/0.5f);
+            fade = Mathf.Lerp(0, 1, elapsedTime / 0.5f);
             targetText.color = new Color(1, 1, 1, fade);
             float currentValue = Mathf.Lerp(startValue, endValue, elapsedTime / animationDuration);
             if (targetText == null)

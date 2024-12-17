@@ -48,8 +48,9 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         if (!GameManager.instance.isGameOver && !GameManager.instance.isGameClear)
+        {
             GetScore();
-
+        }
         // Esc 키 입력으로 일시정지/재개
         if (Input.GetKeyDown(KeyCode.Escape))
         {
