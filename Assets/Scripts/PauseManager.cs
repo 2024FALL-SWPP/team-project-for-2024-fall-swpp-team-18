@@ -99,9 +99,7 @@ public class PauseManager : MonoBehaviour
         Img.gameObject.SetActive(true);
         while (elapsedTime < 1.0f) {
             elapsedTime += Time.unscaledDeltaTime;
-            Debug.Log($"{elapsedTime}");
             fade = Mathf.Lerp(1, 0, elapsedTime);
-            Debug.Log($"{elapsedTime}, {fade}");
             Img.color = new Color(0, 0, 0, fade);
             yield return null;
         }
@@ -115,9 +113,7 @@ public class PauseManager : MonoBehaviour
         Img.gameObject.SetActive(true);
         while (elapsedTime < 1.0f) {
             elapsedTime += Time.unscaledDeltaTime;
-            Debug.Log($"{elapsedTime}");
             fade = Mathf.Lerp(0, 1, elapsedTime);
-            Debug.Log($"{elapsedTime}, {fade}");
             Img.color = new Color(0, 0, 0, fade);
             yield return null;
         }

@@ -347,7 +347,6 @@ public class PlayerPositionController : MonoBehaviour
 
     private void RemoveBlackScreen()
     {
-        Img.color = new Color(0, 0, 0, 0);
         Img.gameObject.SetActive(false);
     }
 }

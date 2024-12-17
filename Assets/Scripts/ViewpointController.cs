@@ -46,7 +46,10 @@ public class ViewpointController : MonoBehaviour
         float T = 0.0f;
         while(T < t) {
             T += Time.deltaTime;
-            transform.localPosition = origin + (Vector3)Random.insideUnitCircle;
+            if (!GameManager.instance.isPaused) 
+            {
+                transform.localPosition = origin + (Vector3)Random.insideUnitCircle;
+            }
             yield return null;
         }
         transform.localPosition = origin;
