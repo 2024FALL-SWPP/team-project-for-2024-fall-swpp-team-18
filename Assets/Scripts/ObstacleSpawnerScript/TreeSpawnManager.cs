@@ -24,6 +24,7 @@ public class TreeSpawnManager : MonoBehaviour
     {
         StartCoroutine(SpawnTrees13(spawnPoint));
     }
+
     public void TriggerSpawn2(Transform spawnPoint)
     {
         StartCoroutine(SpawnTrees2(spawnPoint));
@@ -69,7 +70,8 @@ public class TreeSpawnManager : MonoBehaviour
 
         // 플레이어 기준 spawnOffsets을 월드 좌표로 변환
         worldOffset =
-            playerTransform.TransformPoint(spawnOffsets13[chosenint + 4]) - playerTransform.position;
+            playerTransform.TransformPoint(spawnOffsets13[chosenint + 4])
+            - playerTransform.position;
 
         // 최종 스폰 위치 계산
         spawnPosition = spawnPoint.position + worldOffset;

@@ -16,13 +16,12 @@ public class PlayerPositionController : MonoBehaviour
     private bool BumpSnowflake = false;
     private bool BumpHurricane = false;
     private bool Stop = false;
-    private int stage = 1;    
+    private int stage = 1;
     private Vector3 CurForward;
     private Coroutine activeRecoveryCoroutine = null; // 현재 활성화된 Snowflake 코루틴
     private Coroutine activeHurricaneCoroutine = null; // 현재 활성화된 Hurricane 코루틴
     private GameObject scoreManager;
     private ScoreManager scoreManagerScript;
-    
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +33,8 @@ public class PlayerPositionController : MonoBehaviour
         Invoke("RemoveBlackScreen", 1.0f);
     }
 
-    public int getStage(){
+    public int getStage()
+    {
         return stage;
     }
 
@@ -57,7 +57,7 @@ public class PlayerPositionController : MonoBehaviour
             {
                 transform.Translate(Vector3.right * Speed * Time.deltaTime);
             }
-        }   
+        }
 
         GameObject Snowball = GameObject.FindWithTag("Snowball");
         if (
@@ -76,13 +76,7 @@ public class PlayerPositionController : MonoBehaviour
             //Stop = true;
             GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(1f);
             SFXController.PlayExplosion();
-            scoreManagerScript.heart--;
-        }
-        if (collision.gameObject.CompareTag("Professor"))
-        {
-            Debug.Log("collision of player and professor");
-            scoreManagerScript.IncreaseProfessor();
-            Destroy(collision.gameObject);
+            scoreManagerScript.DecreaseHeart();
         }
     }
 
@@ -106,7 +100,10 @@ public class PlayerPositionController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Snowball"))
         {
+            Debug.Log("Collision with snowball");
+            SFXController.PlayExplosion();
             scoreManagerScript.collideSnowball();
+            Destroy(other.gameObject);
         }
         if (other.gameObject.CompareTag("JumpBoard"))
         {
@@ -123,10 +120,14 @@ public class PlayerPositionController : MonoBehaviour
             Avalanche2.SetActive(true);
             StartCoroutine(TurnCorner2());
             stage = 3;
-            Debug.Log(stage);
+        }
+        if (other.gameObject.CompareTag("Professor"))
+        {
+            SFXController.PlayBlip();
+            scoreManagerScript.IncreaseProfessor();
+            Destroy(other.gameObject);
         }
         if (other.gameObject.CompareTag("Snowflake") && !BumpHurricane)
-
         {
             Debug.Log("Collision with snowflake detected.");
 
@@ -268,14 +269,9 @@ public class PlayerPositionController : MonoBehaviour
     IEnumerator HandleHurricaneEffect(Vector3 hurricaneCenter, GameObject hurricaneObject)
     {
         Debug.Log("Hurricane effect started.");
-        Debug.Log("Hurricane effect started.");
-
 
         // 플레이어를 허리케인 중심으로 이동
         transform.position = hurricaneCenter;
-        // 플레이어를 허리케인 중심으로 이동
-        transform.position = hurricaneCenter;
-        
 
         // 제자리 회전 (Q, E 입력으로 지속 시간 감소)
         float spinSpeed = 540f; // 빠른 회전 속도
@@ -321,7 +317,6 @@ public class PlayerPositionController : MonoBehaviour
         transform.rotation = initialRotation;
         Debug.Log("SpinPlayerByKeyboard finished.");
     }
-
 
     public bool getBumpHurricane()
     {

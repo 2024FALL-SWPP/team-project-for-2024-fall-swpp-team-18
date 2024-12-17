@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class NewSpawnerManager : MonoBehaviour
 {
-
     public CarSpawnManager carSpawnManager; // CarSpawnManager 참조
     public PeopleSpawnManager peopleSpawnManager; // PeopleSpawnManager 참조
     public TreeSpawnManager treeSpawnManager; // TreeSpawnManager 참조
 
     public JumpSpawnManager jumpSpawnManager; // TreeSpawnManager 참조
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +17,7 @@ public class NewSpawnerManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-    }
+    void Update() { }
 
     private void TriggerRandomSpawnManager()
     {

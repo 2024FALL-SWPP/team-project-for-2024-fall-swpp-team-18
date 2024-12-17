@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement; // 씬 관리를 위한 네임스페이스
+using UnityEngine.UI;
 
 public class ScoreUIController : MonoBehaviour
 {
@@ -13,12 +13,14 @@ public class ScoreUIController : MonoBehaviour
 
     void Start()
     {
-        
-    }
-
-    public void InvokeShowTextsSequentially() {
         StartCoroutine(ShowTextsSequentially());
     }
+
+    public void InvokeShowTextsSequentially()
+    {
+        StartCoroutine(ShowTextsSequentially());
+    }
+
     IEnumerator ShowTextsSequentially()
     {
         yield return new WaitForSeconds(1f);

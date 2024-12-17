@@ -467,9 +467,9 @@ Transform:
   - {fileID: 2516835164958847365}
   - {fileID: 2516835164940950305}
   - {fileID: 2516835163501115330}
-  - {fileID: 2516835164405303704}
-  - {fileID: 2516835163720140981}
   - {fileID: 2516835164523622104}
+  - {fileID: 4527548417353964882}
+  - {fileID: 1993960925881003050}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -525,70 +525,9 @@ MonoBehaviour:
   triggerDistance: 25
   carSpawnManager: {fileID: 2516835163501115329}
   peopleSpawnManager: {fileID: 2516835164940950304}
-  treeSpawnManager: {fileID: 2516835164405303703}
-  jumpSpawnManager: {fileID: 2516835163720140980}
+  treeSpawnManager: {fileID: 8417887405613335011}
+  jumpSpawnManager: {fileID: 4978476080435536985}
   player: {fileID: 0}
---- !u!1 &2516835163720140979
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2516835163720140981}
-  - component: {fileID: 2516835163720140980}
-  m_Layer: 0
-  m_Name: JumpSpawnManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2516835163720140981
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2516835163720140979}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2516835163671437943}
-  m_RootOrder: 40
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2516835163720140980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2516835163720140979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83866ade037dd764d819accbafb71a67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  treePrefabs:
-  - {fileID: 8835030795515639584, guid: ea3fb89537b8f5a488a8030df660fede, type: 3}
-  - {fileID: 2693453019956569452, guid: 1aba66bb1b9f7914ca3d27e246e2681c, type: 3}
-  jumpObject: {fileID: 330740502543464223, guid: 307fee46362dd3b4a90ca16646485c0e, type: 3}
-  spawnjumpOffsets:
-  - {x: 2, y: 0.5, z: -4}
-  - {x: -6, y: 0.5, z: -4}
-  spawnOffsets:
-  - {x: 8, y: 7, z: 17}
-  - {x: -12, y: 7, z: 17}
-  - {x: 8, y: 7, z: 25}
-  - {x: -12, y: 7, z: 25}
-  - {x: 8, y: 7, z: 33}
-  - {x: -12, y: 7, z: 33}
-  - {x: 8, y: 7, z: 41}
-  - {x: -12, y: 7, z: 41}
-  playerTransform: {fileID: 0}
 --- !u!1 &2516835163775077753
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,62 +745,6 @@ Transform:
   m_Father: {fileID: 2516835163671437943}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2516835164405303702
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2516835164405303704}
-  - component: {fileID: 2516835164405303703}
-  m_Layer: 0
-  m_Name: TreeSpawnManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2516835164405303704
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2516835164405303702}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1241.56, y: -239.53, z: -520.43}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2516835163671437943}
-  m_RootOrder: 39
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2516835164405303703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2516835164405303702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c574fbbebc148f4d8e4b0709385e6f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  treePrefabs:
-  - {fileID: 1861773171592671157, guid: 0103942438424b843a8ddb3c2c08c278, type: 3}
-  - {fileID: 9023683330206932126, guid: 031a5a8729b3f164598ffe48bcc032d2, type: 3}
-  spawnOffsets:
-  - {x: 8, y: 5, z: 5}
-  - {x: -12, y: 5, z: 5}
-  - {x: 8, y: 5, z: 18}
-  - {x: -12, y: 5, z: 18}
-  - {x: 8, y: 5, z: 31}
-  - {x: -12, y: 5, z: 31}
-  playerTransform: {fileID: 0}
-  maxtreesToSpawn: 3
 --- !u!1 &2516835164408334873
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,7 +837,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2516835163671437943}
-  m_RootOrder: 41
+  m_RootOrder: 39
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2516835164523622105
 MonoBehaviour:
@@ -968,10 +851,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6651df19988ab9f47840e3766a74dfa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   snowballPrefab: {fileID: 1181036157804623955, guid: 8aa0191e3092b1244816806ea902b721, type: 3}
-  playerTransform: {fileID: 0}
-  spawnPositions:
-  - {x: -182.5, y: 118.7, z: 417}
+  spawnPoints: []
 --- !u!1 &2516835164565110656
 GameObject:
   m_ObjectHideFlags: 0
@@ -1551,3 +1433,139 @@ Transform:
   m_Father: {fileID: 2516835163671437943}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5528257057538452744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1993960925881003050}
+  - component: {fileID: 4978476080435536985}
+  m_Layer: 0
+  m_Name: JumpSpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1993960925881003050
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5528257057538452744}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2516835163671437943}
+  m_RootOrder: 41
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4978476080435536985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5528257057538452744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83866ade037dd764d819accbafb71a67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  treePrefabs:
+  - {fileID: 8835030795515639584, guid: ea3fb89537b8f5a488a8030df660fede, type: 3}
+  - {fileID: 2693453019956569452, guid: 1aba66bb1b9f7914ca3d27e246e2681c, type: 3}
+  jumpObject: {fileID: 330740502543464223, guid: 307fee46362dd3b4a90ca16646485c0e, type: 3}
+  spawnjumpOffsets13:
+  - {x: 2, y: 0.5, z: -2}
+  - {x: -6, y: 0.5, z: -2}
+  spawnOffsets13:
+  - {x: 8, y: 7, z: 17}
+  - {x: -12, y: 7, z: 17}
+  - {x: 8, y: 7, z: 25}
+  - {x: -12, y: 7, z: 25}
+  - {x: 8, y: 7, z: 33}
+  - {x: -12, y: 7, z: 33}
+  - {x: 8, y: 7, z: 41}
+  - {x: -12, y: 7, z: 41}
+  spawnjumpOffsets2:
+  - {x: 2, y: 0.5, z: -2}
+  - {x: -6, y: 0.5, z: -2}
+  spawnOffsets2:
+  - {x: 7, y: 9, z: 17}
+  - {x: -7, y: 9, z: 17}
+  - {x: 7, y: 9, z: 23}
+  - {x: -7, y: 9, z: 23}
+  - {x: 7, y: 9, z: 29}
+  - {x: -7, y: 9, z: 29}
+  - {x: 7, y: 9, z: 35}
+  - {x: -7, y: 9, z: 35}
+  playerTransform: {fileID: 0}
+--- !u!1 &5594259160842646946
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4527548417353964882}
+  - component: {fileID: 8417887405613335011}
+  m_Layer: 0
+  m_Name: TreeSpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4527548417353964882
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5594259160842646946}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1241.56, y: -239.53, z: -520.43}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2516835163671437943}
+  m_RootOrder: 40
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8417887405613335011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5594259160842646946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c574fbbebc148f4d8e4b0709385e6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  treePrefabs:
+  - {fileID: 1861773171592671157, guid: 0103942438424b843a8ddb3c2c08c278, type: 3}
+  - {fileID: 9023683330206932126, guid: 031a5a8729b3f164598ffe48bcc032d2, type: 3}
+  spawnOffsets13:
+  - {x: 8, y: 5, z: 5}
+  - {x: -12, y: 5, z: 5}
+  - {x: 8, y: 5, z: 13}
+  - {x: -12, y: 5, z: 13}
+  - {x: 8, y: 5, z: 21}
+  - {x: -12, y: 5, z: 21}
+  spawnOffsets2:
+  - {x: 10, y: 5, z: 5}
+  - {x: -9, y: 5, z: 5}
+  - {x: 10, y: 5, z: 13}
+  - {x: -9, y: 5, z: 13}
+  - {x: 10, y: 5, z: 21}
+  - {x: -9, y: 5, z: 21}
+  playerTransform: {fileID: 0}
+  maxtreesToSpawn: 3

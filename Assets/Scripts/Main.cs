@@ -1,14 +1,16 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Main : MonoBehaviour
 {
     public Image Img;
     public GameObject Background;
     private Vector2 initPos;
-    private float resetPosX = 2000.0f, speed = 100.0f;
-    void Start() 
+    private float resetPosX = 2000.0f,
+        speed = 100.0f;
+
+    void Start()
     {
         initPos = Background.GetComponent<RectTransform>().anchoredPosition;
         Img.CrossFadeAlpha(0, 1.0f, false);
@@ -17,33 +19,41 @@ public class Main : MonoBehaviour
 
     void Update()
     {
-        Background.GetComponent<RectTransform>().anchoredPosition -= new Vector2(speed*Time.deltaTime, 0);
+        Background.GetComponent<RectTransform>().anchoredPosition -= new Vector2(
+            speed * Time.deltaTime,
+            0
+        );
         Vector2 curPos = Background.GetComponent<RectTransform>().anchoredPosition;
-        if (initPos.x - curPos.x >= resetPosX) 
+        if (initPos.x - curPos.x >= resetPosX)
         {
             Background.GetComponent<RectTransform>().anchoredPosition = initPos;
         }
     }
+
     public void OnClickStartButton(string level)
     {
         Img.gameObject.SetActive(true);
         Img.CrossFadeAlpha(1.0f, 1.0f, false);
-        
+
         if (level == "Easy")
         {
+            GameManager.instance.isEasy = true;
             Invoke("LoadIntro", 1.0f);
         }
         else if (level == "Hard")
         {
+            GameManager.instance.isEasy = false;
             Invoke("LoadIntro", 1.0f);
         }
     }
 
-    public void LoadIntro() {
+    public void LoadIntro()
+    {
         SceneManager.LoadScene("Intro");
     }
 
-    private void RemoveBlackScreen() {
+    private void RemoveBlackScreen()
+    {
         Img.gameObject.SetActive(false);
     }
 }
