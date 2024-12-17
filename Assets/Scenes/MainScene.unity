@@ -1041,6 +1041,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGameOver: 0
   isGameClear: 0
+  isPaused: 0
   grade: 0
   student: 0
   time: 0
@@ -4461,6 +4462,22 @@ PrefabInstance:
     - target: {fileID: 8744331945537669798, guid: f7cf2e31ce09e4bccb7a10e949b0b929, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9188706793551893513, guid: f7cf2e31ce09e4bccb7a10e949b0b929, type: 3}
+      propertyPath: m_Size.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9188706793688419964, guid: f7cf2e31ce09e4bccb7a10e949b0b929, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9188706793999278328, guid: f7cf2e31ce09e4bccb7a10e949b0b929, type: 3}
+      propertyPath: m_Size.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9188706793999278333, guid: f7cf2e31ce09e4bccb7a10e949b0b929, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7cf2e31ce09e4bccb7a10e949b0b929, type: 3}
