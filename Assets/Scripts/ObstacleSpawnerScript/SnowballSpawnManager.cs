@@ -10,10 +10,11 @@ public class SnowballSpawnManager : MonoBehaviour
     public Transform[] spawnPoints; // 눈덩이 생성 위치 오브젝트들
     private float snowballSpeed = 20.0f;
     private float snowballLifetime = 20.0f;
-    public float spawnInterval = 5.0f;
+    public float spawnInterval;
 
     private void Start()
     {
+        spawnInterval = GameManager.instance.isEasy ? 8.0f : 4.0f;
         if (player == null)
         {
             Debug.LogError("Player object is not assigned!");

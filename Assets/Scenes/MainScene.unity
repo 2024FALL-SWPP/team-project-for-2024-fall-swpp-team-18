@@ -1391,6 +1391,7 @@ MonoBehaviour:
   total: 0
   professor: 0
   gradeNum: 0
+  isEasy: 1
 --- !u!4 &569003515
 Transform:
   m_ObjectHideFlags: 0
@@ -4781,7 +4782,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1873365882}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 74.8, y: -96, z: -797.96}
+  m_LocalPosition: {x: 85.52, y: -102.64, z: -797.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5397,7 +5398,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8744331945788204880}
   m_Layer: 0
-  m_Name: AvalancheSystem
+  m_Name: Avalanche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7039,7 +7040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5de1ef9bcb14ddd4f891ed8cb7b13311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 20
+  Speed: 10
   Avalanche2: {fileID: 9188706794401109882}
   Img: {fileID: 1304095342}
 --- !u!20 &955764157126125704
@@ -14593,7 +14594,7 @@ GameObject:
   - component: {fileID: 9188706794251898126}
   - component: {fileID: 9188706794251898127}
   m_Layer: 0
-  m_Name: Avalanche
+  m_Name: Avalanche1
   m_TagString: Avalanche
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28964,15 +28965,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9188706794911889917}
-  m_LocalRotation: {x: 0, y: 0.9995854, z: -0.028793924, w: 0}
-  m_LocalPosition: {x: 211.3, y: 16.8, z: 15.3}
+  m_LocalRotation: {x: 0, y: 0.99963415, z: -0.02704931, w: 0}
+  m_LocalPosition: {x: 211.3, y: 15.83, z: 15.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9188706795267873615}
   m_Father: {fileID: 9188706794401109883}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 3.3, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 3.1, y: 180, z: 0}
 --- !u!1 &9188706794911889917
 GameObject:
   m_ObjectHideFlags: 0
@@ -28987,7 +28988,7 @@ GameObject:
   - component: {fileID: 9188706794911889919}
   - component: {fileID: 9188706794911889918}
   m_Layer: 0
-  m_Name: Avalanche
+  m_Name: Avalanche2
   m_TagString: Avalanche
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29047,7 +29048,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9188706795014955914}
   m_Layer: 0
-  m_Name: Avalanche
+  m_Name: Avalanche1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
