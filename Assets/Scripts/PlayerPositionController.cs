@@ -76,7 +76,7 @@ public class PlayerPositionController : MonoBehaviour
             //Stop = true;
             GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(1f);
             SFXController.PlayExplosion();
-            scoreManagerScript.heart--;
+            //scoreManagerScript.DecreaseHeart();
         }
     }
 
@@ -100,7 +100,10 @@ public class PlayerPositionController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Snowball"))
         {
-            scoreManagerScript.collideSnowball();
+            Debug.Log("Collision with snowball");
+            SFXController.PlayExplosion();
+            //scoreManagerScript.collideSnowball();
+            Destroy(other.gameObject);
         }
         if (other.gameObject.CompareTag("JumpBoard"))
         {

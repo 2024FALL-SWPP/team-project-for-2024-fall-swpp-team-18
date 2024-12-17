@@ -147,7 +147,9 @@ public class BackgroundMusicController : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("GameOver AudioClip이 설정되지 않았거나 AudioSource가 초기화되지 않았습니다.");
+            Debug.LogWarning(
+                "GameOver AudioClip이 설정되지 않았거나 AudioSource가 초기화되지 않았습니다."
+            );
         }
     }
 }

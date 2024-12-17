@@ -41,18 +41,6 @@ public class ScoreManager : MonoBehaviour
         if (!GameManager.instance.isGameOver)
         {
             playTime += Time.deltaTime;
-            if (heart == 0)
-            {
-                GameManager.Instance.HandleGameOver(
-                    GameManager.OverBy.Obstacle,
-                    grade,
-                    student,
-                    playTime,
-                    total,
-                    professor,
-                    gradeNum
-                );
-            }
         }
     }
 
@@ -68,6 +56,23 @@ public class ScoreManager : MonoBehaviour
         student++;
     }
 
+    public void DecreaseHeart()
+    {
+        heart--;
+        if (heart == 0)
+        {
+            GameManager.Instance.HandleGameOver(
+                GameManager.OverBy.Obstacle,
+                grade,
+                student,
+                playTime,
+                total,
+                professor,
+                gradeNum
+            );
+        }
+    }
+
     public void IncreaseProfessor()
     {
         professor++;
@@ -76,7 +81,6 @@ public class ScoreManager : MonoBehaviour
     public void IncreaseHeart()
     {
         heart = Mathf.Min(heart + 1, 3);
-
     }
 
     public void IncreaseFireball()

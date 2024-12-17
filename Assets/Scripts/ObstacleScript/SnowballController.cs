@@ -5,7 +5,8 @@ public class SnowballController : MonoBehaviour
     private Transform playerTransform; // 플레이어 Transform
     private float speed; // 눈덩이의 이동 속도
     private float lifetime; // 눈덩이 생존 시간
-    private Vector3 direction;
+    public Vector3 direction = new Vector3(0, -1, -4).normalized;
+
     public void SetTarget(Transform target, float moveSpeed, float lifeTime)
     {
         playerTransform = target;
@@ -15,11 +16,11 @@ public class SnowballController : MonoBehaviour
         // 눈덩이 자동 제거
         Destroy(gameObject, lifetime);
     }
-    private void Start(){
+
+    private void Start()
+    {
         if (playerTransform != null)
         {
-            // 플레이어를 향해 이동
-            direction = (playerTransform.position - transform.position).normalized;
             transform.position += direction * speed * Time.deltaTime;
         }
     }
@@ -32,5 +33,4 @@ public class SnowballController : MonoBehaviour
             transform.position += direction * speed * Time.deltaTime;
         }
     }
-
 }

@@ -70,17 +70,22 @@ public class GameManager : MonoBehaviour
 
         isGameOver = true;
         Debug.Log("Game Over! Returning to Main Menu...");
+        BackgroundMusicController.Instance.PlayGameOverMusic();
 
-        if (overtype == OverBy.Avalanche) { 
+        if (overtype == OverBy.Avalanche)
+        {
             SceneManager.LoadScene("AvalancheOutro");
         }
-        else if (overtype == OverBy.Snowball) { 
+        else if (overtype == OverBy.Snowball)
+        {
             SceneManager.LoadScene("SnowballOutro");
         }
-        else if (overtype == OverBy.Obstacle) { 
+        else if (overtype == OverBy.Obstacle)
+        {
             SceneManager.LoadScene("AvalancheOutro");
         }
-        else { 
+        else
+        {
             SceneManager.LoadScene("Outro1");
         }
         // SceneManager.LoadScene("Main"); // 예: 메인 메뉴 씬으로 이동
@@ -104,6 +109,6 @@ public class GameManager : MonoBehaviour
 
         isGameClear = true;
         Debug.Log("Game Clear! Returning to Main Menu...");
-        SceneManager.LoadScene("Score");
+        SceneManager.LoadScene("Outro1");
     }
 }
