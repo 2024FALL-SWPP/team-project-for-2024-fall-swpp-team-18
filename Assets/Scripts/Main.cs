@@ -19,10 +19,10 @@ public class Main : MonoBehaviour
 
     void Update()
     {
-        Background.GetComponent<RectTransform>().anchoredPosition -= new Vector2(
+        /*Background.GetComponent<RectTransform>().anchoredPosition -= new Vector2(
             speed * Time.deltaTime,
             0
-        );
+        );*/
         Vector2 curPos = Background.GetComponent<RectTransform>().anchoredPosition;
         if (initPos.x - curPos.x >= resetPosX)
         {

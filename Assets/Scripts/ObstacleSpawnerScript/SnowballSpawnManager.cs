@@ -14,7 +14,7 @@ public class SnowballSpawnManager : MonoBehaviour
 
     private void Start()
     {
-        spawnInterval = GameManager.instance.isEasy ? 8.0f : 4.0f;
+        spawnInterval = GameManager.instance.isEasy ? 10.0f : 5.0f;
         if (player == null)
         {
             Debug.LogError("Player object is not assigned!");

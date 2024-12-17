@@ -80,7 +80,7 @@ public class ScoreManager : MonoBehaviour
 
     public void IncreaseHeart()
     {
-        heart = Mathf.Min(heart + 1, 3);
+        heart = Mathf.Min(5, heart + 1);
     }
 
     public void IncreaseFireball()
@@ -90,8 +90,13 @@ public class ScoreManager : MonoBehaviour
 
     public int CalculateTotal()
     {
-        return ((int)(grade * 100 * gradeNum) + student * 100 + (int)((200 - playTime) * 500))
-            * (professor + 1);
+        total = (int)(grade * 100 * gradeNum) + student * 100 + (int)(playTime * 10);
+        return total;
+    }
+
+    public int CalculateFinalTotal()
+    {
+        return (total + (int)((200 - playTime) * 500)) * (professor + 1);
     }
 
     public void collideSnowball()
@@ -129,7 +134,7 @@ public class ScoreManager : MonoBehaviour
 
     public void arriveMainGate()
     {
-        total = CalculateTotal();
+        total = CalculateFinalTotal();
         GameManager.Instance.HandleGameClear(grade, student, playTime, total, professor, gradeNum);
     }
 }
