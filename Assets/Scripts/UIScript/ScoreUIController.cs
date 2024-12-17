@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using TMPro; // TextMeshPro 사용 시 필요
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,12 +7,7 @@ using UnityEngine.SceneManagement; // 씬 관리를 위한 네임스페이스
 
 public class ScoreUIController : MonoBehaviour
 {
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI gradeText;
-    public TextMeshProUGUI studentText;
-    public TextMeshProUGUI timeText;
-    public TextMeshProUGUI lectureText;
-    public TextMeshProUGUI professorText;
+    public Text scoreText, gradeText, studentText, timeText, lectureText, professorText;
 
     public float animationDuration = 1.0f; // 점수 애니메이션 지속 시간
 
@@ -54,26 +48,27 @@ public class ScoreUIController : MonoBehaviour
         );
         // 1. Score
         yield return StartCoroutine(
-            AnimateValue(scoreText, "Score : ", 0, GameManager.instance.total, true)
+            AnimateValue(scoreText, "Total : ", 0, GameManager.instance.total, true)
         );
-        yield return new WaitForSeconds(20f);
-
-        SceneManager.LoadScene("Main");
     }
 
     IEnumerator AnimateValue(
-        TextMeshProUGUI targetText,
+        Text targetText,
         string prefix,
         float startValue,
         float endValue,
         bool isInt
     )
     {
-        float elapsedTime = 0f;
+        float elapsedTime = 0.0f;
+        float fade = 0.0f;
 
         while (elapsedTime < animationDuration)
         {
             elapsedTime += Time.deltaTime;
+
+            fade = Mathf.Lerp(0, 1, elapsedTime/0.5f);
+            targetText.color = new Color(1, 1, 1, fade);
             float currentValue = Mathf.Lerp(startValue, endValue, elapsedTime / animationDuration);
             if (targetText == null)
                 continue;

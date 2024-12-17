@@ -41,13 +41,13 @@ public class NewSpawnerManager : MonoBehaviour
         else if (randomChoice == 2 && treeSpawnManager != null)
         {
             // PeopleSpawnManager 실행
-            treeSpawnManager.TriggerSpawn(this.transform);
+            treeSpawnManager.TriggerSpawn13(this.transform);
             Debug.Log($"Spawn triggered at {this.transform.name} using {"TreeSpawnManager"}");
         }
         else if (randomChoice == 3 && jumpSpawnManager != null)
         {
             // PeopleSpawnManager 실행
-            jumpSpawnManager.TriggerSpawn(this.transform);
+            jumpSpawnManager.TriggerSpawn13(this.transform);
             Debug.Log($"Spawn triggered at {this.transform.name} using {"jumpSpawnManager"}");
         }
     }

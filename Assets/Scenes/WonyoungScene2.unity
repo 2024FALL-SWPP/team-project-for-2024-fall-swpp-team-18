@@ -3186,9 +3186,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5de1ef9bcb14ddd4f891ed8cb7b13311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
+  Speed: 5
   Avalanche2: {fileID: 9188706794279596452}
-  Before: {x: 0, y: 0, z: 0}
+  Img: {fileID: 0}
 --- !u!4 &955764155530946015
 Transform:
   m_ObjectHideFlags: 0
@@ -3411,7 +3411,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8139cf005689a6742ab8828d0e4acdec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shake: 0
 --- !u!114 &955764156595932529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5455,7 +5454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6712fc374bc58254db88e78b90a9e62d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 9
+  speed: 5
   level: 1
   fog: {fileID: 9188706794931229057}
 --- !u!1 &9188706794437192658

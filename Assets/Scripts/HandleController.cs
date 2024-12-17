@@ -19,17 +19,17 @@ public class HandleController : MonoBehaviour
     {
         tmp = Quaternion.Euler(new Vector3(-90, 0, 0));
         mouseX = Mathf.Clamp(mouseX, -30, 30);
-
-        if (Input.GetKey(KeyCode.Q)) {
-            mouseX -= speed;
-            transform.localEulerAngles = new Vector3(0, mouseX, 0) + new Vector3(-90, 0, 0);
-        } else if (Input.GetKey(KeyCode.E)) {
-            mouseX += speed;
-            transform.localEulerAngles = new Vector3(0, mouseX, 0) + new Vector3(-90, 0, 0);
-        } else {
-            mouseX = 0;
-            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, tmp, rotateSpeed * Time.deltaTime);
+        if (!GameManager.instance.isPaused) {
+            if (Input.GetKey(KeyCode.Q)) {
+                mouseX -= speed;
+                transform.localEulerAngles = new Vector3(0, mouseX, 0) + new Vector3(-90, 0, 0);
+            } else if (Input.GetKey(KeyCode.E)) {
+                mouseX += speed;
+                transform.localEulerAngles = new Vector3(0, mouseX, 0) + new Vector3(-90, 0, 0);
+            } else {
+                mouseX = 0;
+                transform.localRotation = Quaternion.RotateTowards(transform.localRotation, tmp, rotateSpeed * Time.deltaTime);
+            }
         }
-
     }
 }

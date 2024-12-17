@@ -5,7 +5,7 @@ using UnityEngine;
 public class AvalancheController : MonoBehaviour
 {
     [SerializeField]
-    public float speed = 4f;
+    public float speed = 1f;
 
     [SerializeField]
     public int level = 1;

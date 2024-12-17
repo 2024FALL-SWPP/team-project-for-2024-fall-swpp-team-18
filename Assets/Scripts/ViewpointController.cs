@@ -19,24 +19,26 @@ public class ViewpointController : MonoBehaviour
     void Update()
     {
         // 초기 위치
-        init = Quaternion.Euler(transform.parent.right * 15) * transform.parent.rotation;
+        if (!GameManager.instance.isPaused) {
+            init = Quaternion.Euler(transform.parent.right * 15) * transform.parent.rotation;
 
-        if (Input.GetKeyDown(KeyCode.LeftShift)) {
-            mouseX = 0f;
-        }
-        if (Input.GetKey(KeyCode.LeftShift)) {
-            mouseX += Input.GetAxis("Mouse X") * mouseSpeed;
-            mouseX = Mathf.Clamp(mouseX, -150, 150);
+            if (Input.GetKeyDown(KeyCode.LeftShift)) {
+                mouseX = 0f;
+            }
+            if (Input.GetKey(KeyCode.LeftShift)) {
+                mouseX += Input.GetAxis("Mouse X") * mouseSpeed;
+                mouseX = Mathf.Clamp(mouseX, -150, 150);
 
-            transform.localEulerAngles = new Vector3(15, mouseX, 0);
-        }
-        else
-        {
-            transform.rotation = Quaternion.RotateTowards(
-                transform.rotation,
-                init,
-                rotateSpeed * Time.deltaTime
-            );
+                transform.localEulerAngles = new Vector3(15, mouseX, 0);
+            }
+            else
+            {
+                transform.rotation = Quaternion.RotateTowards(
+                    transform.rotation,
+                    init,
+                    rotateSpeed * Time.deltaTime
+                );
+            }
         }
     }
 
