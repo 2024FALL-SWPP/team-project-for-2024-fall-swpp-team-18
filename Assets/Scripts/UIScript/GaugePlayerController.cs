@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GaugeController : MonoBehaviour
+public class GaugePlayerController : MonoBehaviour
 {
     public Transform playerTransform; // 플레이어 Transform
     public Transform startPoint;      // 출발지 Transform
@@ -9,6 +9,7 @@ public class GaugeController : MonoBehaviour
     public GameObject gaugePlayer;    // UI 이미지 오브젝트
 
     private RectTransform gaugeRect;  // UI RectTransform
+    public GameObject player;
     private float totalDistance;      // 출발지와 목적지 사이 거리
 
     void Start()
@@ -22,7 +23,7 @@ public class GaugeController : MonoBehaviour
         }
 
         // Transform 체크
-        if (playerTransform == null || startPoint == null || destination == null)
+        if (playerTransform == null || playerTransform == null ||startPoint == null || destination == null)
         {
             Debug.LogError("Transform references are missing in the Inspector!");
             return;
@@ -35,6 +36,8 @@ public class GaugeController : MonoBehaviour
 
     void Update()
     {
+        PlayerPositionController playerController = player.GetComponent<PlayerPositionController>();
+
         // 현재 거리 계산
         float currentDistance = Vector3.Distance(playerTransform.position, destination.position);
         float gaugeRatio = 1 - Mathf.Clamp01(currentDistance / totalDistance);
@@ -43,14 +46,14 @@ public class GaugeController : MonoBehaviour
         if (totalDistance > 0) // totalDistance가 0 이상일 때만 계산
         {
             
-            
-
             UpdateGauge(gaugeRatio);
         }
         else
         {
             Debug.LogWarning("Total distance is 0 or less. Cannot calculate gauge ratio.");
         }
+        
+        
     }
 
     private void UpdateGauge(float gaugeRatio)
