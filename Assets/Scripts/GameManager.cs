@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
         professor = _professor;
         gradeNum = _gradeNum;
 
+        SFXController.PlayExplosion();
         isGameOver = true;
         Debug.Log("Game Over! Returning to Main Menu...");
         BackgroundMusicController.Instance.PlayGameOverMusic();
