@@ -10,6 +10,7 @@ public class Intro : MonoBehaviour
     public GameObject Camera1, Camera2, Camera3;
     public GameObject Avalanche;
     public Image Img;
+    public Button SkipButton;
     private float T = 0.0f;
     private float Speed = 1.4f;
     private Vector3 InitPos;
@@ -25,7 +26,9 @@ public class Intro : MonoBehaviour
         Camera3.SetActive(false);
         Avalanche.SetActive(false);
 
-        Img.CrossFadeAlpha(0.0f, 2.0f, false);
+        Img.color = new Color(0, 0, 0, 1);
+        SkipButton.gameObject.SetActive(false);
+        StartCoroutine(FadeIn());
     }
 
     // Update is called once per frame
@@ -35,6 +38,8 @@ public class Intro : MonoBehaviour
         
         if (T < 1.0f) {
             animator.SetBool("isWalking", true);
+        } else if (T < 2.0f) {
+            SkipButton.gameObject.SetActive(true);
         } else if (T < 6.0f) {
             if (!stair) {
                 GameObject.Find("Main Camera").GetComponent<IntroCamera>().Walk_t(5.0f);
@@ -87,10 +92,11 @@ public class Intro : MonoBehaviour
         } else if (T >= 14.5f && T< 17.5f) {
             if (!run) {
                 animator.SetBool("isRunning", true);
-                Img.CrossFadeAlpha(1.0f, 2.0f, false);
                 run = true;
             }
             if (T > 15.0f && !camera3) {
+                StartCoroutine(FadeOut());
+                SkipButton.gameObject.SetActive(false);
                 transform.GetChild(1).position = transform.GetChild(1).position + new Vector3(0, 0.3f, 0);
                 Camera2.SetActive(false);
                 Camera3.SetActive(true);
@@ -99,6 +105,43 @@ public class Intro : MonoBehaviour
             transform.Translate(Vector3.forward * Speed * 2 * Time.deltaTime);
         } else if (T > 17.5f) {
             SceneManager.LoadScene("MainScene");
+        }
+    }
+
+    public void SkipIntro() {
+        StartCoroutine(FadeOut());
+        SkipButton.gameObject.SetActive(false);
+        Invoke("LoadMainScene", 1.0f);
+    }
+
+    private void LoadMainScene()
+    {
+        SceneManager.LoadScene("MainScene");
+    }
+
+    IEnumerator FadeIn()
+    {
+        float elapsedTime = 0.0f;
+        float fade = 0.0f;
+
+        while (elapsedTime < 1.0f) {
+            elapsedTime += Time.deltaTime;
+            fade = Mathf.Lerp(1, 0, elapsedTime);
+            Img.color = new Color(0, 0, 0, fade);
+            yield return null;
+        }
+    }
+
+    IEnumerator FadeOut()
+    {
+        float elapsedTime = 0.0f;
+        float fade = 0.0f;
+
+        while (elapsedTime < 1.0f) {
+            elapsedTime += Time.deltaTime;
+            fade = Mathf.Lerp(0, 1, elapsedTime);
+            Img.color = new Color(0, 0, 0, fade);
+            yield return null;
         }
     }
 }

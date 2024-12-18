@@ -41,7 +41,10 @@ public class HourGlass : StudentItem
     public override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        playerPositionController.CallCoroutine(-2f, gameObject);
-        Destroy(gameObject);
+        if (other.CompareTag("Player"))
+        {
+            playerPositionController.CallCoroutine(-2f, gameObject);
+            Destroy(gameObject);
+        }
     }
 }

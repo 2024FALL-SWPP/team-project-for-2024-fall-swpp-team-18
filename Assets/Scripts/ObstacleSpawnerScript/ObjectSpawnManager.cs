@@ -15,7 +15,7 @@ public class ObjectSpawnManager : MonoBehaviour
     private bool[] isSpawnPointActive; // 각 스폰 포인트 활성화 상태 추적
 
     private void Start()
-    {   
+    {
         // 스폰 포인트 활성화 상태 초기화
         isSpawnPointActive = new bool[spawnPoints.Length];
         for (int i = 0; i < isSpawnPointActive.Length; i++)
@@ -53,11 +53,11 @@ public class ObjectSpawnManager : MonoBehaviour
     }
 
     private void TriggerRandomSpawnManager(Transform spawnPoint, int spawnIndex)
-    {   
+    {
         PlayerPositionController playerController = player.GetComponent<PlayerPositionController>();
         Awake();
         isSpawnPointActive[spawnIndex] = false;
-        int randomChoice = 1; // 무작위 선택
+        int randomChoice = Random.Range(0, 4); // 무작위 선택
 
         if (randomChoice == 0 && carSpawnManager != null)
         {
@@ -74,11 +74,13 @@ public class ObjectSpawnManager : MonoBehaviour
         else if (randomChoice == 2 && treeSpawnManager != null)
         {
             // TreeSpawnManager 실행
-            if(playerController.getStage() == 2){
-            treeSpawnManager.TriggerSpawn2(spawnPoint);
-            Debug.Log($"Spawn triggered at {spawnPoint.name} using {"TreeSpawnManager2"}");
+            if (playerController.getStage() == 2)
+            {
+                treeSpawnManager.TriggerSpawn2(spawnPoint);
+                Debug.Log($"Spawn triggered at {spawnPoint.name} using {"TreeSpawnManager2"}");
             }
-            else{
+            else
+            {
                 treeSpawnManager.TriggerSpawn13(spawnPoint);
                 Debug.Log($"Spawn triggered at {spawnPoint.name} using {"TreeSpawnManager13"}");
             }
@@ -86,15 +88,16 @@ public class ObjectSpawnManager : MonoBehaviour
         else if (randomChoice == 3 && jumpSpawnManager != null)
         {
             // stage에 나눠 jumpSpawnManager 실행
-            if(playerController.getStage() == 2){
+            if (playerController.getStage() == 2)
+            {
                 jumpSpawnManager.TriggerSpawn2(spawnPoint);
                 Debug.Log($"Spawn triggered at {spawnPoint.name} using {"jumpSpawnManager2"}");
             }
-            else{
+            else
+            {
                 jumpSpawnManager.TriggerSpawn13(spawnPoint);
                 Debug.Log($"Spawn triggered at {spawnPoint.name} using {"jumpSpawnManager13"}");
             }
-            
         }
 
         // 로그 출력 (디버깅용)

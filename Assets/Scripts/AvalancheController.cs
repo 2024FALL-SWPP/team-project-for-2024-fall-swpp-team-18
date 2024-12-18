@@ -5,7 +5,7 @@ using UnityEngine;
 public class AvalancheController : MonoBehaviour
 {
     [SerializeField]
-    public float speed = 4f;
+    public float speed = 1f;
 
     [SerializeField]
     public int level = 1;
@@ -22,10 +22,11 @@ public class AvalancheController : MonoBehaviour
     // Update is called once per frame
     void Update() { }
 
-    void OnEnable() 
+    void OnEnable()
     {
         StartAvalanche();
     }
+
     public void StartAvalanche()
     {
         speed += (float)level * 2f;

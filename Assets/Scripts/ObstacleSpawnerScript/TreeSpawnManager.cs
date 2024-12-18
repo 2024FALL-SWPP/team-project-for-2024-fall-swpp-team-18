@@ -24,6 +24,7 @@ public class TreeSpawnManager : MonoBehaviour
     {
         StartCoroutine(SpawnTrees13(spawnPoint));
     }
+
     public void TriggerSpawn2(Transform spawnPoint)
     {
         StartCoroutine(SpawnTrees2(spawnPoint));
@@ -47,7 +48,17 @@ public class TreeSpawnManager : MonoBehaviour
 
         // 무작위로 선택된 나무 중 하나를 생성
         GameObject randomTree = availableTrees[chosenint];
-        Instantiate(randomTree, spawnPosition, treeRotation);
+        GameObject newTree1 = Instantiate(randomTree, spawnPosition, treeRotation);
+        Collider carCollider = newTree1.GetComponent<Collider>();
+
+        if (carCollider != null && GameManager.instance.isTest)
+        {
+            carCollider.isTrigger = true;
+        }
+        else
+        {
+            Debug.LogError("Collider 컴포넌트를 찾을 수 없습니다!");
+        }
 
         // 생성 간격 (필요 시 수정)
         yield return new WaitForSeconds(0.3f);
@@ -62,21 +73,42 @@ public class TreeSpawnManager : MonoBehaviour
 
         // 무작위로 선택된 나무 중 하나를 생성
         randomTree = availableTrees[unchosenint];
-        Instantiate(randomTree, spawnPosition, treeRotation);
+        GameObject newTree2 = Instantiate(randomTree, spawnPosition, treeRotation);
+        Collider carCollider2 = newTree2.GetComponent<Collider>();
+
+        if (carCollider2 != null && GameManager.instance.isTest)
+        {
+            carCollider2.isTrigger = true;
+        }
+        else
+        {
+            Debug.LogError("Collider 컴포넌트를 찾을 수 없습니다!");
+        }
 
         // 생성 간격 (필요 시 수정)
         yield return new WaitForSeconds(0.3f);
 
         // 플레이어 기준 spawnOffsets을 월드 좌표로 변환
         worldOffset =
-            playerTransform.TransformPoint(spawnOffsets13[chosenint + 4]) - playerTransform.position;
+            playerTransform.TransformPoint(spawnOffsets13[chosenint + 4])
+            - playerTransform.position;
 
         // 최종 스폰 위치 계산
         spawnPosition = spawnPoint.position + worldOffset;
 
         // 무작위로 선택된 나무 중 하나를 생성
         randomTree = availableTrees[chosenint];
-        Instantiate(randomTree, spawnPosition, treeRotation);
+        GameObject newTree3 = Instantiate(randomTree, spawnPosition, treeRotation);
+        Collider carCollider3 = newTree3.GetComponent<Collider>();
+
+        if (carCollider3 != null && GameManager.instance.isTest)
+        {
+            carCollider3.isTrigger = true;
+        }
+        else
+        {
+            Debug.LogError("Collider 컴포넌트를 찾을 수 없습니다!");
+        }
 
         // 생성 간격 (필요 시 수정)
         yield return new WaitForSeconds(0.3f);
@@ -100,7 +132,17 @@ public class TreeSpawnManager : MonoBehaviour
 
         // 무작위로 선택된 나무 중 하나를 생성
         GameObject randomTree = availableTrees[chosenint];
-        Instantiate(randomTree, spawnPosition, treeRotation);
+        Collider carCollider1 = Instantiate(randomTree, spawnPosition, treeRotation)
+            .GetComponent<Collider>();
+
+        if (carCollider1 != null && GameManager.instance.isTest)
+        {
+            carCollider1.isTrigger = true;
+        }
+        else
+        {
+            Debug.LogError("Collider 컴포넌트를 찾을 수 없습니다!");
+        }
 
         // 생성 간격 (필요 시 수정)
         yield return new WaitForSeconds(0.3f);
@@ -115,7 +157,17 @@ public class TreeSpawnManager : MonoBehaviour
 
         // 무작위로 선택된 나무 중 하나를 생성
         randomTree = availableTrees[unchosenint];
-        Instantiate(randomTree, spawnPosition, treeRotation);
+        Collider carCollider2 = Instantiate(randomTree, spawnPosition, treeRotation)
+            .GetComponent<Collider>();
+
+        if (carCollider2 != null && GameManager.instance.isTest)
+        {
+            carCollider2.isTrigger = true;
+        }
+        else
+        {
+            Debug.LogError("Collider 컴포넌트를 찾을 수 없습니다!");
+        }
 
         // 생성 간격 (필요 시 수정)
         yield return new WaitForSeconds(0.3f);
@@ -129,7 +181,17 @@ public class TreeSpawnManager : MonoBehaviour
 
         // 무작위로 선택된 나무 중 하나를 생성
         randomTree = availableTrees[chosenint];
-        Instantiate(randomTree, spawnPosition, treeRotation);
+        Collider carCollider3 = Instantiate(randomTree, spawnPosition, treeRotation)
+            .GetComponent<Collider>();
+
+        if (carCollider3 != null && GameManager.instance.isTest)
+        {
+            carCollider3.isTrigger = true;
+        }
+        else
+        {
+            Debug.LogError("Collider 컴포넌트를 찾을 수 없습니다!");
+        }
 
         // 생성 간격 (필요 시 수정)
         yield return new WaitForSeconds(0.3f);

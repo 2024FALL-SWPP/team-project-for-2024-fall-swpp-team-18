@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class PlayerPositionController : MonoBehaviour
 {
     [SerializeField]
-    public float Speed = 10.0f;
+    public float Speed = 5.0f;
 
     [SerializeField]
     public GameObject Avalanche2;
@@ -16,13 +16,12 @@ public class PlayerPositionController : MonoBehaviour
     private bool BumpSnowflake = false;
     private bool BumpHurricane = false;
     private bool Stop = false;
-    private int stage = 1;    
+    private int stage = 1;
     private Vector3 CurForward;
     private Coroutine activeRecoveryCoroutine = null; // 현재 활성화된 Snowflake 코루틴
     private Coroutine activeHurricaneCoroutine = null; // 현재 활성화된 Hurricane 코루틴
     private GameObject scoreManager;
     private ScoreManager scoreManagerScript;
-    
 
     // Start is called before the first frame update
     void Start()
@@ -30,14 +29,23 @@ public class PlayerPositionController : MonoBehaviour
         //PlayerRb = GetComponent<Rigidbody>();
         scoreManager = GameObject.Find("ScoreManager");
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
-        Img.CrossFadeAlpha(0.0f, 1.0f, false);
+        GameObject.Find("PauseManager").GetComponent<PauseManager>().Fadein();
+        Invoke("RemoveBlackScreen", 1.0f);
+        if (GameManager.instance.isTest)
+            Speed = 20.0f;
     }
-    public int getStage(){
+
+    public int getStage()
+    {
         return stage;
     }
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            GameObject.Find("PauseManager").GetComponent<PauseManager>().InvokePauseBoard();
+        }
         // 눈송이 또는 허리케인 효과가 없을 때만 이동
         if (!BumpSnowflake && !BumpHurricane && !Stop)
         {
@@ -45,21 +53,12 @@ public class PlayerPositionController : MonoBehaviour
 
             if (Input.GetKey(KeyCode.Q) && !BumpWallLeft)
             {
-                //PlayerRb.AddForce(Vector3.right * 50.0f, ForceMode.Force);
                 transform.Translate(-Vector3.right * Speed * Time.deltaTime);
             }
             if (Input.GetKey(KeyCode.E) && !BumpWallRight)
             {
                 transform.Translate(Vector3.right * Speed * Time.deltaTime);
             }
-        }
-        if (Input.GetKey(KeyCode.Q) && !BumpWallLeft)
-        {
-            transform.Translate(-Vector3.right * Speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.E) && !BumpWallRight)
-        {
-            transform.Translate(Vector3.right * Speed * Time.deltaTime);
         }
 
         GameObject Snowball = GameObject.FindWithTag("Snowball");
@@ -68,24 +67,18 @@ public class PlayerPositionController : MonoBehaviour
             && Vector3.Distance(transform.position, Snowball.transform.position) <= 10.0f
         )
         {
-            GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(10.0f);
+            //GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(10.0f);
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("Obstacle") && !GameManager.instance.isTest)
         {
             //Stop = true;
             GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(1f);
             SFXController.PlayExplosion();
-            scoreManagerScript.heart--;
-        }
-        if (collision.gameObject.CompareTag("Professor"))
-        {
-            Debug.Log("collision of player and professor");
-            scoreManagerScript.IncreaseProfessor();
-            Destroy(collision.gameObject);
+            scoreManagerScript.DecreaseHeart();
         }
     }
 
@@ -107,14 +100,17 @@ public class PlayerPositionController : MonoBehaviour
         {
             scoreManagerScript.arriveMainGate();
         }
-        if (other.gameObject.CompareTag("Snowball"))
+        if (other.gameObject.CompareTag("Snowball") && !GameManager.instance.isTest)
         {
+            Debug.Log("Collision with snowball");
+            SFXController.PlayExplosion();
+            GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(1f);
             scoreManagerScript.collideSnowball();
+            Destroy(other.gameObject);
         }
         if (other.gameObject.CompareTag("JumpBoard"))
         {
             StartCoroutine(Jump());
-            GameObject.Find("Player").GetComponent<PlayerController>().JumpControl();
         }
         if (other.gameObject.CompareTag("Corner1"))
         {
@@ -126,10 +122,14 @@ public class PlayerPositionController : MonoBehaviour
             Avalanche2.SetActive(true);
             StartCoroutine(TurnCorner2());
             stage = 3;
-            Debug.Log(stage);
+        }
+        if (other.gameObject.CompareTag("Professor"))
+        {
+            SFXController.PlayBlip();
+            scoreManagerScript.IncreaseProfessor();
+            Destroy(other.gameObject);
         }
         if (other.gameObject.CompareTag("Snowflake") && !BumpHurricane)
-
         {
             Debug.Log("Collision with snowflake detected.");
 
@@ -271,14 +271,9 @@ public class PlayerPositionController : MonoBehaviour
     IEnumerator HandleHurricaneEffect(Vector3 hurricaneCenter, GameObject hurricaneObject)
     {
         Debug.Log("Hurricane effect started.");
-        Debug.Log("Hurricane effect started.");
-
 
         // 플레이어를 허리케인 중심으로 이동
         transform.position = hurricaneCenter;
-        // 플레이어를 허리케인 중심으로 이동
-        transform.position = hurricaneCenter;
-        
 
         // 제자리 회전 (Q, E 입력으로 지속 시간 감소)
         float spinSpeed = 540f; // 빠른 회전 속도
@@ -325,7 +320,6 @@ public class PlayerPositionController : MonoBehaviour
         Debug.Log("SpinPlayerByKeyboard finished.");
     }
 
-
     public bool getBumpHurricane()
     {
         return BumpHurricane;
@@ -342,9 +336,14 @@ public class PlayerPositionController : MonoBehaviour
 
         BackgroundMusicController.Instance.SetPlaySpeed(1 + (delta / 10));
 
-        yield return new WaitForSecondsRealtime(ItemDuration);
+        yield return new WaitForSeconds(ItemDuration);
         Speed -= delta;
         BackgroundMusicController.Instance.PlayNormal();
         Destroy(item);
+    }
+
+    private void RemoveBlackScreen()
+    {
+        Img.gameObject.SetActive(false);
     }
 }

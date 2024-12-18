@@ -41,18 +41,6 @@ public class ScoreManager : MonoBehaviour
         if (!GameManager.instance.isGameOver)
         {
             playTime += Time.deltaTime;
-            if (heart == 0)
-            {
-                GameManager.Instance.HandleGameOver(
-                    GameManager.OverBy.Obstacle,
-                    grade,
-                    student,
-                    playTime,
-                    total,
-                    professor,
-                    gradeNum
-                );
-            }
         }
     }
 
@@ -68,6 +56,23 @@ public class ScoreManager : MonoBehaviour
         student++;
     }
 
+    public void DecreaseHeart()
+    {
+        heart--;
+        if (heart == 0)
+        {
+            GameManager.Instance.HandleGameOver(
+                GameManager.OverBy.Obstacle,
+                grade,
+                student,
+                playTime,
+                total,
+                professor,
+                gradeNum
+            );
+        }
+    }
+
     public void IncreaseProfessor()
     {
         professor++;
@@ -75,8 +80,7 @@ public class ScoreManager : MonoBehaviour
 
     public void IncreaseHeart()
     {
-        heart = Mathf.Min(heart + 1, 3);
-
+        heart = Mathf.Min(5, heart + 1);
     }
 
     public void IncreaseFireball()
@@ -86,8 +90,15 @@ public class ScoreManager : MonoBehaviour
 
     public int CalculateTotal()
     {
-        return ((int)(grade * 100 * gradeNum) + student * 100 + (int)((200 - playTime) * 500))
-            * (professor + 1);
+        if (GameManager.instance.isGameClear)
+        {
+            total = (total + (int)((200 - playTime) * 500)) * (professor + 1);
+        }
+        else
+        {
+            total = (int)(grade * 100 * gradeNum) + student * 100 + (int)(playTime * 50);
+        }
+        return total;
     }
 
     public void collideSnowball()
@@ -125,6 +136,7 @@ public class ScoreManager : MonoBehaviour
 
     public void arriveMainGate()
     {
+        GameManager.instance.isGameClear = true;
         total = CalculateTotal();
         GameManager.Instance.HandleGameClear(grade, student, playTime, total, professor, gradeNum);
     }
