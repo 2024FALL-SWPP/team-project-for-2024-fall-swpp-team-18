@@ -27,19 +27,4 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, tmp, 100 * Time.deltaTime);
         }
     }
-
-    IEnumerator Jump() {
-        onJump = true;
-        float t = 0.0f;
-        while (t < 1.0f) {
-            t += Time.deltaTime;
-            transform.Rotate(Vector3.right * 300 * (t-0.5f) * Time.deltaTime);
-            yield return null;
-        }
-        onJump = false;
-    }
-
-    public void JumpControl() {
-        StartCoroutine(Jump());
-    }
 }

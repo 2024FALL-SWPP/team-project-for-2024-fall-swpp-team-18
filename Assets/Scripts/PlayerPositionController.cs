@@ -111,7 +111,6 @@ public class PlayerPositionController : MonoBehaviour
         if (other.gameObject.CompareTag("JumpBoard"))
         {
             StartCoroutine(Jump());
-            GameObject.Find("Player").GetComponent<PlayerController>().JumpControl();
         }
         if (other.gameObject.CompareTag("Corner1"))
         {
