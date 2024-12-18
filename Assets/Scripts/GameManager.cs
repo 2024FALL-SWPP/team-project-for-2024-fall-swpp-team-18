@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public int professor = 0;
     public int gradeNum = 0;
     public bool isEasy = true;
+    public bool isTest = false;
 
     public class OverBy
     {
