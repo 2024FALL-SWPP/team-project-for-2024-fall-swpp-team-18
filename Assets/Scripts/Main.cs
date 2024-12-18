@@ -7,8 +7,8 @@ public class Main : MonoBehaviour
     public Image Img;
     public GameObject Background;
     private Vector2 initPos;
-    private float resetPosX = 2000.0f,
-        speed = 100.0f;
+    private float resetPosX = 3000.0f,
+        speed = 200.0f;
 
     void Start()
     {
@@ -19,10 +19,10 @@ public class Main : MonoBehaviour
 
     void Update()
     {
-        /*Background.GetComponent<RectTransform>().anchoredPosition -= new Vector2(
+        Background.GetComponent<RectTransform>().anchoredPosition -= new Vector2(
             speed * Time.deltaTime,
             0
-        );*/
+        );
         Vector2 curPos = Background.GetComponent<RectTransform>().anchoredPosition;
         if (initPos.x - curPos.x >= resetPosX)
         {
