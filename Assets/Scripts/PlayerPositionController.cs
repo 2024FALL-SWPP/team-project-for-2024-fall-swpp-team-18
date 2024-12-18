@@ -31,6 +31,8 @@ public class PlayerPositionController : MonoBehaviour
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
         GameObject.Find("PauseManager").GetComponent<PauseManager>().Fadein();
         Invoke("RemoveBlackScreen", 1.0f);
+        if (GameManager.instance.isTest)
+            Speed = 20.0f;
     }
 
     public int getStage()
@@ -71,7 +73,7 @@ public class PlayerPositionController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("Obstacle") && !GameManager.instance.isTest)
         {
             //Stop = true;
             GameObject.Find("Main Camera").GetComponent<ViewpointController>().Shake_t(1f);
@@ -98,7 +100,7 @@ public class PlayerPositionController : MonoBehaviour
         {
             scoreManagerScript.arriveMainGate();
         }
-        if (other.gameObject.CompareTag("Snowball"))
+        if (other.gameObject.CompareTag("Snowball") && !GameManager.instance.isTest)
         {
             Debug.Log("Collision with snowball");
             SFXController.PlayExplosion();
