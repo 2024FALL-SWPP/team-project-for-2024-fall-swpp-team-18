@@ -90,13 +90,15 @@ public class ScoreManager : MonoBehaviour
 
     public int CalculateTotal()
     {
-        total = (int)(grade * 100 * gradeNum) + student * 100 + (int)(playTime * 10);
+        if (GameManager.instance.isGameClear)
+        {
+            total = (total + (int)((200 - playTime) * 500)) * (professor + 1);
+        }
+        else
+        {
+            total = (int)(grade * 100 * gradeNum) + student * 100 + (int)(playTime * 50);
+        }
         return total;
-    }
-
-    public int CalculateFinalTotal()
-    {
-        return (total + (int)((200 - playTime) * 500)) * (professor + 1);
     }
 
     public void collideSnowball()
@@ -135,7 +137,7 @@ public class ScoreManager : MonoBehaviour
     public void arriveMainGate()
     {
         GameManager.instance.isGameClear = true;
-        total = CalculateFinalTotal();
+        total = CalculateTotal();
         GameManager.Instance.HandleGameClear(grade, student, playTime, total, professor, gradeNum);
     }
 }
