@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
         public const int Obstacle = 2;
     }
 
+/* 
     public static GameManager Instance
     {
         get
@@ -37,6 +38,14 @@ public class GameManager : MonoBehaviour
             return instance;
         }
     }
+    해당 부분 아래와 같이 수정*/
+    public static GameManager Instance
+{
+    get
+    {
+        return instance;
+    }
+}
 
     private void Awake()
     {
@@ -52,7 +61,7 @@ public class GameManager : MonoBehaviour
     }
 
     void Update() { }
-
+    
     public void HandleGameOver(
         int overtype,
         float _grade,
@@ -70,29 +79,42 @@ public class GameManager : MonoBehaviour
         professor = _professor;
         gradeNum = _gradeNum;
 
-        SFXController.PlayExplosion();
+        // SFXController null 체크
+        if (SFXController.Instance != null)
+        {
+            SFXController.PlayExplosion();
+        }
+
         isGameOver = true;
         Debug.Log("Game Over! Returning to Main Menu...");
-        BackgroundMusicController.Instance.PlayGameOverMusic();
 
-        if (overtype == OverBy.Avalanche)
+        // BackgroundMusicController null 체크
+        if (BackgroundMusicController.Instance != null)
         {
-            SceneManager.LoadScene("AvalancheOutro");
+            BackgroundMusicController.Instance.PlayGameOverMusic();
         }
-        else if (overtype == OverBy.Snowball)
+
+        if (!isTest) // 테스트 모드에서는 씬 전환하지 않음
         {
-            SceneManager.LoadScene("SnowballOutro");
+            if (overtype == OverBy.Avalanche)
+            {
+                SceneManager.LoadScene("AvalancheOutro");
+            }
+            else if (overtype == OverBy.Snowball)
+            {
+                SceneManager.LoadScene("SnowballOutro");
+            }
+            else if (overtype == OverBy.Obstacle)
+            {
+                SceneManager.LoadScene("AvalancheOutro");
+            }
+            else
+            {
+                SceneManager.LoadScene("Outro1");
+            }
         }
-        else if (overtype == OverBy.Obstacle)
-        {
-            SceneManager.LoadScene("AvalancheOutro");
-        }
-        else
-        {
-            SceneManager.LoadScene("Outro1");
-        }
-        // SceneManager.LoadScene("Main"); // 예: 메인 메뉴 씬으로 이동
     }
+
 
     public void HandleGameClear(
         float _grade,
