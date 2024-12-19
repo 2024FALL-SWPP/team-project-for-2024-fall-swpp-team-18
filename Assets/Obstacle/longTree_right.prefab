@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2980549305553808086}
   - component: {fileID: 7442491519576365424}
   - component: {fileID: 9209030576619800569}
-  - component: {fileID: 9209030576619800570}
+  - component: {fileID: 735317483393182098}
   m_Layer: 0
   m_Name: longTree_right
   m_TagString: Obstacle
@@ -133,7 +133,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &9209030576619800570
+--- !u!65 &735317483393182098
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,5 +144,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 8.057404, y: 13.108671, z: 8.057388}
-  m_Center: {x: -1.5006104, y: -4.048766, z: -28.479858}
+  m_Size: {x: 8.057405, y: 13.108672, z: 8.05739}
+  m_Center: {x: -1.5006107, y: -4.0487666, z: -28.479866}
