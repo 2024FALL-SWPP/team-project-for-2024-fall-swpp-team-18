@@ -23,22 +23,22 @@ public class JumpSpawnManager : MonoBehaviour
 
     public void TriggerSpawn13(Transform spawnPoint)
     {
-        StartCoroutine(SpawnJump13(spawnPoint));
-        StartCoroutine(SpawnLongTree13(spawnPoint));
+        StartCoroutine(SpawnJump(spawnPoint, spawnjumpOffsets13));
+        StartCoroutine(SpawnLongTree(spawnPoint, spawnOffsets13));
     }
 
     public void TriggerSpawn2(Transform spawnPoint)
     {
-        StartCoroutine(SpawnJump2(spawnPoint));
-        StartCoroutine(SpawnLongTree2(spawnPoint));
+        StartCoroutine(SpawnJump(spawnPoint, spawnjumpOffsets2));
+        StartCoroutine(SpawnLongTree(spawnPoint, spawnOffsets2));
     }
 
-    private IEnumerator SpawnJump13(Transform spawnPoint)
+    private IEnumerator SpawnJump(Transform spawnPoint, Vector3[] spawnjumpOffsets)
     {
         int chosenint = Random.Range(0, 2);
 
         Vector3 worldjumpOffset =
-            playerTransform.TransformPoint(spawnjumpOffsets13[chosenint])
+            playerTransform.TransformPoint(spawnjumpOffsets[chosenint])
             - playerTransform.position;
 
         Vector3 spawnjumpPosition = spawnPoint.position + worldjumpOffset;
@@ -51,241 +51,56 @@ public class JumpSpawnManager : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
     }
 
-    private IEnumerator SpawnLongTree13(Transform spawnPoint)
+    
+
+    private IEnumerator SpawnLongTree(Transform spawnPoint, Vector3[] spawnOffsets)
+{
+    int chosenIndex = Random.Range(0, 2);
+    int unchosenIndex = 1 - chosenIndex;
+    List<GameObject> availableTrees = new List<GameObject>(treePrefabs);
+
+    // 나무 생성 위치와 순서를 정의
+    int[] spawnOrder = { chosenIndex, unchosenIndex, chosenIndex, unchosenIndex };
+    int[] offsetIndices = { 0, 2, 4, 6 };
+
+    for (int i = 0; i < spawnOrder.Length; i++)
     {
-        int chosenint = Random.Range(0, 2);
-        int unchosenint = 1 - chosenint;
-        List<GameObject> availableTrees = new List<GameObject>(treePrefabs);
+        int treeIndex = spawnOrder[i];
+        int offsetIndex = offsetIndices[i];
 
-        // 플레이어 기준 spawnOffsets을 월드 좌표로 변환
-        Vector3 worldOffset =
-            playerTransform.TransformPoint(spawnOffsets13[chosenint]) - playerTransform.position;
-
-        // 최종 스폰 위치 계산
+        // 스폰 위치 및 방향 계산
+        Vector3 worldOffset = CalculateWorldOffset(spawnOffsets[treeIndex + offsetIndex]);
         Vector3 spawnPosition = spawnPoint.position + worldOffset;
-
-        // 나무 방향 설정 (플레이어를 정면으로 바라보게 하고, 로컬 축 조정)
         Quaternion treeRotation = Quaternion.LookRotation(playerTransform.forward);
 
-        // 무작위로 선택된 나무 중 하나를 생성
-        GameObject randomTree = availableTrees[chosenint];
+        // 나무 생성 및 충돌체 설정
+        SpawnTree(availableTrees[treeIndex], spawnPosition, treeRotation);
 
-        Collider carCollider1 = Instantiate(randomTree, spawnPosition, treeRotation)
-            .GetComponent<Collider>();
-
-        if (carCollider1 != null && GameManager.instance.isTest)
-        {
-            carCollider1.isTrigger = true;
-        }
-        else
-        {
-            Debug.LogError("Collider 컴포넌트를 찾을 수 없습니다!");
-        }
-
-        // 생성 간격 (필요 시 수정)
-        yield return new WaitForSeconds(0.3f);
-
-        // 플레이어 기준 spawnOffsets을 월드 좌표로 변환
-        worldOffset =
-            playerTransform.TransformPoint(spawnOffsets13[unchosenint + 2])
-            - playerTransform.position;
-
-        // 최종 스폰 위치 계산
-        spawnPosition = spawnPoint.position + worldOffset;
-
-        // 무작위로 선택된 나무 중 하나를 생성
-        randomTree = availableTrees[unchosenint];
-        Collider carCollider2 = Instantiate(randomTree, spawnPosition, treeRotation)
-            .GetComponent<Collider>();
-
-        if (carCollider2 != null && GameManager.instance.isTest)
-        {
-            carCollider2.isTrigger = true;
-        }
-        else
-        {
-            Debug.LogError("Collider 컴포넌트를 찾을 수 없습니다!");
-        }
-
-        // 생성 간격 (필요 시 수정)
-        yield return new WaitForSeconds(0.3f);
-
-        // 플레이어 기준 spawnOffsets을 월드 좌표로 변환
-        worldOffset =
-            playerTransform.TransformPoint(spawnOffsets13[chosenint + 4])
-            - playerTransform.position;
-
-        // 최종 스폰 위치 계산
-        spawnPosition = spawnPoint.position + worldOffset;
-
-        // 무작위로 선택된 나무 중 하나를 생성
-        randomTree = availableTrees[chosenint];
-        Collider carCollider3 = Instantiate(randomTree, spawnPosition, treeRotation)
-            .GetComponent<Collider>();
-
-        if (carCollider3 != null && GameManager.instance.isTest)
-        {
-            carCollider3.isTrigger = true;
-        }
-        else
-        {
-            Debug.LogError("Collider 컴포넌트를 찾을 수 없습니다!");
-        }
-
-        // 생성 간격 (필요 시 수정)
-        yield return new WaitForSeconds(0.3f);
-
-        // 플레이어 기준 spawnOffsets을 월드 좌표로 변환
-        worldOffset =
-            playerTransform.TransformPoint(spawnOffsets13[unchosenint + 6])
-            - playerTransform.position;
-
-        // 최종 스폰 위치 계산
-        spawnPosition = spawnPoint.position + worldOffset;
-
-        // 무작위로 선택된 나무 중 하나를 생성
-        randomTree = availableTrees[unchosenint];
-        GameObject newTree = Instantiate(randomTree, spawnPosition, treeRotation);
-        Collider carCollider = newTree.GetComponent<Collider>();
-
-        if (carCollider != null && GameManager.instance.isTest)
-        {
-            carCollider.isTrigger = true;
-        }
-        else
-        {
-            Debug.LogError("Collider 컴포넌트를 찾을 수 없습니다!");
-        }
-
-        // 생성 간격 (필요 시 수정)
+        // 생성 간격 (필요 시 조정 가능)
         yield return new WaitForSeconds(0.3f);
     }
+}
 
-    private IEnumerator SpawnJump2(Transform spawnPoint)
+private Vector3 CalculateWorldOffset(Vector3 localOffset)
+{
+    return playerTransform.TransformPoint(localOffset) - playerTransform.position;
+}
+
+private void SpawnTree(GameObject treePrefab, Vector3 position, Quaternion rotation)
+{
+    GameObject tree = Instantiate(treePrefab, position, rotation);
+    Collider treeCollider = tree.GetComponent<Collider>();
+
+    if (treeCollider != null && GameManager.instance.isTest)
     {
-        int chosenint = Random.Range(0, 2);
-
-        Vector3 worldjumpOffset =
-            playerTransform.TransformPoint(spawnjumpOffsets2[chosenint]) - playerTransform.position;
-
-        Vector3 spawnjumpPosition = spawnPoint.position + worldjumpOffset;
-
-        Quaternion jumpRotation = Quaternion.LookRotation(playerTransform.forward);
-
-        Instantiate(jumpObject, spawnjumpPosition, jumpRotation);
-
-        // 생성 간격 (필요 시 수정)
-        yield return new WaitForSeconds(0.3f);
+        treeCollider.isTrigger = true;
     }
-
-    private IEnumerator SpawnLongTree2(Transform spawnPoint)
+    else if (treeCollider == null)
     {
-        int chosenint = Random.Range(0, 2);
-        int unchosenint = 1 - chosenint;
-        List<GameObject> availableTrees = new List<GameObject>(treePrefabs);
-
-        // 플레이어 기준 spawnOffsets을 월드 좌표로 변환
-        Vector3 worldOffset =
-            playerTransform.TransformPoint(spawnOffsets2[chosenint]) - playerTransform.position;
-
-        // 최종 스폰 위치 계산
-        Vector3 spawnPosition = spawnPoint.position + worldOffset;
-
-        // 나무 방향 설정 (플레이어를 정면으로 바라보게 하고, 로컬 축 조정)
-        Quaternion treeRotation = Quaternion.LookRotation(playerTransform.forward);
-
-        // 무작위로 선택된 나무 중 하나를 생성
-        GameObject randomTree = availableTrees[chosenint];
-        Collider carCollider1 = Instantiate(randomTree, spawnPosition, treeRotation)
-            .GetComponent<Collider>();
-
-        if (carCollider1 != null && GameManager.instance.isTest)
-        {
-            carCollider1.isTrigger = true;
-        }
-        else
-        {
-            Debug.LogError("Collider 컴포넌트를 찾을 수 없습니다!");
-        }
-
-        // 생성 간격 (필요 시 수정)
-        yield return new WaitForSeconds(0.3f);
-
-        // 플레이어 기준 spawnOffsets을 월드 좌표로 변환
-        worldOffset =
-            playerTransform.TransformPoint(spawnOffsets2[unchosenint + 2])
-            - playerTransform.position;
-
-        // 최종 스폰 위치 계산
-        spawnPosition = spawnPoint.position + worldOffset;
-
-        // 무작위로 선택된 나무 중 하나를 생성
-        randomTree = availableTrees[unchosenint];
-        Collider carCollider2 = Instantiate(randomTree, spawnPosition, treeRotation)
-            .GetComponent<Collider>();
-
-        if (carCollider2 != null && GameManager.instance.isTest)
-        {
-            carCollider2.isTrigger = true;
-        }
-        else
-        {
-            Debug.LogError("Collider 컴포넌트를 찾을 수 없습니다!");
-        }
-
-        // 생성 간격 (필요 시 수정)
-        yield return new WaitForSeconds(0.3f);
-
-        // 플레이어 기준 spawnOffsets을 월드 좌표로 변환
-        worldOffset =
-            playerTransform.TransformPoint(spawnOffsets2[chosenint + 4]) - playerTransform.position;
-
-        // 최종 스폰 위치 계산
-        spawnPosition = spawnPoint.position + worldOffset;
-
-        // 무작위로 선택된 나무 중 하나를 생성
-        randomTree = availableTrees[chosenint];
-        Collider carCollider3 = Instantiate(randomTree, spawnPosition, treeRotation)
-            .GetComponent<Collider>();
-
-        if (carCollider3 != null && GameManager.instance.isTest)
-        {
-            carCollider3.isTrigger = true;
-        }
-        else
-        {
-            Debug.LogError("Collider 컴포넌트를 찾을 수 없습니다!");
-        }
-
-        // 생성 간격 (필요 시 수정)
-        yield return new WaitForSeconds(0.3f);
-
-        // 플레이어 기준 spawnOffsets을 월드 좌표로 변환
-        worldOffset =
-            playerTransform.TransformPoint(spawnOffsets2[unchosenint + 6])
-            - playerTransform.position;
-
-        // 최종 스폰 위치 계산
-        spawnPosition = spawnPoint.position + worldOffset;
-
-        // 무작위로 선택된 나무 중 하나를 생성
-        randomTree = availableTrees[unchosenint];
-        GameObject newTree = Instantiate(randomTree, spawnPosition, treeRotation);
-
-        Collider carCollider = newTree.GetComponent<Collider>();
-
-        if (carCollider != null)
-        {
-            carCollider.isTrigger = true;
-        }
-        else
-        {
-            Debug.LogError("Collider 컴포넌트를 찾을 수 없습니다!");
-        }
-
-        // 생성 간격 (필요 시 수정)
-        yield return new WaitForSeconds(0.3f);
+        Debug.LogError("Collider 컴포넌트를 찾을 수 없습니다!");
     }
+}
+
 
     // Update is called once per frame
     void Update() { }
