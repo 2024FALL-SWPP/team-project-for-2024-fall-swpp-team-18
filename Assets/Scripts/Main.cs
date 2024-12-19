@@ -34,6 +34,8 @@ public class Main : MonoBehaviour
     {
         Img.gameObject.SetActive(true);
         Img.CrossFadeAlpha(1.0f, 1.0f, false);
+        GameManager.instance.isGameClear = false;
+        GameManager.instance.isGameOver = false;
 
         if (level == "Easy")
         {

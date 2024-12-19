@@ -2,57 +2,143 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public static class InputTestHelper
+{
+    private static readonly Dictionary<KeyCode, bool> keyStates = new Dictionary<KeyCode, bool>();
+    private static readonly Dictionary<KeyCode, bool> keyDownStates =
+        new Dictionary<KeyCode, bool>();
+    private static readonly Dictionary<string, float> axisValues = new Dictionary<string, float>();
+
+    public static void SetKey(KeyCode key, bool isPressed)
+    {
+        if (keyStates.ContainsKey(key))
+            keyStates[key] = isPressed;
+        else
+            keyStates.Add(key, isPressed);
+    }
+
+    public static void SetAxis(string axisName, float value)
+    {
+        if (axisValues.ContainsKey(axisName))
+            axisValues[axisName] = value;
+        else
+            axisValues.Add(axisName, value);
+    }
+
+    public static bool GetKey(KeyCode key)
+    {
+        return keyStates.ContainsKey(key) && keyStates[key];
+    }
+
+    public static bool GetKeyDown(KeyCode key)
+    {
+        if (keyDownStates.ContainsKey(key) && keyDownStates[key])
+        {
+            keyDownStates[key] = false; // 한 번 호출 후 false로 초기화
+            return true;
+        }
+        return false;
+    }
+
+    public static float GetAxis(string axisName)
+    {
+        return axisValues.ContainsKey(axisName) ? axisValues[axisName] : 0f;
+    }
+
+    public static void Reset()
+    {
+        keyStates.Clear();
+        axisValues.Clear();
+    }
+}
+
 public class ViewpointController : MonoBehaviour
 {
-    private float rotateSpeed = 400f;
-    private float mouseSpeed = 8f; // 회전속도(mouse 이동시)
-    private float mouseX = 0f; // 수평 회전값
-    private Quaternion init;
-    private Vector3 origin;
-    // Start is called before the first frame update
+    [SerializeField]
+    public float rotateSpeed = 400f;
+
+    [SerializeField]
+    public float mouseSpeed = 8f;
+
+    [SerializeField]
+    public float maxMouseX = 150f;
+
+    [SerializeField]
+    public float minMouseX = -150f;
+
+    private float mouseX = 0f;
+    private Quaternion initialRotation;
+    private Vector3 originPosition;
+
     void Start()
     {
-        origin = transform.localPosition;
+        originPosition = transform.localPosition;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        // 초기 위치
-        if (!GameManager.instance.isPaused) {
-            init = Quaternion.Euler(transform.parent.right * 15) * transform.parent.rotation;
+        //////////////////////// 테스트 시 주석 처리
+        InputTestHelper.SetKey(KeyCode.LeftShift, Input.GetKey(KeyCode.LeftShift)); // Key 상태를 업데이트
+        InputTestHelper.SetAxis("Mouse X", Input.GetAxis("Mouse X")); // "Mouse X" 축 값 업데이트
+        if (GameManager.instance.isPaused)
+            return;
+        //////////////////////// 테스트 시 주석 처리
+        HandleRotation();
+    }
 
-            if (Input.GetKeyDown(KeyCode.LeftShift)) {
-                mouseX = 0f;
-            }
-            if (Input.GetKey(KeyCode.LeftShift)) {
-                mouseX += Input.GetAxis("Mouse X") * mouseSpeed;
-                mouseX = Mathf.Clamp(mouseX, -150, 150);
+    private void HandleRotation()
+    {
+        // 초기 회전값 설정
+        initialRotation = Quaternion.Euler(transform.parent.right * 15) * transform.parent.rotation;
 
-                transform.localEulerAngles = new Vector3(15, mouseX, 0);
-            }
-            else
-            {
-                transform.rotation = Quaternion.RotateTowards(
-                    transform.rotation,
-                    init,
-                    rotateSpeed * Time.deltaTime
-                );
-            }
+        if (InputTestHelper.GetKeyDown(KeyCode.LeftShift))
+        {
+            mouseX = 0f;
+        }
+        if (InputTestHelper.GetKey(KeyCode.LeftShift))
+        {
+            HandleMouseRotation();
+        }
+        else
+        {
+            ResetToInitialRotation();
         }
     }
 
-    IEnumerator Shake(float t) {
-        float T = 0.0f;
-        while(T < t) {
-            T += Time.deltaTime;
-            if (!GameManager.instance.isPaused) 
+    private void HandleMouseRotation()
+    {
+        mouseX += InputTestHelper.GetAxis("Mouse X") * mouseSpeed;
+        mouseX = Mathf.Clamp(mouseX, minMouseX, maxMouseX);
+
+        transform.localEulerAngles = new Vector3(15, mouseX, 0);
+    }
+
+    private void ResetToInitialRotation()
+    {
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            initialRotation,
+            rotateSpeed * Time.deltaTime
+        );
+    }
+
+    IEnumerator Shake(float duration)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+
+            if (!GameManager.instance.isPaused)
             {
-                transform.localPosition = origin + (Vector3)Random.insideUnitCircle;
+                transform.localPosition = originPosition + (Vector3)Random.insideUnitCircle;
             }
+
             yield return null;
         }
-        transform.localPosition = origin;
+
+        transform.localPosition = originPosition;
     }
 
     public void Shake_t(float t)
