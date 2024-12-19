@@ -71,6 +71,16 @@ public class SnowballSpawnManager : MonoBehaviour
             selectedSpawnPoint.position + new Vector3(Random.Range(-3, 4), 0, 0),
             Quaternion.identity
         );
+        Collider carCollider = snowball.GetComponent<Collider>();
+
+        if (carCollider != null && GameManager.instance.isTest)
+        {
+            carCollider.isTrigger = true;
+        }
+        else
+        {
+            Debug.LogError("Collider 컴포넌트를 찾을 수 없습니다!");
+        }
 
         // 눈덩이의 움직임 처리
         SnowballController snowballController = snowball.GetComponent<SnowballController>();

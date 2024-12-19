@@ -55,6 +55,16 @@ public class PeopleSpawnManager : MonoBehaviour
 
             // 사람 생성
             GameObject newPerson = Instantiate(peoplePrefab, startPosition, inverseRotation);
+            Collider carCollider = newPerson.GetComponent<Collider>();
+
+            if (carCollider != null && GameManager.instance.isTest)
+            {
+                carCollider.isTrigger = true;
+            }
+            else
+            {
+                Debug.LogError("Collider 컴포넌트를 찾을 수 없습니다!");
+            }
 
             StartCoroutine(MoveToTarget(newPerson.transform, targetPosition));
             // 약간의 대기 시간 (필요한 경우)
