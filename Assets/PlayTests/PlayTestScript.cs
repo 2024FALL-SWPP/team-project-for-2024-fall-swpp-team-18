@@ -47,7 +47,7 @@ public class PlayTestScript
 
         var gameManager = GameObject.Find("GameManager");
         Assert.IsNotNull(gameManager, "GameManager가 존재하지 않습니다.");
-        var gameStatus = gameManager.GetComponent<GameManager>().isGameClear;
+        var gameStatus = (gameManager.GetComponent<GameManager>().getState() == State.GameClear);
         Assert.AreEqual(true, gameStatus, "게임을 클리어했습니다.");
         yield return null;
     }

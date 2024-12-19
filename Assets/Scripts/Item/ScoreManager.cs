@@ -6,54 +6,44 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField]
-    public float grade = 0;
-
-    [SerializeField]
-    public int gradeNum = 0;
-
-    [SerializeField]
-    public int total = 0;
-
-    [SerializeField]
-    public int student = 0;
-
-    [SerializeField]
-    public int professor = 0;
-
-    [SerializeField]
     public int heart = 3;
 
     [SerializeField]
     public int fireball = 0;
-
-    [SerializeField]
-    public float playTime;
+    private Stats curStat;
 
     // Start is called before the first frame update
     void Start()
     {
-        playTime = 0f;
+        curStat = new Stats(0, 0, 0, 0, 0, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.instance.isGameOver)
+        if (GameManager.instance.getState() == State.Play)
         {
-            playTime += Time.deltaTime;
+            float playTime = curStat.getTime() + Time.deltaTime;
+            curStat.setTime(playTime);
         }
     }
 
     public void IncreaseGrade(float itemGrade)
     {
+        float grade = curStat.getGrade();
+        int gradeNum = curStat.getGradeNum();
+        
         grade = (grade * gradeNum + itemGrade) / (gradeNum + 1);
         grade = Mathf.Round(grade * 100) / 100f;
-        gradeNum++;
+        
+        curStat.setGrade(grade);
+        curStat.setGradeNum(gradeNum++);
     }
 
     public void IncreaseStudent()
     {
-        student++;
+        int student = curStat.getStudent();
+        curStat.setStudent(student++);
     }
 
     public void DecreaseHeart()
@@ -61,21 +51,14 @@ public class ScoreManager : MonoBehaviour
         heart--;
         if (heart == 0)
         {
-            GameManager.Instance.HandleGameOver(
-                GameManager.OverBy.Obstacle,
-                grade,
-                student,
-                playTime,
-                total,
-                professor,
-                gradeNum
-            );
+            GameManager.instance.HandleGameOver(OverBy.Obstacle, curStat);
         }
     }
 
     public void IncreaseProfessor()
     {
-        professor++;
+        int professor = curStat.getProfessor();
+        curStat.setProfessor(professor++);
     }
 
     public void IncreaseHeart()
@@ -90,7 +73,14 @@ public class ScoreManager : MonoBehaviour
 
     public int CalculateTotal()
     {
-        if (GameManager.instance.isGameClear)
+        float playTime = curStat.getTime();
+        float grade = curStat.getGrade();
+        int gradeNum = curStat.getGradeNum();
+        int student = curStat.getStudent();
+        int professor = curStat.getProfessor();
+        int total = curStat.getTotal();
+
+        if (GameManager.instance.getState() == State.GameClear)
         {
             total = (total + (int)((200 - playTime) * 500)) * (professor + 1);
         }
@@ -98,6 +88,7 @@ public class ScoreManager : MonoBehaviour
         {
             total = (int)(grade * 100 * gradeNum) + student * 100 + (int)(playTime * 50);
         }
+        curStat.setTotal(total);
         return total;
     }
 
@@ -105,15 +96,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (heart == 1)
         {
-            GameManager.instance.HandleGameOver(
-                GameManager.OverBy.Snowball,
-                grade,
-                student,
-                playTime,
-                total,
-                professor,
-                gradeNum
-            );
+            GameManager.instance.HandleGameOver(OverBy.Snowball, curStat);
         }
         else
         {
@@ -123,21 +106,13 @@ public class ScoreManager : MonoBehaviour
 
     public void collideAvalanche()
     {
-        GameManager.instance.HandleGameOver(
-            GameManager.OverBy.Avalanche,
-            grade,
-            student,
-            playTime,
-            total,
-            professor,
-            gradeNum
-        );
+        GameManager.instance.HandleGameOver(OverBy.Avalanche, curStat);
     }
 
     public void arriveMainGate()
     {
-        GameManager.instance.isGameClear = true;
-        total = CalculateTotal();
-        GameManager.Instance.HandleGameClear(grade, student, playTime, total, professor, gradeNum);
+        GameManager.instance.setState(State.GameClear);
+        CalculateTotal();
+        GameManager.Instance.HandleGameClear(curStat);
     }
 }

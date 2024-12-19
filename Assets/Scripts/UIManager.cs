@@ -47,7 +47,7 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (!GameManager.instance.isGameOver && !GameManager.instance.isGameClear)
+        if (GameManager.instance.getState() == State.Play)
         {
             GetScore();
         }
