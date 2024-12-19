@@ -6,25 +6,25 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField]
-    public float grade = 0;
+    public float grade;
 
     [SerializeField]
-    public int gradeNum = 0;
+    public int gradeNum;
 
     [SerializeField]
-    public int total = 0;
+    public int total;
 
     [SerializeField]
-    public int student = 0;
+    public int student;
 
     [SerializeField]
-    public int professor = 0;
+    public int professor;
 
     [SerializeField]
-    public int heart = 3;
+    public int heart;
 
     [SerializeField]
-    public int fireball = 0;
+    public int fireball;
 
     [SerializeField]
     public float playTime;
@@ -33,6 +33,12 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         playTime = 0f;
+        grade = 0;
+        gradeNum = 0;
+        student = 0;
+        professor = 0;
+        total = 0;
+        fireball = 0;
     }
 
     // Update is called once per frame
