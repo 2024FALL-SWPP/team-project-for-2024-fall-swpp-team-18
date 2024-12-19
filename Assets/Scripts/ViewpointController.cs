@@ -19,7 +19,7 @@ public class ViewpointController : MonoBehaviour
     void Update()
     {
         // 초기 위치
-        if (!GameManager.instance.isPaused) {
+        if (GameManager.instance.getState() != State.Pause) {
             init = Quaternion.Euler(transform.parent.right * 15) * transform.parent.rotation;
 
             if (Input.GetKeyDown(KeyCode.LeftShift)) {
@@ -46,7 +46,7 @@ public class ViewpointController : MonoBehaviour
         float T = 0.0f;
         while(T < t) {
             T += Time.deltaTime;
-            if (!GameManager.instance.isPaused) 
+            if (GameManager.instance.getState() != State.Pause) 
             {
                 transform.localPosition = origin + (Vector3)Random.insideUnitCircle;
             }

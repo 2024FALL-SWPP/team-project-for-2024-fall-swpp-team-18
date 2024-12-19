@@ -8,7 +8,7 @@ public class FireballSpawner : MonoBehaviour
     public GameObject fireballPrefab;
     public Transform spawnPoint;
     public UnityEngine.Vector3 offset = new UnityEngine.Vector3(0, 5, -5);
-    public KeyCode spawnKey = KeyCode.Space;
+    private KeyCode spawnKey = KeyCode.Space;
     public GameObject scoreManager;
     public ScoreManager scoreManagerScript;
 
