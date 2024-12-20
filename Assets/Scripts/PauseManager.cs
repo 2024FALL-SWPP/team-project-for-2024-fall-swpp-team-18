@@ -24,12 +24,13 @@ public class PauseManager : MonoBehaviour
     {
         Debug.Log("invoke pause board");
         GameManager.instance.setState(State.Pause);
-        Time.timeScale = 0f;
         StartCoroutine(ShowBoard());
+        Time.timeScale = 0f;
     }
 
     IEnumerator ShowBoard()
     {
+        Debug.Log("show board");
         float elapsedTime = 0.0f;
 
         while (elapsedTime < 0.5f)

@@ -228,7 +228,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11417727}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -1063,14 +1063,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 220bf7acd86e1674bbe8c9b180e97fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grade: 0
-  gradeNum: 0
-  total: 0
-  student: 0
-  professor: 0
   heart: 5
   fireball: 0
-  playTime: 0
 --- !u!4 &455763235
 Transform:
   m_ObjectHideFlags: 0
@@ -1955,7 +1949,6 @@ MonoBehaviour:
   fireballPrefab: {fileID: 6535557133876866142, guid: e0ddeac0103cdb1468ac0e4f726302d8, type: 3}
   spawnPoint: {fileID: 955764157034875094}
   offset: {x: 0, y: 0.5, z: 0}
-  spawnKey: 32
   scoreManager: {fileID: 455763233}
   scoreManagerScript: {fileID: 455763234}
 --- !u!1 &758701287
@@ -2504,16 +2497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff6d903ee8930546a969b902de8249c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGameOver: 0
-  isGameClear: 0
-  isPaused: 0
-  grade: 0
-  student: 0
-  time: 0
-  total: 0
-  professor: 0
-  gradeNum: 0
-  isEasy: 1
+  gameState: 0
   isTest: 0
 --- !u!4 &995100920
 Transform:
