@@ -31,6 +31,7 @@ public class PlayerPositionController : MonoBehaviour
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
         GameObject.Find("PauseManager").GetComponent<PauseManager>().Fadein();
         Invoke("RemoveBlackScreen", 1.0f);
+        GameManager.instance.setState(State.Play);
         if (GameManager.instance.isTest)
             Speed = 20.0f;
     }
@@ -42,7 +43,7 @@ public class PlayerPositionController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !Img.gameObject.activeSelf)
         {
             GameObject.Find("PauseManager").GetComponent<PauseManager>().InvokePauseBoard();
         }

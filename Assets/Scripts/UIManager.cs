@@ -21,7 +21,6 @@ public class UIManager : MonoBehaviour
         scoreManager = GameObject.Find("ScoreManager");
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
         pauseButton.gameObject.SetActive(true);
-        pauseButton.onClick.AddListener(TogglePause);
     }
 
     public int GetScore()
@@ -30,31 +29,12 @@ public class UIManager : MonoBehaviour
         return score;
     }
 
-    public void TogglePause()
-    {
-        isPaused = !isPaused;
-        if (isPaused)
-        {
-            Time.timeScale = 0;
-            Debug.Log("Game Paused");
-        }
-        else
-        {
-            Time.timeScale = 1;
-            Debug.Log("Game Resumed");
-        }
-    }
 
     void Update()
     {
-        if (!GameManager.instance.isGameOver && !GameManager.instance.isGameClear)
+        if (GameManager.instance.getState() == State.Play)
         {
             GetScore();
-        }
-        // Esc 키 입력으로 일시정지/재개
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            TogglePause();
         }
     }
 }
