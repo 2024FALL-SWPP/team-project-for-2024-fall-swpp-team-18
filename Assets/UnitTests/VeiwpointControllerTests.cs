@@ -72,7 +72,10 @@ public class ViewpointControllerTests
         controller.transform.rotation = Quaternion.Euler(0, 45, 0);
 
         // Act
-        controller.Update();
+        for (int i = 0; i < 100; i++) // 100번의 Update 호출로 충분히 회전하게 함
+        {
+            controller.Update();
+        }
 
         // Assert
         // 회전 값이 부모 초기 회전 값으로 복원되는지 확인

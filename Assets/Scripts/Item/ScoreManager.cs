@@ -37,7 +37,7 @@ public class ScoreManager : MonoBehaviour
         grade = Mathf.Round(grade * 100) / 100f;
 
         curStat.setGrade(grade);
-        curStat.setGradeNum(gradeNum++);
+        curStat.setGradeNum(++gradeNum);
     }
 
     public void IncreaseStudent()

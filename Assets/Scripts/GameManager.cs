@@ -29,24 +29,24 @@ public class GameManager : MonoBehaviour
     private bool isEasy = true;
     public bool isTest = false;
 
-    /*
-        public static GameManager Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new GameManager();
-                }
-                return instance;
-            }
-        }
-        해당 부분 아래와 같이 수정*/
     public static GameManager Instance
     {
-        get { return instance; }
+        get
+        {
+            if (instance == null)
+            {
+                instance = new GameManager();
+            }
+            return instance;
+        }
     }
 
+    /*         해당 부분 아래와 같이 수정
+        public static GameManager Instance
+        {
+            get { return instance; }
+        }
+     */
     private void Awake()
     {
         // Singleton 패턴 초기화

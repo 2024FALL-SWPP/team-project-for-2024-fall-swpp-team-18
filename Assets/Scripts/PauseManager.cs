@@ -22,6 +22,7 @@ public class PauseManager : MonoBehaviour
 
     public void InvokePauseBoard()
     {
+        Debug.Log("invoke pause board");
         GameManager.instance.setState(State.Pause);
         Time.timeScale = 0f;
         StartCoroutine(ShowBoard());

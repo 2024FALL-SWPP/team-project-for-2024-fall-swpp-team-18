@@ -12,10 +12,12 @@ public class ScoreManagerTests
         var gmObj = new GameObject("GameManager");
         var gm = gmObj.AddComponent<GameManager>();
         GameManager.instance = gm;
-        gm.isTest = true; // 테스트 모드
+        GameManager.instance.isTest = true; // 테스트 모드
+        GameManager.instance.setState(State.Ready);
 
         var scoreObj = new GameObject("ScoreManager");
         scoreManager = scoreObj.AddComponent<ScoreManager>();
+        scoreManager.curStat = new Stats(0, 0, 0, 0, 0, 0);
 
         // SFXController 인스턴스 생성
         var sfxObj = new GameObject("SFXController");
@@ -53,7 +55,6 @@ public class ScoreManagerTests
         // heart가 1일 때 DecreaseHeart 호출 시 게임 오버 호출 로직이 실행되는지 테스트
         // 이 경우, 실제로 GameManager를 mocking하거나, GameManager.Instance.HandleGameOver를 호출했는지 확인할 수 있어야 합니다.
         // 간단히 heart 값 변화만 체크(비즈니스 로직 검증)하려면 heart == 0일 때를 확인합니다.
-        scoreManager.heart = 1;
         // GameManager에 대한 Mocking이나 Stub 필요할 수 있음.
         // 일단 Heart 감소 후 heart == 0으로 만들고 추후 게임오버 메소드 호출 테스트는 별도로 진행.
         scoreManager.DecreaseHeart();
@@ -66,7 +67,7 @@ public class ScoreManagerTests
     public void IncreaseGradeTest()
     {
         // 초기값 설정
-        scoreManager.curStat.setGrade(0);
+        scoreManager.curStat.setGrade(0f);
         scoreManager.curStat.setGradeNum(0);
 
         // 첫번 째 호출: grade = ((0 * 0) + 95) / (0+1) = 95

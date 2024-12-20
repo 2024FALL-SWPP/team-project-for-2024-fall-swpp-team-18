@@ -43,7 +43,7 @@ public class PlayerPositionController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Escape) && !Img.gameObject.activeSelf)
+        if (Input.GetKeyDown(KeyCode.Escape) && !Img.gameObject.activeSelf)
         {
             GameObject.Find("PauseManager").GetComponent<PauseManager>().InvokePauseBoard();
         }
