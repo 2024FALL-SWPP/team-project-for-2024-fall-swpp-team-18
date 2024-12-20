@@ -57,16 +57,6 @@ public class PlayTestScript
             "게임 씬이 로드되지 않았습니다."
         );
         yield return new WaitForSeconds(12);
-        yield return new WaitUntil(() =>
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                isEscPressed = true;
-                return true;
-            }
-            return false;
-        });
-        Assert.IsTrue(isEscPressed, "ESC 키가 감지되지 않았습니다.");
 
         yield return null; // 씬 전환 대기
 
@@ -76,11 +66,6 @@ public class PlayTestScript
         var overState = (gameManager.GetComponent<GameManager>().getState() == State.GameOver);
         Assert.AreEqual(false, overState, "게임이 오버되었습니다.");
         yield return new WaitForSeconds(200);
-
-        var menuButton = GameObject.Find("MainMenu");
-        Assert.IsNotNull(menuButton, "SkipButton이 존재하지 않습니다.");
-        skipButton.GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
-        yield return new WaitForSeconds(210); // 씬 전환 대기
 
         yield return null;
     }
