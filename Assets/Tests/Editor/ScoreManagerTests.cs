@@ -26,7 +26,6 @@ public class ScoreManagerTests
         bgmObj.AddComponent<BackgroundMusicController>();
     }
 
-
     [Test]
     public void IncreaseHeartTest()
     {
@@ -49,7 +48,7 @@ public class ScoreManagerTests
         // heart의 초기값 확인
         scoreManager.heart = 3;
         scoreManager.DecreaseHeart();
-        Assert.AreEqual(2, scoreManager.heart);
+        Assert.AreEqual(2, scoreManager.heart, "decreaseHeart fail1");
 
         // heart가 1일 때 DecreaseHeart 호출 시 게임 오버 호출 로직이 실행되는지 테스트
         // 이 경우, 실제로 GameManager를 mocking하거나, GameManager.Instance.HandleGameOver를 호출했는지 확인할 수 있어야 합니다.
@@ -58,7 +57,7 @@ public class ScoreManagerTests
         // GameManager에 대한 Mocking이나 Stub 필요할 수 있음.
         // 일단 Heart 감소 후 heart == 0으로 만들고 추후 게임오버 메소드 호출 테스트는 별도로 진행.
         scoreManager.DecreaseHeart();
-        Assert.AreEqual(0, scoreManager.heart); 
+        Assert.AreEqual(1, scoreManager.heart, "decreaseHeart fail2");
         // 여기서 GameManager의 함수가 호출됐는지 검증하려면 GameManager 자체를 Mock 처리하거나
         // 게임오버 로직을 분리하여 테스트할 필요가 있습니다.
     }
@@ -67,18 +66,18 @@ public class ScoreManagerTests
     public void IncreaseGradeTest()
     {
         // 초기값 설정
-        scoreManager.grade = 0f;
-        scoreManager.gradeNum = 0;
+        scoreManager.curStat.setGrade(0);
+        scoreManager.curStat.setGradeNum(0);
 
         // 첫번 째 호출: grade = ((0 * 0) + 95) / (0+1) = 95
         scoreManager.IncreaseGrade(95f);
-        Assert.AreEqual(95f, scoreManager.grade);
-        Assert.AreEqual(1, scoreManager.gradeNum);
+        Assert.AreEqual(95f, scoreManager.curStat.getGrade());
+        Assert.AreEqual(1, scoreManager.curStat.getGradeNum());
 
         // 두번 째 호출: grade = ((95 * 1) + 85) / (1+1) = (95 + 85) / 2 = 180/2 = 90
         scoreManager.IncreaseGrade(85f);
-        Assert.AreEqual(90f, scoreManager.grade);
-        Assert.AreEqual(2, scoreManager.gradeNum);
+        Assert.AreEqual(90f, scoreManager.curStat.getGrade());
+        Assert.AreEqual(2, scoreManager.curStat.getGradeNum());
 
         // 소수점 반올림 테스트 (already done by Mathf.Round(grade*100)/100f)
         // 예를 들어 90.1234같은 값에 대한 처리도 테스트 가능
@@ -88,15 +87,15 @@ public class ScoreManagerTests
     public void CalculateTotalTest()
     {
         // 초기 상황 설정
-        scoreManager.grade = 90f;
-        scoreManager.gradeNum = 2; // 예: 2개의 점수 평균
-        scoreManager.student = 5;
-        scoreManager.playTime = 10f;
-        scoreManager.professor = 1;
-        scoreManager.total = 0;
+        scoreManager.curStat.setGrade(90f);
+        scoreManager.curStat.setGradeNum(2); // 예: 2개의 점수 평균
+        scoreManager.curStat.setStudent(5);
+        scoreManager.curStat.setTime(10f);
+        scoreManager.curStat.setProfessor(1);
+        scoreManager.curStat.setTotal(0);
 
         // GameManager.instance.isGameClear = false 인 상황 가정
-        GameManager.instance.isGameClear = false;
+        GameManager.instance.setState(State.Play);
         int total = scoreManager.CalculateTotal();
         // total 계산 로직:
         // total = (int)(grade * 100 * gradeNum) + student * 100 + (int)(playTime * 50);
@@ -106,12 +105,12 @@ public class ScoreManagerTests
         Assert.AreEqual(19000, total);
 
         // GameManager.instance.isGameClear = true 인 상황 가정
-        GameManager.instance.isGameClear = true;
+        GameManager.instance.setState(State.GameClear);
         // total = ((total + (int)((200 - playTime)*500))*(professor+1));
         // 위 테스트에서는 total이 계속 누적되므로 먼저 total을 초기화 하거나 새로 설정해야 할 수도 있습니다.
-        scoreManager.total = 0;
-        scoreManager.playTime = 10f;
-        scoreManager.professor = 1;
+        scoreManager.curStat.setTotal(0);
+        scoreManager.curStat.setTime(10f);
+        scoreManager.curStat.setProfessor(1);
         // (200 - 10)*500 = 190 * 500 = 95000
         // total = (0 + 95000) * (1+1) = 95000 * 2 = 190000
         total = scoreManager.CalculateTotal();

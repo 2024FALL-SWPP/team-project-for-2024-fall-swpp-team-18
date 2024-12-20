@@ -10,9 +10,9 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField]
     public int fireball = 0;
-    private Stats curStat;
+    public Stats curStat;
 
-// Start is called before the first frame update
+    // Start is called before the first frame update
     void Start()
     {
         curStat = new Stats(0, 0, 0, 0, 0, 0);
@@ -32,10 +32,10 @@ public class ScoreManager : MonoBehaviour
     {
         float grade = curStat.getGrade();
         int gradeNum = curStat.getGradeNum();
-        
+
         grade = (grade * gradeNum + itemGrade) / (gradeNum + 1);
         grade = Mathf.Round(grade * 100) / 100f;
-        
+
         curStat.setGrade(grade);
         curStat.setGradeNum(gradeNum++);
     }

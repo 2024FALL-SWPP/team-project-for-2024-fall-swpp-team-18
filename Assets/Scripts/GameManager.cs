@@ -4,35 +4,47 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement; // 씬 관리에 필요
 
-public enum State{Ready, Play, GameOver, GameClear, Pause}
-public enum OverBy{Avalanche, Snowball, Obstacle}
+public enum State
+{
+    Ready,
+    Play,
+    GameOver,
+    GameClear,
+    Pause,
+}
+
+public enum OverBy
+{
+    Avalanche,
+    Snowball,
+    Obstacle,
+}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
-    private State gameState = State.Ready;
+    public State gameState = State.Ready;
     private State prevState = State.Ready;
     public Stats gameStat = new Stats(0, 0, 0, 0, 0, 0);
     private bool isEasy = true;
     public bool isTest = false;
-/*
-    public static GameManager Instance
-    {
-        get
+
+    /*
+        public static GameManager Instance
         {
-            if (instance == null)
+            get
             {
-                instance = new GameManager();
+                if (instance == null)
+                {
+                    instance = new GameManager();
+                }
+                return instance;
             }
-            return instance;
         }
-    }
-    해당 부분 아래와 같이 수정*/
+        해당 부분 아래와 같이 수정*/
     public static GameManager Instance
     {
-        get
-        {
-            return instance;
-        }
+        get { return instance; }
     }
 
     private void Awake()
@@ -96,15 +108,15 @@ public class GameManager : MonoBehaviour
         }
         if (!isTest) // 테스트 모드에서는 씬 전환하지 않음
         {
-            if (overtype == OverBy.Avalanche)
+            if (overType == OverBy.Avalanche)
             {
                 SceneManager.LoadScene("AvalancheOutro");
             }
-            else if (overtype == OverBy.Snowball)
+            else if (overType == OverBy.Snowball)
             {
                 SceneManager.LoadScene("SnowballOutro");
             }
-            else if (overtype == OverBy.Obstacle)
+            else if (overType == OverBy.Obstacle)
             {
                 SceneManager.LoadScene("AvalancheOutro");
             }
@@ -159,7 +171,7 @@ public class Stats
     }
 
     public float getTime() //time값 반환
-    { 
+    {
         return this.time;
     }
 
