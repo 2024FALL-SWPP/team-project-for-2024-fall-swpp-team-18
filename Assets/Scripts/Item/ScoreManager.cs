@@ -12,7 +12,7 @@ public class ScoreManager : MonoBehaviour
     public int fireball = 0;
     private Stats curStat;
 
-    // Start is called before the first frame update
+// Start is called before the first frame update
     void Start()
     {
         curStat = new Stats(0, 0, 0, 0, 0, 0);

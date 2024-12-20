@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
     public Image Img;
     public RawImage board;
     private RectTransform boardRt;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +18,7 @@ public class PauseManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void Update() { }
 
     public void InvokePauseBoard()
     {
@@ -33,14 +31,19 @@ public class PauseManager : MonoBehaviour
     {
         float elapsedTime = 0.0f;
 
-        while (elapsedTime < 0.5f) {
+        while (elapsedTime < 0.5f)
+        {
             elapsedTime += Time.unscaledDeltaTime;
-            boardRt.localScale = Vector3.Lerp(new Vector3(0, 0, 0), new Vector3(1, 1, 0), elapsedTime/0.5f);
+            boardRt.localScale = Vector3.Lerp(
+                new Vector3(0, 0, 0),
+                new Vector3(1, 1, 0),
+                elapsedTime / 0.5f
+            );
             yield return null;
         }
     }
 
-    public void ClickResume() 
+    public void ClickResume()
     {
         StartCoroutine(HideBoard());
     }
@@ -50,16 +53,21 @@ public class PauseManager : MonoBehaviour
         Debug.Log("HIde");
         float elapsedTime = 0.0f;
 
-        while (elapsedTime < 0.5f) {
+        while (elapsedTime < 0.5f)
+        {
             elapsedTime += Time.unscaledDeltaTime;
-            boardRt.localScale = Vector3.Lerp(new Vector3(1, 1, 0), new Vector3(0, 0, 0), elapsedTime/0.5f);
+            boardRt.localScale = Vector3.Lerp(
+                new Vector3(1, 1, 0),
+                new Vector3(0, 0, 0),
+                elapsedTime / 0.5f
+            );
             yield return null;
         }
         Time.timeScale = 1f;
         GameManager.instance.setState(State.Play);
     }
 
-    public void ClickRestart() 
+    public void ClickRestart()
     {
         StartCoroutine(FadeOut());
         StartCoroutine(LoadThis());
@@ -71,7 +79,8 @@ public class PauseManager : MonoBehaviour
         StartCoroutine(LoadMain());
     }
 
-    IEnumerator LoadMain() {
+    IEnumerator LoadMain()
+    {
         yield return new WaitForSecondsRealtime(1.0f);
         Time.timeScale = 1f;
         GameManager.instance.setState(State.Ready);
@@ -79,7 +88,8 @@ public class PauseManager : MonoBehaviour
         SceneManager.LoadScene("Main");
     }
 
-    IEnumerator LoadThis() {
+    IEnumerator LoadThis()
+    {
         yield return new WaitForSecondsRealtime(1.0f);
         Time.timeScale = 1f;
         GameManager.instance.setState(State.Play);
@@ -98,7 +108,8 @@ public class PauseManager : MonoBehaviour
         float fade = 0.0f;
 
         Img.gameObject.SetActive(true);
-        while (elapsedTime < 1.0f) {
+        while (elapsedTime < 1.0f)
+        {
             elapsedTime += Time.unscaledDeltaTime;
             fade = Mathf.Lerp(1, 0, elapsedTime);
             Img.color = new Color(0, 0, 0, fade);
@@ -112,7 +123,8 @@ public class PauseManager : MonoBehaviour
         float fade = 0.0f;
 
         Img.gameObject.SetActive(true);
-        while (elapsedTime < 1.0f) {
+        while (elapsedTime < 1.0f)
+        {
             elapsedTime += Time.unscaledDeltaTime;
             fade = Mathf.Lerp(0, 1, elapsedTime);
             Img.color = new Color(0, 0, 0, fade);

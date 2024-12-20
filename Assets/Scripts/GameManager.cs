@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public Stats gameStat = new Stats(0, 0, 0, 0, 0, 0);
     private bool isEasy = true;
     public bool isTest = false;
-
+/*
     public static GameManager Instance
     {
         get
@@ -23,6 +23,14 @@ public class GameManager : MonoBehaviour
             {
                 instance = new GameManager();
             }
+            return instance;
+        }
+    }
+    해당 부분 아래와 같이 수정*/
+    public static GameManager Instance
+    {
+        get
+        {
             return instance;
         }
     }
@@ -78,19 +86,32 @@ public class GameManager : MonoBehaviour
         this.setState(State.GameOver);
         Debug.Log("Game Over! Returning to Main Menu...");
         BackgroundMusicController.Instance.PlayGameOverMusic();
-        SFXController.PlayExplosion();
-
-        if (overType == OverBy.Avalanche)
+        if (SFXController.Instance != null)
         {
-            SceneManager.LoadScene("AvalancheOutro");
+            SFXController.PlayExplosion();
         }
-        else if (overType == OverBy.Snowball)
+        if (BackgroundMusicController.Instance != null)
         {
-            SceneManager.LoadScene("SnowballOutro");
+            BackgroundMusicController.Instance.PlayGameOverMusic();
         }
-        else if (overType == OverBy.Obstacle)
+        if (!isTest) // 테스트 모드에서는 씬 전환하지 않음
         {
-            SceneManager.LoadScene("AvalancheOutro");
+            if (overtype == OverBy.Avalanche)
+            {
+                SceneManager.LoadScene("AvalancheOutro");
+            }
+            else if (overtype == OverBy.Snowball)
+            {
+                SceneManager.LoadScene("SnowballOutro");
+            }
+            else if (overtype == OverBy.Obstacle)
+            {
+                SceneManager.LoadScene("AvalancheOutro");
+            }
+            else
+            {
+                SceneManager.LoadScene("Outro1");
+            }
         }
     }
 
