@@ -71,9 +71,9 @@ public class PlayTestScript
         yield return null; // 씬 전환 대기
 
         Assert.IsNotNull(gameManager, "GameManager가 존재하지 않습니다.");
-        var clearState = gameManager.GetComponent<GameManager>().isGameClear;
+        var clearState = (gameManager.GetComponent<GameManager>().getState() == State.GameClear);
         Assert.AreEqual(false, clearState, "게임을 클리어했습니다.");
-        var overState = gameManager.GetComponent<GameManager>().isGameOver;
+        var overState = (gameManager.GetComponent<GameManager>().getState() == State.GameOver);
         Assert.AreEqual(false, overState, "게임이 오버되었습니다.");
         yield return new WaitForSeconds(200);
 

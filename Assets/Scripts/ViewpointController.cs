@@ -80,13 +80,16 @@ public class ViewpointController : MonoBehaviour
         //////////////////////// 테스트 시 주석 처리
         InputTestHelper.SetKey(KeyCode.LeftShift, Input.GetKey(KeyCode.LeftShift)); // Key 상태를 업데이트
         InputTestHelper.SetAxis("Mouse X", Input.GetAxis("Mouse X")); // "Mouse X" 축 값 업데이트
-        if (GameManager.instance.isPaused)
-            return;
+        if (GameManager.instance.getState() != State.Pause)
+        {
+            initialRotation =
+                Quaternion.Euler(transform.parent.right * 15) * transform.parent.rotation;
+        }
         //////////////////////// 테스트 시 주석 처리
         HandleRotation();
     }
 
-    private void HandleRotation()
+    public void HandleRotation()
     {
         // 초기 회전값 설정
         initialRotation = Quaternion.Euler(transform.parent.right * 15) * transform.parent.rotation;
@@ -105,7 +108,7 @@ public class ViewpointController : MonoBehaviour
         }
     }
 
-    private void HandleMouseRotation()
+    public void HandleMouseRotation()
     {
         mouseX += InputTestHelper.GetAxis("Mouse X") * mouseSpeed;
         mouseX = Mathf.Clamp(mouseX, minMouseX, maxMouseX);
@@ -113,7 +116,7 @@ public class ViewpointController : MonoBehaviour
         transform.localEulerAngles = new Vector3(15, mouseX, 0);
     }
 
-    private void ResetToInitialRotation()
+    public void ResetToInitialRotation()
     {
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation,
@@ -130,7 +133,7 @@ public class ViewpointController : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
 
-            if (!GameManager.instance.isPaused)
+            if (GameManager.instance.getState() != State.Pause)
             {
                 transform.localPosition = originPosition + (Vector3)Random.insideUnitCircle;
             }

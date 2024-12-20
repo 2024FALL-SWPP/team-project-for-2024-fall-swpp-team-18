@@ -19,7 +19,7 @@ public class HandleController : MonoBehaviour
     {
         tmp = Quaternion.Euler(new Vector3(-90, 0, 0));
         mouseX = Mathf.Clamp(mouseX, -30, 30);
-        if (!GameManager.instance.isPaused) {
+        if (GameManager.instance.getState() != State.Pause) {
             if (Input.GetKey(KeyCode.Q)) {
                 mouseX -= speed;
                 transform.localEulerAngles = new Vector3(0, mouseX, 0) + new Vector3(-90, 0, 0);

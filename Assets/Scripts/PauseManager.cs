@@ -22,13 +22,15 @@ public class PauseManager : MonoBehaviour
 
     public void InvokePauseBoard()
     {
-        GameManager.instance.isPaused = true;
-        Time.timeScale = 0f;
+        Debug.Log("invoke pause board");
+        GameManager.instance.setState(State.Pause);
         StartCoroutine(ShowBoard());
+        Time.timeScale = 0f;
     }
 
     IEnumerator ShowBoard()
     {
+        Debug.Log("show board");
         float elapsedTime = 0.0f;
 
         while (elapsedTime < 0.5f)
@@ -50,6 +52,7 @@ public class PauseManager : MonoBehaviour
 
     IEnumerator HideBoard()
     {
+        Debug.Log("HIde");
         float elapsedTime = 0.0f;
 
         while (elapsedTime < 0.5f)
@@ -63,7 +66,7 @@ public class PauseManager : MonoBehaviour
             yield return null;
         }
         Time.timeScale = 1f;
-        GameManager.instance.isPaused = false;
+        GameManager.instance.setState(State.Play);
     }
 
     public void ClickRestart()
@@ -82,7 +85,7 @@ public class PauseManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(1.0f);
         Time.timeScale = 1f;
-        GameManager.instance.isPaused = false;
+        GameManager.instance.setState(State.Ready);
         Debug.Log("Returning to Main Menu...");
         SceneManager.LoadScene("Main");
     }
@@ -91,7 +94,7 @@ public class PauseManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(1.0f);
         Time.timeScale = 1f;
-        GameManager.instance.isPaused = false;
+        GameManager.instance.setState(State.Play);
         Debug.Log("Restarting the Game...");
         SceneManager.LoadScene("MainScene");
     }

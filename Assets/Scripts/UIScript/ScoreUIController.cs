@@ -31,31 +31,31 @@ public class ScoreUIController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         // 2. Grade
         yield return StartCoroutine(
-            AnimateValue(gradeText, "grade\n", 0, GameManager.instance.grade, false)
+            AnimateValue(gradeText, "grade\n", 0, GameManager.instance.gameStat.getGrade(), false)
         );
 
         // 5. Lecture
         yield return StartCoroutine(
-            AnimateValue(lectureText, "lecture\n", 0, GameManager.instance.gradeNum, true)
+            AnimateValue(lectureText, "lecture\n", 0, GameManager.instance.gameStat.getGradeNum(), true)
         );
 
         // 3. Students
         yield return StartCoroutine(
-            AnimateValue(studentText, "rescued students\n", 0, GameManager.instance.student, true)
+            AnimateValue(studentText, "rescued students\n", 0, GameManager.instance.gameStat.getStudent(), true)
         );
 
         // 4. Time
         yield return StartCoroutine(
-            AnimateValue(timeText, "time\n", 0, GameManager.instance.time, false)
+            AnimateValue(timeText, "time\n", 0, GameManager.instance.gameStat.getTime(), false)
         );
 
         // 6. Professor
         yield return StartCoroutine(
-            AnimateValue(professorText, "professor\n", 0, GameManager.instance.professor, true)
+            AnimateValue(professorText, "professor\n", 0, GameManager.instance.gameStat.getProfessor(), true)
         );
         // 1. Score
         yield return StartCoroutine(
-            AnimateValue(scoreText, "Total : ", 0, GameManager.instance.total, true)
+            AnimateValue(scoreText, "Total : ", 0, GameManager.instance.gameStat.getTotal(), true)
         );
     }
 

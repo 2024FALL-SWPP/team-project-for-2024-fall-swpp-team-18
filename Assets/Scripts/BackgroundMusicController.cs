@@ -24,14 +24,15 @@ public class BackgroundMusicController : MonoBehaviour
     private void Awake()
     {
         // Singleton 패턴 초기화
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
+        if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject); // 씬 전환 시 파괴되지 않도록 설정
+            
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
         }
 
         // AudioSource 초기화

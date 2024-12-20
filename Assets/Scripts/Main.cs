@@ -15,6 +15,7 @@ public class Main : MonoBehaviour
         initPos = Background.GetComponent<RectTransform>().anchoredPosition;
         Img.CrossFadeAlpha(0, 1.0f, false);
         Invoke("RemoveBlackScreen", 1.0f);
+        GameManager.instance.setState(State.Ready);
     }
 
     void Update()
@@ -34,17 +35,16 @@ public class Main : MonoBehaviour
     {
         Img.gameObject.SetActive(true);
         Img.CrossFadeAlpha(1.0f, 1.0f, false);
-        GameManager.instance.isGameClear = false;
-        GameManager.instance.isGameOver = false;
+        GameManager.instance.setState(State.Play);
 
         if (level == "Easy")
         {
-            GameManager.instance.isEasy = true;
+            GameManager.instance.setEasy(true);
             Invoke("LoadIntro", 1.0f);
         }
         else if (level == "Hard")
         {
-            GameManager.instance.isEasy = false;
+            GameManager.instance.setEasy(false);
             Invoke("LoadIntro", 1.0f);
         }
     }
